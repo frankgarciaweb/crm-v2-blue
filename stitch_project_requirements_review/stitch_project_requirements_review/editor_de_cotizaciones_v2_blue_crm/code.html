@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Editor de Cotizaciones | Blue CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0b1120;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #434655;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-container": "#bdffdb",
+                      "tertiary-fixed": "#6ffbbe",
+                      "outline-variant": "#434655",
+                      "surface-container-highest": "#2d3449",
+                      "on-secondary": "#472a00",
+                      "surface-variant": "#2d3449",
+                      "on-secondary-container": "#5b3800",
+                      "on-primary-fixed": "#00174b",
+                      "error-container": "#93000a",
+                      "on-surface-variant": "#c3c6d7",
+                      "on-error": "#690005",
+                      "on-tertiary": "#003824",
+                      "secondary-container": "#ee9800",
+                      "text-primary": "#F8FAFC",
+                      "primary": "#b4c5ff",
+                      "on-tertiary-fixed": "#002113",
+                      "status-pending": "#64748B",
+                      "on-primary": "#002a78",
+                      "surface": "#0b1326",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "tertiary": "#4edea3",
+                      "inverse-primary": "#0053db",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-container-lowest": "#060e20",
+                      "on-background": "#dae2fd",
+                      "surface-tint": "#b4c5ff",
+                      "text-secondary": "#94A3B8",
+                      "error": "#ffb4ab",
+                      "surface-deep": "#0B1120",
+                      "on-surface": "#dae2fd",
+                      "background": "#0b1326",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "tertiary-container": "#007d55",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "surface-bright": "#31394d",
+                      "inverse-surface": "#dae2fd",
+                      "surface-container-high": "#222a3d",
+                      "secondary-fixed": "#ffddb8",
+                      "status-ready": "#10B981",
+                      "primary-container": "#2563eb",
+                      "surface-dim": "#0b1326",
+                      "primary-fixed": "#dbe1ff",
+                      "secondary": "#ffb95f",
+                      "inverse-on-surface": "#283044",
+                      "on-secondary-fixed": "#2a1700",
+                      "status-production": "#3B82F6",
+                      "surface-container": "#171f33",
+                      "surface-card": "#1E293B",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "outline": "#8d90a0",
+                      "surface-container-low": "#131b2e",
+                      "on-primary-container": "#eeefff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "status-alert": "#EF4444"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-margin": "2rem",
+                      "stack-xs": "0.25rem",
+                      "stack-sm": "0.5rem",
+                      "gutter": "1.5rem",
+                      "component-gap": "1rem"
+              },
+              "fontFamily": {
+                      "data-table": ["Inter"],
+                      "display-lg": ["Geist"],
+                      "title-sm": ["Geist"],
+                      "headline-md": ["Geist"],
+                      "label-caps": ["JetBrains Mono"],
+                      "body-base": ["Inter"],
+                      "financial-metric": ["Geist"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface overflow-hidden">
+<!-- Sidebar Wrapper -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-gutter mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Blue CRM</h1>
+<p class="text-on-surface-variant font-body-sm opacity-60">Industrial Precision</p>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar"><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">dashboard</span><span class="font-body-base text-body-base">Dashboard</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">group</span><span class="font-body-base text-body-base">Clientes</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">inventory_2</span><span class="font-body-base text-body-base">Productos</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all" href="#"><span class="material-symbols-outlined">request_quote</span><span class="font-body-base text-body-base">Cotizaciones</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">precision_manufacturing</span><span class="font-body-base text-body-base">Trabajos</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">print</span><span class="font-body-base text-body-base">Plotter</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">payments</span><span class="font-body-base text-body-base">Pagos</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">receipt</span><span class="font-body-base text-body-base">Facturación</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">inventory</span><span class="font-body-base text-body-base">Inventario</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">local_shipping</span><span class="font-body-base text-body-base">Envíos</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">analytics</span><span class="font-body-base text-body-base">Reportes</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">settings</span><span class="font-body-base text-body-base">Configuración</span></a><a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">help</span><span class="font-body-base text-body-base">Soporte</span></a></nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 bg-primary-container text-on-primary-container rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all"><span class="material-symbols-outlined">add</span><span>Nueva Cotización</span></button>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant font-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-status-ready"></span>
+<span>$ Dólar: 38,5 Bs</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-status-production"></span>
+<span>Binance: 259,9 Bs</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant" data-icon="search">search</span>
+<input class="bg-surface-container-lowest border-border-subtle rounded-full pl-10 pr-4 py-1.5 text-body-sm w-64 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Buscar órdenes..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+<div class="h-8 w-8 rounded-full bg-primary-container/20 border border-primary/30 flex items-center justify-center overflow-hidden">
+<img alt="Admin" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a tech executive in a high-tech industrial setting with soft blue ambient lighting. The person has a confident expression, wearing modern business-casual attire. The background is slightly blurred, showing glimpses of high-precision printing machinery and data monitors, maintaining a professional and authoritative Blue CRM brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs2PArPS3ZRaw6JsMRncmckg3fgsH3RqUEE_-BQjlgbzBttDdpOzTQrd7XWxUGCjRF4iKrBQ2UtiNMz1A3isubv7faVL_chjNke2tmPenlsSjYA2QfVVgfXim9wSwA49cGSdSNqoVOclsgHaxPb1N7eKZ1rRHBVE77oYvxs8mcxrkkXzzUx-c5yDDzxf7YGwEm6xXE4nFmhIH4I8PM0eQpq65I5YdUyBr_p4hV4XNWuNSZE6R1lc1gm1lViiEeStNdx4fMt1Ezwqw"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[280px] mt-16 h-[calc(100vh-64px)] overflow-y-auto bg-surface-deep/50 p-gutter custom-scrollbar">
+<!-- Header Actions -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<nav class="flex items-center gap-2 text-on-surface-variant text-body-sm mb-1">
+<span>Cotizaciones</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-medium">Editor de Cotización</span>
+</nav>
+<h2 class="font-headline-md text-headline-md text-text-primary">Nueva Cotización Industrial</h2>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-border-subtle rounded text-text-primary font-medium hover:bg-surface-container-high transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="save">save</span>
+                    Guardar Borrador
+                </button>
+<button class="px-6 py-2 bg-primary text-on-primary font-bold rounded flex items-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf" data-weight="fill" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+                    Generar PDF
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Editor Form Area -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Client & Basic Info Card -->
+<section class="glass-panel rounded-xl p-6">
+<div class="flex items-center gap-2 mb-6 border-b border-border-subtle pb-4">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<h3 class="font-title-sm text-title-sm text-text-primary">Información del Cliente</h3>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant">Seleccionar Cliente</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border border-border-subtle rounded-lg px-4 py-3 text-body-base appearance-none focus:ring-1 focus:ring-primary focus:border-primary outline-none">
+<option>Artes Gráficas Modernas C.A.</option>
+<option>Inversiones Publicitarias 2024</option>
+<option>Corporación Plotter Pro</option>
+</select>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined pointer-events-none text-outline-variant" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant">Vencimiento</label>
+<input class="w-full bg-surface-container-lowest border border-border-subtle rounded-lg px-4 py-3 text-body-base focus:ring-1 focus:ring-primary focus:border-primary outline-none" type="date" value="2024-05-20"/>
+</div>
+</div>
+</section>
+<!-- Items Editor Card -->
+<section class="glass-panel rounded-xl p-6">
+<div class="flex justify-between items-center mb-6 border-b border-border-subtle pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="list_alt">list_alt</span>
+<h3 class="font-title-sm text-title-sm text-text-primary">Ítems de la Cotización</h3>
+</div>
+<button class="text-primary text-body-sm font-bold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                            Agregar del Catálogo
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-left border-b border-border-subtle">
+<th class="pb-3 font-label-caps text-label-caps text-on-surface-variant">Descripción del Producto/Servicio</th>
+<th class="pb-3 font-label-caps text-label-caps text-on-surface-variant w-24">Cantidad</th>
+<th class="pb-3 font-label-caps text-label-caps text-on-surface-variant w-32 text-right">Precio U. ($)</th>
+<th class="pb-3 font-label-caps text-label-caps text-on-surface-variant w-32 text-right">Total ($)</th>
+<th class="pb-3 w-10"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr>
+<td class="py-4">
+<div class="font-data-table text-data-table text-text-primary">Impresión Vinil Autoadhesivo Mate</div>
+<div class="text-body-sm text-on-surface-variant">Sistema de Impresión Industrial HP Latex 1440dpi - Sustrato Vinil Mate 1.50m</div>
+</td>
+<td class="py-4">
+<input class="w-full bg-surface-container-low border border-border-subtle rounded px-2 py-1 text-center" type="number" value="12"/>
+</td>
+<td class="py-4 text-right font-data-table text-data-table">15.50</td>
+<td class="py-4 text-right font-data-table text-data-table">186.00</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-error hover:opacity-70" data-icon="delete">delete</button>
+</td>
+</tr>
+<tr>
+<td class="py-4">
+<div class="font-data-table text-data-table text-text-primary">Banner Publicitario Pro Frontlit</div>
+<div class="text-body-sm text-on-surface-variant">Lona Frontlit 13oz - Acabado Termosellado y Ojaletes Metálicos c/50cm</div>
+</td>
+<td class="py-4">
+<input class="w-full bg-surface-container-low border border-border-subtle rounded px-2 py-1 text-center" type="number" value="5"/>
+</td>
+<td class="py-4 text-right font-data-table text-data-table">45.00</td>
+<td class="py-4 text-right font-data-table text-data-table">225.00</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-error hover:opacity-70" data-icon="delete">delete</button>
+</td>
+</tr>
+<tr>
+<td class="py-4">
+<div class="font-data-table text-data-table text-text-primary">Servicio de Instalación en Altura</div>
+<div class="text-body-sm text-on-surface-variant">Logística de Montaje - Cuadrilla Técnica Especializada + Equipos de Altura</div>
+</td>
+<td class="py-4">
+<input class="w-full bg-surface-container-low border border-border-subtle rounded px-2 py-1 text-center" type="number" value="1"/>
+</td>
+<td class="py-4 text-right font-data-table text-data-table">120.00</td>
+<td class="py-4 text-right font-data-table text-data-table">120.00</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-error hover:opacity-70" data-icon="delete">delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<button class="mt-6 w-full py-3 border-2 border-dashed border-border-subtle rounded-xl text-on-surface-variant hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2 group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="add">add</span>
+                        Añadir Línea Personalizada
+                    </button>
+</section>
+</div>
+<!-- Summary & Totals Sidebar -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Calculation Configuration -->
+<section class="glass-panel rounded-xl p-6 bg-surface-container-high/40">
+<div class="flex items-center gap-2 mb-6 border-b border-border-subtle pb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="calculate">calculate</span>
+<h3 class="font-title-sm text-title-sm text-text-primary">Configuración de Costos</h3>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Margen de Ganancia (%)</label>
+<span class="text-tertiary font-bold">25%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-lowest rounded-lg appearance-none cursor-pointer accent-tertiary" max="100" min="0" type="range" value="25"/>
+<div class="flex justify-between text-[10px] text-outline">
+<span>Mín. 5%</span>
+<span>Máx. 100%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-lg border border-border-subtle">
+<div class="flex flex-col">
+<span class="font-body-sm text-text-primary">Aplicar IVA (16%)</span>
+<span class="text-[11px] text-on-surface-variant">Impuesto nacional estándar</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="space-y-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant">Moneda de Visualización</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 rounded bg-primary-container/20 border border-primary text-primary font-bold text-body-sm">USD ($)</button>
+<button class="py-2 rounded bg-surface-container-lowest border border-border-subtle text-on-surface-variant font-medium text-body-sm hover:bg-surface-container-high transition-colors">VES (Bs)</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Totals Card -->
+<section class="bg-primary-container text-on-primary-container rounded-xl p-8 relative overflow-hidden shadow-xl shadow-primary/10">
+<!-- Decor logic -->
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-10 -bottom-10 w-32 h-32 bg-on-primary/10 rounded-full blur-2xl"></div>
+<div class="relative z-10 space-y-4">
+<div class="flex justify-between text-on-primary-container/70 font-body-sm">
+<span>Subtotal Bruto</span>
+<span class="font-mono">$ 531.00</span>
+</div>
+<div class="flex justify-between text-on-primary-container/70 font-body-sm">
+<span>Margen Aplicado (25%)</span>
+<span class="font-mono">+ $ 132.75</span>
+</div>
+<div class="flex justify-between text-on-primary-container/70 font-body-sm">
+<span>Impuestos (IVA 16%)</span>
+<span class="font-mono">$ 106.20</span>
+</div>
+<div class="border-t border-on-primary-container/20 pt-4 mt-4">
+<div class="flex justify-between items-end">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase opacity-60">Total a Pagar</span>
+<span class="font-financial-metric text-[32px] font-bold leading-none">$ 770.00</span>
+</div>
+<div class="text-right">
+<span class="text-[11px] block opacity-60">Equivalente BCV</span>
+<span class="font-mono text-body-sm">29,645.00 Bs</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-4 bg-on-primary-container text-primary-container rounded-lg font-extrabold text-title-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                            Emitir Cotización
+                        </button>
+<p class="text-center text-[10px] opacity-60 italic">Válido por 5 días hábiles desde la fecha de emisión.</p><p class="text-center text-[10px] text-on-primary-container/50 mt-1 uppercase font-bold tracking-widest">Datos de ejemplo</p>
+</div>
+</section>
+<!-- Activity / Notes -->
+<section class="glass-panel rounded-xl p-6">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-3">Notas Internas / Condiciones</label>
+<textarea class="w-full bg-surface-container-lowest border border-border-subtle rounded-lg p-3 text-body-sm h-24 focus:ring-1 focus:ring-primary outline-none resize-none" placeholder="Escribe condiciones especiales de pago o detalles técnicos aquí..."></textarea>
+</section>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for the range slider value display
+        const range = document.querySelector('input[type="range"]');
+        const marginVal = document.querySelector('.text-tertiary.font-bold');
+        
+        range.addEventListener('input', (e) => {
+            marginVal.textContent = `${e.target.value}%`;
+        });
+
+        // Add visual feedback to buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.classList.add('scale-95');
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.classList.remove('scale-95');
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

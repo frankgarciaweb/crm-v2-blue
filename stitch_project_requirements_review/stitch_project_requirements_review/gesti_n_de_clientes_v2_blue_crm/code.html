@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#bdffdb",
+                        "tertiary-fixed": "#6ffbbe",
+                        "outline-variant": "#434655",
+                        "surface-container-highest": "#2d3449",
+                        "on-secondary": "#472a00",
+                        "surface-variant": "#2d3449",
+                        "on-secondary-container": "#5b3800",
+                        "on-primary-fixed": "#00174b",
+                        "error-container": "#93000a",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-error": "#690005",
+                        "on-tertiary": "#003824",
+                        "secondary-container": "#ee9800",
+                        "text-primary": "#F8FAFC",
+                        "primary": "#b4c5ff",
+                        "on-tertiary-fixed": "#002113",
+                        "status-pending": "#64748B",
+                        "on-primary": "#002a78",
+                        "surface": "#0b1326",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "tertiary": "#4edea3",
+                        "inverse-primary": "#0053db",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-lowest": "#060e20",
+                        "on-background": "#dae2fd",
+                        "surface-tint": "#b4c5ff",
+                        "text-secondary": "#94A3B8",
+                        "error": "#ffb4ab",
+                        "surface-deep": "#0B1120",
+                        "on-surface": "#dae2fd",
+                        "background": "#0b1326",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "tertiary-container": "#007d55",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "surface-bright": "#31394d",
+                        "inverse-surface": "#dae2fd",
+                        "surface-container-high": "#222a3d",
+                        "secondary-fixed": "#ffddb8",
+                        "status-ready": "#10B981",
+                        "primary-container": "#2563eb",
+                        "surface-dim": "#0b1326",
+                        "primary-fixed": "#dbe1ff",
+                        "secondary": "#ffb95f",
+                        "inverse-on-surface": "#283044",
+                        "on-secondary-fixed": "#2a1700",
+                        "status-production": "#3B82F6",
+                        "surface-container": "#171f33",
+                        "surface-card": "#1E293B",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "outline": "#8d90a0",
+                        "surface-container-low": "#131b2e",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "status-alert": "#EF4444"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-margin": "2rem",
+                        "stack-xs": "0.25rem",
+                        "stack-sm": "0.5rem",
+                        "gutter": "1.5rem",
+                        "component-gap": "1rem"
+                    },
+                    "fontFamily": {
+                        "data-table": ["Inter"],
+                        "display-lg": ["Geist"],
+                        "title-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-base": ["Inter"],
+                        "financial-metric": ["Geist"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0b1326; color: #dae2fd; font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        .glass-top { backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+        .drawer-transition { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="overflow-hidden">
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Blue CRM</h1>
+<p class="text-on-surface-variant font-body-sm text-body-sm opacity-70">Industrial Precision</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 custom-scrollbar">
+<div class="space-y-1">
+<!-- Navigation Items -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all scale-[0.98]" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-sm text-body-sm">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-sm text-body-sm">Productos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">warehouse</span>
+<span class="font-body-sm text-body-sm">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-sm text-body-sm">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+<span class="font-body-sm text-body-sm">Pedidos PDF</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-body-sm text-body-sm">Archivos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-body-sm text-body-sm">Trabajos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">print</span>
+<span class="font-body-sm text-body-sm">Plotter</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-sm text-body-sm">Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-body-sm text-body-sm">Proveedores</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+<span class="font-body-sm text-body-sm">Cotizaciones</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm">Configuración</span>
+</a>
+</div>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-bold font-body-sm text-body-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all"><span class="material-symbols-outlined">add</span> Nueva Cotización</button>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-[280px] w-[calc(100%-280px)] h-screen flex flex-col relative overflow-hidden">
+<!-- Top Navbar -->
+<header class="h-16 flex justify-between items-center px-gutter w-full glass-top bg-surface/80 fixed top-0 right-0 z-40">
+<div class="flex items-center gap-8">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">search</span>
+<input class="bg-surface-container-lowest border-none rounded-full pl-10 pr-4 py-1.5 w-80 text-body-sm font-body-sm focus:ring-1 focus:ring-primary/50 transition-all" placeholder="Buscar clientes, facturas o RIF..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-body-sm text-body-sm text-primary font-bold">$ Dólar: 38,5 Bs</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Binance: 259,9 Bs</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-primary transition-colors material-symbols-outlined">notifications</button>
+<button class="px-4 py-1.5 border border-border-subtle rounded text-body-sm font-body-sm text-on-surface-variant hover:text-primary hover:border-primary/40 transition-all">Cotización Rápida</button>
+<button class="px-4 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded text-body-sm font-body-sm font-bold hover:bg-primary/20 transition-all">Nuevo Pedido</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-border-subtle">
+<div class="text-right hidden xl:block">
+<p class="text-body-sm font-bold leading-none">Admin Blue</p>
+<p class="text-[10px] text-on-surface-variant font-label-caps">OPERADOR MASTER</p>
+</div>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-primary/30 object-cover" data-alt="A professional headshot of a male operations manager in a high-tech corporate office environment. He has a confident expression, wearing a tailored navy blazer over a clean white shirt. The background is softly blurred with subtle blue ambient lighting and sleek architectural lines, creating an atmosphere of industrial precision and elite executive leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClhNij9-UaulJE85E4Ae1biNpUA_oFJRDkmVyG8vLdOQ5VFoEon2ATpfR6yBBwUTxgfXR-Qxs9WCv8hgZsgfQhlCKZh9_QslJbdtqgqMN-aIpiKv1q2YfxUIU8ONqjBgj23rFXKfwjb-KNEw7LcK9AOgWSxKGTuGZoYZro7V6SBexXIKWlp_1BAomNaWB626Zuk-gPRsW1MdM8rUoAm1oWj2yTRHYZ61XwXDb1ktoh1w_zvA9G7kzyDDs_i-TRWbwkLr4HNnYmD9Y"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<section class="flex-1 mt-16 p-gutter overflow-hidden flex flex-col bg-surface">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-title-sm text-title-sm font-bold text-text-primary">Gestión de Clientes</h2><span class="text-[10px] font-label-caps bg-surface-container-highest px-2 py-0.5 rounded ml-2 text-on-surface-variant">Datos de ejemplo</span>
+<p class="text-on-surface-variant font-body-sm text-body-sm">428 registros técnicos en base de datos</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-card border border-border-subtle rounded text-body-sm font-medium hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                        Filtros Avanzados
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded font-bold text-body-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+                        Registrar Cliente
+                    </button>
+</div>
+</div>
+<!-- Stats Bar (Bento-lite) -->
+<div class="grid grid-cols-4 gap-gutter mb-6">
+<div class="bg-surface-card border border-border-subtle p-4 rounded-xl">
+<p class="text-[11px] font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">Cartera Total</p>
+<p class="font-financial-metric text-financial-metric text-primary">$142,500.40</p>
+</div>
+<div class="bg-surface-card border border-border-subtle p-4 rounded-xl">
+<p class="text-[11px] font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">Saldos Vencidos</p>
+<p class="font-financial-metric text-financial-metric text-error">$12,410.15</p>
+</div>
+<div class="bg-surface-card border border-border-subtle p-4 rounded-xl">
+<p class="text-[11px] font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">Clientes Activos</p>
+<p class="font-financial-metric text-financial-metric text-status-ready">382</p>
+</div>
+<div class="bg-surface-card border border-border-subtle p-4 rounded-xl">
+<p class="text-[11px] font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">Ticket Promedio</p>
+<p class="font-financial-metric text-financial-metric text-secondary">$328.00</p>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="flex-1 bg-surface-card border border-border-subtle rounded-xl overflow-hidden flex flex-col">
+<div class="overflow-x-auto overflow-y-auto custom-scrollbar flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-high z-10">
+<tr>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant border-b border-border-subtle uppercase tracking-wider">Nombre / Empresa</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant border-b border-border-subtle uppercase tracking-wider">ID Fiscal (RIF)</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant border-b border-border-subtle uppercase tracking-wider">Categoría</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant border-b border-border-subtle uppercase tracking-wider text-right">Descuento</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant border-b border-border-subtle uppercase tracking-wider text-right">Saldo Pendiente</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant border-b border-border-subtle uppercase tracking-wider text-center">Estado</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant border-b border-border-subtle uppercase tracking-wider text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Table Rows -->
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer" onclick="toggleDrawer(true, 'Inversiones Gráficas 2024', 'J-3129845-0', 'Agencia VIP', '15%', '$2,450.00')">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">IG</div>
+<div>
+<p class="font-data-table text-data-table text-text-primary">Artes Gráficas del Norte C.A.</p>
+<p class="text-xs text-on-surface-variant">info@invgraficas.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-data-table text-data-table text-on-surface-variant">Artes Gráficas del Norte C.A.</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-secondary-container/20 text-secondary text-[11px] font-bold uppercase tracking-tight border border-secondary/20">Agencia VIP</span>
+</td>
+<td class="px-6 py-4 font-data-table text-data-table text-right text-tertiary">Artes Gráficas del Norte C.A.</td>
+<td class="px-6 py-4 font-data-table text-data-table text-right text-text-primary">Artes Gráficas del Norte C.A.</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-status-ready">
+<span class="w-1.5 h-1.5 rounded-full bg-status-ready"></span> ACTIVO
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Repeat Row 2 -->
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer" onclick="toggleDrawer(true, 'Distribuidora PrintFast', 'G-2000412-2', 'Mayorista', '8%', '$0.00')">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary/10 flex items-center justify-center text-secondary font-bold text-xs">PF</div>
+<div>
+<p class="font-data-table text-data-table text-text-primary">Publicidad Exterior 360</p>
+<p class="text-xs text-on-surface-variant">ventas@printfast.net</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-data-table text-data-table text-on-surface-variant">Publicidad Exterior 360</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-primary-container/20 text-primary text-[11px] font-bold uppercase tracking-tight border border-primary/20">Mayorista</span>
+</td>
+<td class="px-6 py-4 font-data-table text-data-table text-right text-tertiary">Publicidad Exterior 360</td>
+<td class="px-6 py-4 font-data-table text-data-table text-right text-text-primary">Publicidad Exterior 360</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-status-ready">
+<span class="w-1.5 h-1.5 rounded-full bg-status-ready"></span> ACTIVO
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer" onclick="toggleDrawer(true, 'Servicios Globales C.A.', 'J-0012938-1', 'Standard', '0%', '$8,940.50')">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error/10 flex items-center justify-center text-error font-bold text-xs">SG</div>
+<div>
+<p class="font-data-table text-data-table text-text-primary">Soluciones Offset &amp; Digital</p>
+<p class="text-xs text-on-surface-variant">contabilidad@globalca.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-data-table text-data-table text-on-surface-variant">Soluciones Offset &amp; Digital</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container-highest/50 text-on-surface-variant text-[11px] font-bold uppercase tracking-tight border border-border-subtle">Estándar</span>
+</td>
+<td class="px-6 py-4 font-data-table text-data-table text-right text-on-surface-variant">Soluciones Offset &amp; Digital</td>
+<td class="px-6 py-4 font-data-table text-data-table text-right text-error">Soluciones Offset &amp; Digital</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-status-alert">
+<span class="w-1.5 h-1.5 rounded-full bg-status-alert"></span> MOROSO
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Dummy padding rows -->
+<tr class="opacity-50">
+<td class="px-6 py-3 text-center text-xs italic text-on-surface-variant" colspan="7">Fin de los resultados visibles (1-3 de 428)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-4 flex items-center justify-between border-t border-border-subtle bg-surface-container-low">
+<p class="text-body-sm text-on-surface-variant">Mostrando 50 de 428 clientes</p>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center border border-border-subtle rounded hover:bg-surface-container-high material-symbols-outlined text-sm">chevron_left</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-border-subtle rounded hover:bg-surface-container-high text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-border-subtle rounded hover:bg-surface-container-high text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-border-subtle rounded hover:bg-surface-container-high material-symbols-outlined text-sm">chevron_right</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Details Drawer Overlay -->
+<div class="fixed inset-0 bg-surface-deep/60 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300" id="drawerOverlay" onclick="toggleDrawer(false)"></div>
+<!-- Details Drawer Content -->
+<aside class="fixed top-0 right-0 h-full w-[480px] bg-surface-card border-l border-border-subtle z-[70] translate-x-full drawer-transition flex flex-col shadow-2xl" id="clientDrawer">
+<header class="p-6 border-b border-border-subtle flex items-center justify-between">
+<div>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-1 inline-block">Ficha Técnica de Cliente</span>
+<h3 class="font-title-sm text-title-sm font-bold text-text-primary" id="drawerName">Detalles del Cliente</h3>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-highest transition-colors material-symbols-outlined" onclick="toggleDrawer(false)">close</button>
+</header>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8">
+<!-- Info Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<p class="text-[10px] font-label-caps text-on-surface-variant uppercase mb-1">Industrial Precision</p>
+<p class="font-body-base font-bold text-text-primary" id="drawerRIF">J-00000000-0</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<p class="text-[10px] font-label-caps text-on-surface-variant uppercase mb-1">Industrial Precision</p>
+<p class="font-body-base font-bold text-secondary" id="drawerCategory">---</p>
+</div>
+</div>
+<!-- Financial Health Card -->
+<div class="bg-surface-deep/50 border border-primary/20 rounded-xl p-5 relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 w-24 h-24 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-[11px] font-label-caps text-on-surface-variant uppercase tracking-widest">Industrial Precision</p>
+<p class="text-[32px] font-financial-metric font-bold text-primary mt-1" id="drawerBalance">$0.00</p>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 rounded-full bg-status-ready/10 text-status-ready text-[10px] font-bold border border-status-ready/30">AL DÍA</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-border-subtle pt-4">
+<div>
+<p class="text-[10px] text-on-surface-variant">Industrial Precision</p>
+<p class="font-body-sm font-bold text-text-primary">$15,000.00</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant">Industrial Precision</p>
+<p class="font-body-sm font-bold text-text-primary">15 Días</p>
+</div>
+</div>
+</div>
+<!-- Custom Discount Section -->
+<div>
+<label class="block text-[11px] font-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Configuración de Descuento</label>
+<div class="flex items-center gap-4 bg-surface-container p-4 rounded-xl border border-border-subtle">
+<div class="flex-1">
+<p class="text-[10px] text-on-surface-variant mb-1">Industrial Precision</p>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold text-tertiary" id="drawerDiscount">0%</span>
+<span class="material-symbols-outlined text-tertiary text-sm">verified_user</span>
+</div>
+</div>
+<button class="px-4 py-2 bg-surface-container-highest border border-border-subtle rounded font-bold text-body-sm hover:text-primary transition-colors">Ajustar</button>
+</div>
+</div>
+<!-- Technical Specs (Industrial Printing Context) -->
+<div>
+<h4 class="font-body-sm font-bold text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">print_connect</span>
+                        Preferencias Técnicas
+                    </h4>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<span class="text-body-sm text-on-surface-variant">Perfil de Color Preferido</span>
+<span class="font-data-table text-text-primary">CMYK - Fogra39</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<span class="text-body-sm text-on-surface-variant">Material Recurrente</span>
+<span class="font-data-table text-text-primary">Vinil Autoadhesivo Brillante</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<span class="text-body-sm text-on-surface-variant">Calidad de Impresión</span>
+<span class="font-data-table text-text-primary">High Res (1440 DPI)</span>
+</div>
+</div>
+</div>
+<!-- Contact & History -->
+<div class="space-y-4 pt-4">
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-high rounded-lg hover:bg-primary/10 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">history</span>
+<span class="font-body-sm font-medium">Ver Historial de Pedidos</span>
+</div>
+<span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-high rounded-lg hover:bg-primary/10 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">location_on</span>
+<span class="font-body-sm font-medium">Gestionar Direcciones de Despacho</span>
+</div>
+<span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</button>
+</div>
+</div>
+<footer class="p-6 border-t border-border-subtle grid grid-cols-2 gap-3">
+<button class="py-3 bg-surface-container-highest rounded font-bold text-body-sm hover:text-error transition-colors">Eliminar</button>
+<button class="py-3 bg-primary text-on-primary rounded font-bold text-body-sm hover:opacity-90">Editar Perfil</button>
+</footer>
+</aside>
+</main>
+<script>
+        function toggleDrawer(show, name, rif, category, discount, balance) {
+            const drawer = document.getElementById('clientDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            
+            if (show) {
+                // Set data
+                document.getElementById('drawerName').innerText = name;
+                document.getElementById('drawerRIF').innerText = rif;
+                document.getElementById('drawerCategory').innerText = category;
+                document.getElementById('drawerDiscount').innerText = discount;
+                document.getElementById('drawerBalance').innerText = balance;
+                
+                // Show visuals
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.add('opacity-100');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                overlay.classList.remove('opacity-100');
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+    </script>
+</body></html>

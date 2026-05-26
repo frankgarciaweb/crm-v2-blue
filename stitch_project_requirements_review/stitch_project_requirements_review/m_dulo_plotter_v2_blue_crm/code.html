@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calculadora Técnica Plotter | Blue CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#0b1326",
+                    "on-secondary-fixed": "#2a1700",
+                    "surface-card": "#1E293B",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-deep": "#0B1120",
+                    "inverse-surface": "#dae2fd",
+                    "primary-container": "#2563eb",
+                    "outline-variant": "#434655",
+                    "tertiary-container": "#007d55",
+                    "secondary": "#ffb95f",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error": "#690005",
+                    "secondary-container": "#ee9800",
+                    "border-subtle": "rgba(255, 255, 255, 0.08)",
+                    "status-production": "#3B82F6",
+                    "error-container": "#93000a",
+                    "outline": "#8d90a0",
+                    "primary": "#b4c5ff",
+                    "status-alert": "#EF4444",
+                    "surface-container-lowest": "#060e20",
+                    "surface-container": "#171f33",
+                    "on-secondary": "#472a00",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#eeefff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-container": "#bdffdb",
+                    "on-surface": "#dae2fd",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "status-ready": "#10B981",
+                    "error": "#ffb4ab",
+                    "secondary-fixed": "#ffddb8",
+                    "surface-bright": "#31394d",
+                    "text-primary": "#F8FAFC",
+                    "on-tertiary-fixed": "#002113",
+                    "on-primary": "#002a78",
+                    "inverse-on-surface": "#283044",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-container-highest": "#2d3449",
+                    "surface-variant": "#2d3449",
+                    "on-primary-fixed": "#00174b",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "surface-container-high": "#222a3d",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-secondary-container": "#5b3800",
+                    "tertiary": "#4edea3",
+                    "background": "#0b1326",
+                    "on-tertiary": "#003824",
+                    "text-secondary": "#94A3B8",
+                    "surface-dim": "#0b1326",
+                    "on-surface-variant": "#c3c6d7",
+                    "on-background": "#dae2fd",
+                    "status-pending": "#64748B",
+                    "surface-container-low": "#131b2e",
+                    "inverse-primary": "#0053db",
+                    "surface-tint": "#b4c5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "component-gap": "1rem",
+                    "stack-xs": "0.25rem",
+                    "stack-sm": "0.5rem",
+                    "container-margin": "2rem",
+                    "gutter": "1.5rem"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "label-caps": ["JetBrains Mono"],
+                    "title-sm": ["Geist"],
+                    "body-base": ["Inter"],
+                    "financial-metric": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "data-table": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Blue CRM</h1>
+<p class="text-on-surface-variant font-body-sm opacity-70">Industrial Precision</p>
+</div>
+<nav class="flex-1 px-3 space-y-1"><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">dashboard</span><span class="font-body-base">Dashboard</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">group</span><span class="font-body-base">Clientes</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">inventory_2</span><span class="font-body-base">Productos</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all" href="#"><span class="material-symbols-outlined">print</span><span class="font-body-base">Plotter</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">payments</span><span class="font-body-base">Finanzas</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">assignment</span><span class="font-body-base">Proyectos</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">factory</span><span class="font-body-base">Producci3n</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">local_shipping</span><span class="font-body-base">Log1stica</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">store</span><span class="font-body-base">Ventas</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">engineering</span><span class="font-body-base">Mantenimiento</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">support_agent</span><span class="font-body-base">Soporte</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">bar_chart</span><span class="font-body-base">Reportes</span></a><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined">settings</span><span class="font-body-base">Configuraci3n</span></a></nav>
+<div class="px-6 mt-auto">
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded-lg border border-border-subtle">
+<img alt="Blue CRM Admin Avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a senior industrial engineer with a focused expression, set against a dark, technologically advanced background with soft blue atmospheric lighting. The style is sharp, corporate, and modern, reflecting high-end executive expertise in a precision-driven manufacturing environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUcbfK4CqFRNrWGYz5vVvb0XB3H58qr4goLKLM7apk1h6hVQULlYfB05j3iHkRi0rlsv8LRvrS_TmCzDPg7g_UecB8J3ugLDgLtR-cCJNq9azFizeihNxpvMt3covcpLShDF0q0G0sVVoUVJDNkz7A32y1jd-rW-mSYJ0gpryP3lxTjFSd8b1Odxv7w-dT3dGIYuLu8Kpt008fxjR0-O0FLDFwkdCiOTRqc_UDFVUg-TgguC9_CDtbSSOE8q2lTa3kFxFqwDbrC0g"/>
+<div class="overflow-hidden">
+<p class="text-primary font-bold truncate">Admin Operario</p>
+<p class="text-on-surface-variant text-xs truncate">Planta Industrial A</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-secondary font-label-caps">$ Dólar: 38,5 Bs</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span class="text-tertiary font-label-caps">Binance: 259,9 Bs</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 border border-border-subtle rounded-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+<span class="font-body-sm">Buscar...</span>
+</button>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded font-bold font-body-sm active:opacity-80 transition-all">Nuevo Pedido</button>
+</div>
+</div>
+</header>
+<!-- Page Content: Plotter Module -->
+<section class="mt-16 flex-1 overflow-auto p-gutter bg-surface-deep">
+<div class="max-w-[1400px] mx-auto space-y-gutter">
+<header class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Módulo Plotter</h2>
+<p class="text-text-secondary font-body-base">Calculadora de precisión técnica y estimación de costos industriales.</p>
+</div>
+<div class="bg-surface-container px-4 py-2 rounded-lg border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">precision_manufacturing</span>
+<span class="font-label-caps text-secondary">SISTEMA CALIBRADO v2.4</span>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-6">
+<!-- Calculator Inputs -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<div class="glass-panel p-6 rounded-xl border border-border-subtle">
+<h3 class="font-title-sm text-title-sm text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">straighten</span>
+                                Parámetros de Trabajo
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Width Input -->
+<div class="space-y-2">
+<label class="font-label-caps text-text-secondary">ANCHO (CM)</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-border-subtle rounded-lg px-4 py-3 font-financial-metric text-primary focus:ring-1 focus:ring-primary focus:border-primary transition-all" id="input-width" type="number" value="100"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-label-caps">CM</span>
+</div>
+</div>
+<!-- Height Input -->
+<div class="space-y-2">
+<label class="font-label-caps text-text-secondary">ALTO (CM)</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-border-subtle rounded-lg px-4 py-3 font-financial-metric text-primary focus:ring-1 focus:ring-primary focus:border-primary transition-all" id="input-height" type="number" value="100"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-label-caps">CM</span>
+</div>
+</div>
+<!-- Quantity Input -->
+<div class="space-y-2">
+<label class="font-label-caps text-text-secondary">CANTIDAD (UNID.)</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-border-subtle rounded-lg px-4 py-3 font-financial-metric text-primary focus:ring-1 focus:ring-primary focus:border-primary transition-all" id="input-qty" type="number" value="1"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline font-label-caps">PCS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Selectors -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Material Selector -->
+<div class="glass-panel p-6 rounded-xl border border-border-subtle">
+<h3 class="font-title-sm text-title-sm text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">layers</span>
+                                    Material de Impresión
+                                </h3>
+<div class="space-y-4">
+<select class="w-full bg-surface-container-lowest border-border-subtle rounded-lg px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" id="select-material">
+<option data-cost="5.20" value="vinyl-gloss">Vinilo Brillante (Standard) - $5.20/m²</option>
+<option data-cost="5.50" value="vinyl-matte">Vinilo Mate (Premium) - $5.50/m²</option>
+<option data-cost="12.00" value="canvas">Canvas Algodón - $12.00/m²</option>
+<option data-cost="3.80" value="banner-13oz">Lona Banner 13oz - $3.80/m²</option>
+<option data-cost="8.90" value="micro">Microperforado - $8.90/m²</option>
+</select>
+<div class="flex justify-between text-xs font-label-caps text-text-secondary px-1">
+<span>MERMA EST.: 5%</span>
+<span id="material-cost-label">BASE: $5.20/m²</span>
+</div>
+</div>
+</div>
+<!-- Machine Selector -->
+<div class="glass-panel p-6 rounded-xl border border-border-subtle">
+<h3 class="font-title-sm text-title-sm text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">print</span>
+                                    Plotter / Equipo
+                                </h3>
+<div class="space-y-4">
+<select class="w-full bg-surface-container-lowest border-border-subtle rounded-lg px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" id="select-machine">
+<option data-ink="1.20" data-speed="15" data-width="180" value="roland-720">Roland SolJET Pro 4 (1.80m) - 15m²/h</option>
+<option data-ink="1.80" data-speed="22" data-width="160" value="hp-latex">HP Latex 360 (1.60m) - 22m²/h</option>
+<option data-ink="1.10" data-speed="12" data-width="160" value="epson-sure">Epson SureColor S80600 - 12m²/h</option>
+</select>
+<div class="flex justify-between text-xs font-label-caps text-text-secondary px-1">
+<span id="machine-width-label">ANCHO MÁX: 180cm</span>
+<span class="text-tertiary">ESTADO: OPERATIVO</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Warnings / Alerts -->
+<div class="hidden bg-status-alert/10 border border-status-alert/30 p-4 rounded-lg flex items-center gap-3" id="width-warning">
+<span class="material-symbols-outlined text-status-alert">warning</span>
+<p class="text-status-alert font-body-sm">EL ANCHO DEL TRABAJO EXCEDE EL ANCHO MÁXIMO DEL MATERIAL/MÁQUINA SELECCIONADA.</p>
+</div>
+</div>
+<!-- Live Results Card -->
+<div class="col-span-12 lg:col-span-4">
+<div class="sticky top-24 space-y-6">
+<div class="bg-primary-container rounded-xl p-8 shadow-2xl relative overflow-hidden">
+<!-- Background Texture for depth -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+<div class="relative z-10">
+<p class="font-label-caps text-on-primary-container/80 mb-2">PRECIO SUGERIDO FINAL</p>
+<h4 class="font-display-lg text-display-lg text-white mb-6" id="result-total-price">$ 15.14</h4>
+<div class="space-y-4 border-t border-white/20 pt-6">
+<div class="flex justify-between items-center">
+<span class="text-white/70 font-body-sm">Superficie Total</span>
+<span class="font-financial-metric text-white" id="result-area">0.00 m²</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-white/70 font-body-sm">Tiempo Estimado</span>
+<span class="font-financial-metric text-white" id="result-time">0 min</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-white/70 font-body-sm">Margen de Utilidad</span>
+<span class="bg-white/20 px-2 py-1 rounded text-white font-bold" id="result-margin">0%</span>
+</div>
+</div>
+<button class="w-full mt-8 bg-white text-primary-container font-bold py-4 rounded-lg hover:bg-on-primary-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+                                        CREAR COTIZACIÓN
+                                    </button>
+</div>
+</div>
+<!-- Cost Breakdown Card -->
+<div class="glass-panel rounded-xl border border-border-subtle overflow-hidden">
+<div class="bg-surface-container px-6 py-4 border-b border-border-subtle">
+<h3 class="font-label-caps text-primary">DESGLOSE TÉCNICO DE COSTOS</h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary text-sm">inventory_2</span>
+<span class="text-on-surface-variant font-body-sm">Costo Material</span>
+</div>
+<span class="text-on-surface font-body-sm" id="cost-material">$0.00</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary text-sm">colorize</span>
+<span class="text-on-surface-variant font-body-sm">Costo Tinta</span>
+</div>
+<span class="text-on-surface font-body-sm" id="cost-ink">$0.00</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary text-sm">bolt</span>
+<span class="text-on-surface-variant font-body-sm">Uso Máquina</span>
+</div>
+<span class="text-on-surface font-body-sm" id="cost-machine">$0.00</span>
+</div>
+<div class="flex justify-between items-center pt-2 border-t border-border-subtle">
+<span class="text-text-primary font-bold font-body-sm">COSTO TOTAL OPERATIVO</span>
+<span class="text-primary font-bold font-body-sm" id="total-operational-cost">$0.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Logs / Visualizer (Bento style) -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-panel p-6 rounded-xl border border-border-subtle flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4">settings_input_component</span>
+<p class="font-label-caps text-text-secondary mb-1">OPTIMIZACIÓN DE CORTE</p>
+<p class="text-primary font-bold">Activo - Layout Auto</p>
+</div>
+<div class="glass-panel p-6 rounded-xl border border-border-subtle flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">schedule</span>
+<p class="font-label-caps text-text-secondary mb-1">COLA DE IMPRESIÓN</p>
+<p class="text-primary font-bold">3 Trabajos en espera</p>
+</div>
+<div class="glass-panel p-6 rounded-xl border border-border-subtle flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-status-production text-4xl mb-4">analytics</span>
+<p class="font-label-caps text-text-secondary mb-1">RENDIMIENTO INK CC</p>
+<p class="text-primary font-bold">12.4 ml / m² prom.</p>
+</div>
+</div>
+</div>
+<footer class="pt-8 pb-4 text-center border-t border-border-subtle"><p class="text-on-surface-variant text-xs italic">* Datos de ejemplo basados en par1metros est1ndar de industria.</p></footer></div>
+</section>
+</main>
+<!-- Interactive Scripting -->
+<script>
+        const inputs = ['input-width', 'input-height', 'input-qty', 'select-material', 'select-machine'];
+        
+        const updateCalculations = () => {
+            const width = parseFloat(document.getElementById('input-width').value) || 0;
+            const height = parseFloat(document.getElementById('input-height').value) || 0;
+            const qty = parseInt(document.getElementById('input-qty').value) || 0;
+            
+            const materialSelect = document.getElementById('select-material');
+            const materialCostPerM2 = parseFloat(materialSelect.options[materialSelect.selectedIndex].dataset.cost);
+            
+            const machineSelect = document.getElementById('select-machine');
+            const machineMaxWidth = parseFloat(machineSelect.options[machineSelect.selectedIndex].dataset.width);
+            const machineSpeed = parseFloat(machineSelect.options[machineSelect.selectedIndex].dataset.speed);
+            const inkCostPerM2 = parseFloat(machineSelect.options[machineSelect.selectedIndex].dataset.ink);
+
+            // UI updates for labels
+            document.getElementById('material-cost-label').innerText = `BASE: $${materialCostPerM2.toFixed(2)}/m²`;
+            document.getElementById('machine-width-label').innerText = `ANCHO MÁX: ${machineMaxWidth}cm`;
+
+            // Warning logic
+            const warningEl = document.getElementById('width-warning');
+            if (width > machineMaxWidth) {
+                warningEl.classList.remove('hidden');
+            } else {
+                warningEl.classList.add('hidden');
+            }
+
+            // Area Calculation (cm to m2)
+            const areaPerUnit = (width * height) / 10000;
+            const totalArea = areaPerUnit * qty;
+            
+            // Costs
+            const totalMaterialCost = totalArea * materialCostPerM2 * 1.05; // 5% waste
+            const totalInkCost = totalArea * inkCostPerM2;
+            const machineHourlyRate = 25; // Default overhead
+            const printTimeHours = totalArea / machineSpeed;
+            const totalMachineCost = printTimeHours * machineHourlyRate;
+            
+            const totalOperationalCost = totalMaterialCost + totalInkCost + totalMachineCost;
+            
+            // Business Logic: 45% Margin
+            const targetMargin = 0.45;
+            const suggestedPrice = totalOperationalCost / (1 - targetMargin);
+            const actualMarginVal = suggestedPrice > 0 ? ((suggestedPrice - totalOperationalCost) / suggestedPrice) * 100 : 0;
+
+            // Output updates
+            document.getElementById('result-area').innerText = `${totalArea.toFixed(2)} m²`;
+            document.getElementById('result-time').innerText = `${Math.ceil(printTimeHours * 60)} min`;
+            document.getElementById('result-margin').innerText = `${Math.round(actualMarginVal)}%`;
+            document.getElementById('result-total-price').innerText = `$ ${suggestedPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            document.getElementById('cost-material').innerText = `$${totalMaterialCost.toFixed(2)}`;
+            document.getElementById('cost-ink').innerText = `$${totalInkCost.toFixed(2)}`;
+            document.getElementById('cost-machine').innerText = `$${totalMachineCost.toFixed(2)}`;
+            document.getElementById('total-operational-cost').innerText = `$${totalOperationalCost.toFixed(2)}`;
+        };
+
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', updateCalculations);
+        });
+
+        // Initialize
+        updateCalculations();
+    </script>
+</body></html>

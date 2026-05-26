@@ -1,0 +1,51 @@
+schemaname,tablename,policyname,permissive,roles,cmd,qual,with_check
+public,clientes,Enable all access for clientes,PERMISSIVE,{public},ALL,true,true
+public,clientes,Permitir todo en clientes,PERMISSIVE,{public},ALL,true,true
+public,compras_material,auth_compras_material,PERMISSIVE,{authenticated},ALL,true,true
+public,compras_proveedores,Enable all access for compras_proveedores,PERMISSIVE,{public},ALL,true,true
+public,compras_proveedores,Permitir todo en compras_proveedores,PERMISSIVE,{public},ALL,true,true
+public,configuracion_negocio,auth_all_configuracion,PERMISSIVE,{authenticated},ALL,true,true
+public,consumo_materiales,Permitir todo en consumo_materiales,PERMISSIVE,{public},ALL,true,true
+public,cotizacion_items,cotizacion_items_all,PERMISSIVE,{authenticated},ALL,true,true
+public,cotizaciones,cotizaciones_all,PERMISSIVE,{authenticated},ALL,true,true
+public,dolar,Allow public read access to dolar,PERMISSIVE,{public},SELECT,true,null
+public,dolar,Enable delete access for all users,PERMISSIVE,{public},DELETE,true,null
+public,dolar,Enable insert access for all users,PERMISSIVE,{public},INSERT,null,true
+public,dolar,Enable read access for all users,PERMISSIVE,{public},SELECT,true,null
+public,dolar,Enable update access for all users,PERMISSIVE,{public},UPDATE,true,null
+public,historial_binance,Allow all,PERMISSIVE,{public},ALL,true,true
+public,historial_precios,auth_all_historial,PERMISSIVE,{authenticated},ALL,true,true
+public,historial_tasa_binance,auth_historial_tasa,PERMISSIVE,{authenticated},ALL,true,true
+public,maquina_tinta_activa,Allow all operations on maquina_tinta_activa,PERMISSIVE,{authenticated},ALL,true,true
+public,maquinas,auth_all_maquinas,PERMISSIVE,{authenticated},ALL,true,true
+public,marcas_tinta,Permitir todo en marcas_tinta,PERMISSIVE,{public},ALL,true,true
+public,materiales,Enable all access for materiales,PERMISSIVE,{public},ALL,true,true
+public,materiales,Permitir todo en materiales,PERMISSIVE,{public},ALL,true,true
+public,pedido_items,Enable delete access for all users,PERMISSIVE,{public},DELETE,true,null
+public,pedido_items,Enable insert access for all users,PERMISSIVE,{public},INSERT,null,true
+public,pedido_items,Enable read access for all users,PERMISSIVE,{public},SELECT,true,null
+public,pedido_items,Enable update access for all users,PERMISSIVE,{public},UPDATE,true,null
+public,pedido_items,Permitir todo en pedido_items,PERMISSIVE,{public},ALL,true,true
+public,pedidos,Enable all access for pedidos,PERMISSIVE,{public},ALL,true,true
+public,pedidos,Permitir todo en pedidos,PERMISSIVE,{public},ALL,true,true
+public,producto_perfil_tinta,auth_all_perfil_tinta,PERMISSIVE,{authenticated},ALL,true,true
+public,productos,Enable all access for productos,PERMISSIVE,{public},ALL,true,true
+public,productos,Enable delete access for all users,PERMISSIVE,{public},DELETE,true,null
+public,productos,Enable insert access for all users,PERMISSIVE,{public},INSERT,null,true
+public,productos,Enable read access for all users,PERMISSIVE,{public},SELECT,true,null
+public,productos,Enable update access for all users,PERMISSIVE,{public},UPDATE,true,null
+public,productos,Permitir todo en productos,PERMISSIVE,{public},ALL,true,true
+public,productos_materiales_consumo,Enable all access for productos_materiales_consumo,PERMISSIVE,{public},ALL,true,true
+public,productos_materiales_consumo,Enable delete access for all users,PERMISSIVE,{public},DELETE,true,null
+public,productos_materiales_consumo,Enable insert access for all users,PERMISSIVE,{public},INSERT,null,true
+public,productos_materiales_consumo,Enable read access for all users,PERMISSIVE,{public},SELECT,true,null
+public,productos_materiales_consumo,Enable update access for all users,PERMISSIVE,{public},UPDATE,true,null
+public,productos_materiales_consumo,Permitir todo en productos_materiales_consumo,PERMISSIVE,{public},ALL,true,true
+public,proveedores,Enable all access for proveedores,PERMISSIVE,{public},ALL,true,true
+public,proveedores,Permitir todo en proveedores,PERMISSIVE,{public},ALL,true,true
+public,solicitud_items,Allow all,PERMISSIVE,{public},ALL,true,true
+public,solicitudes_compra,Allow all,PERMISSIVE,{public},ALL,true,true
+public,tintas,Enable all access for tintas,PERMISSIVE,{public},ALL,true,true
+public,tintas,Permitir todo en tintas,PERMISSIVE,{public},ALL,true,true
+public,trabajos,Enable all access for trabajos,PERMISSIVE,{public},ALL,true,true
+public,trabajos,Permitir todo en trabajos,PERMISSIVE,{public},ALL,true,true

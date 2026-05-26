@@ -1,0 +1,406 @@
+table_schema,table_name,column_name,data_type,is_nullable,column_default
+public,catalog_items,id,uuid,NO,gen_random_uuid()
+public,catalog_items,name,text,NO,null
+public,catalog_items,category,text,NO,null
+public,catalog_items,unit,text,NO,null
+public,catalog_items,calc_rule,text,NO,null
+public,catalog_items,unit_cost,numeric,NO,0
+public,catalog_items,waste_percent,numeric,NO,0
+public,catalog_items,description,text,YES,null
+public,catalog_items,activo,boolean,NO,true
+public,catalog_items,created_at,timestamp with time zone,YES,now()
+public,clientes,id,uuid,NO,uuid_generate_v4()
+public,clientes,nombre_completo,text,NO,null
+public,clientes,cedula_rif,text,NO,null
+public,clientes,telefono,text,NO,null
+public,clientes,email,text,YES,null
+public,clientes,direccion,text,YES,null
+public,clientes,created_at,timestamp with time zone,NO,now()
+public,clientes,updated_at,timestamp with time zone,NO,now()
+public,clientes,porcentaje_descuento,numeric,YES,0
+public,clientes,activo,boolean,NO,true
+public,compra_items,id,uuid,NO,gen_random_uuid()
+public,compra_items,compra_id,uuid,NO,null
+public,compra_items,tipo,character varying,NO,null
+public,compra_items,item_id,uuid,YES,null
+public,compra_items,tinta_color,character varying,YES,null
+public,compra_items,descripcion,text,YES,null
+public,compra_items,cantidad,numeric,NO,0
+public,compra_items,unidad,character varying,YES,'unidad'::character varying
+public,compra_items,precio_unitario,numeric,NO,0
+public,compra_items,total_linea,numeric,NO,0
+public,compra_items,created_at,timestamp with time zone,YES,now()
+public,compras_material,id,uuid,NO,gen_random_uuid()
+public,compras_material,material_id,uuid,NO,null
+public,compras_material,cantidad,numeric,NO,null
+public,compras_material,unidad,character varying,YES,'metros'::character varying
+public,compras_material,moneda,character varying,NO,'USD'::character varying
+public,compras_material,precio_moneda,numeric,NO,null
+public,compras_material,tasa_usd,numeric,YES,null
+public,compras_material,precio_usd,numeric,YES,null
+public,compras_material,proveedor,character varying,YES,null
+public,compras_material,es_credito,boolean,YES,false
+public,compras_material,estado_pago,character varying,YES,'pagado'::character varying
+public,compras_material,fecha_compra,date,NO,CURRENT_DATE
+public,compras_material,fecha_pago,date,YES,null
+public,compras_material,nota,text,YES,null
+public,compras_material,created_at,timestamp with time zone,YES,now()
+public,compras_proveedores,id,uuid,NO,uuid_generate_v4()
+public,compras_proveedores,proveedor_id,uuid,YES,null
+public,compras_proveedores,numero_factura,text,NO,null
+public,compras_proveedores,fecha_factura,date,NO,null
+public,compras_proveedores,monto_total,numeric,NO,null
+public,compras_proveedores,monto_pagado,numeric,YES,0
+public,compras_proveedores,estado,text,NO,'pendiente'::text
+public,compras_proveedores,descripcion,text,YES,null
+public,compras_proveedores,archivo_factura_url,text,YES,null
+public,compras_proveedores,created_at,timestamp with time zone,NO,now()
+public,compras_proveedores,updated_at,timestamp with time zone,NO,now()
+public,compras_proveedores,moneda,character varying,YES,'Bs'::character varying
+public,configuracion_negocio,id,uuid,NO,gen_random_uuid()
+public,configuracion_negocio,gastos_fijos,jsonb,NO,"'{""arriendo"": 153}'::jsonb"
+public,configuracion_negocio,total_gastos_fijos_mes,numeric,YES,null
+public,configuracion_negocio,produccion_estimada_m2_mes,numeric,NO,40
+public,configuracion_negocio,margen_default,numeric,NO,0.50
+public,configuracion_negocio,moneda,character varying,NO,'USD'::character varying
+public,configuracion_negocio,updated_at,timestamp with time zone,YES,now()
+public,consumo_materiales,id,uuid,NO,gen_random_uuid()
+public,consumo_materiales,pedido_id,uuid,YES,null
+public,consumo_materiales,material_id,uuid,YES,null
+public,consumo_materiales,cantidad_consumida,numeric,NO,null
+public,consumo_materiales,created_at,timestamp with time zone,NO,now()
+public,consumo_tinta_pedido,id,uuid,NO,gen_random_uuid()
+public,consumo_tinta_pedido,pedido_id,uuid,NO,null
+public,consumo_tinta_pedido,tinta_id,uuid,NO,null
+public,consumo_tinta_pedido,magenta_consumida,numeric,NO,0
+public,consumo_tinta_pedido,cian_consumida,numeric,NO,0
+public,consumo_tinta_pedido,amarillo_consumida,numeric,NO,0
+public,consumo_tinta_pedido,negro_consumida,numeric,NO,0
+public,consumo_tinta_pedido,created_at,timestamp with time zone,YES,now()
+public,consumo_tinta_pedido,updated_at,timestamp with time zone,YES,now()
+public,consumo_tinta_pedido,trabajo_id,uuid,YES,null
+public,consumo_tinta_pedido,producto_descripcion,text,YES,null
+public,consumo_tinta_pedido,metros_cuadrados,numeric,YES,null
+public,cotizacion_items,id,uuid,NO,gen_random_uuid()
+public,cotizacion_items,cotizacion_id,uuid,YES,null
+public,cotizacion_items,descripcion,text,NO,null
+public,cotizacion_items,cantidad,numeric,NO,1
+public,cotizacion_items,precio_unitario,numeric,NO,0
+public,cotizacion_items,line_total,numeric,NO,0
+public,cotizacion_items,created_at,timestamp with time zone,YES,now()
+public,cotizaciones,id,uuid,NO,gen_random_uuid()
+public,cotizaciones,cliente_id,uuid,YES,null
+public,cotizaciones,nombre,text,NO,null
+public,cotizaciones,margen_ganancia,numeric,YES,50
+public,cotizaciones,iva_percent,numeric,YES,0
+public,cotizaciones,subtotal,numeric,YES,0
+public,cotizaciones,total_precio,numeric,YES,0
+public,cotizaciones,estado,text,YES,'borrador'::text
+public,cotizaciones,notas,text,YES,null
+public,cotizaciones,created_at,timestamp with time zone,YES,now()
+public,cotizaciones,updated_at,timestamp with time zone,YES,now()
+public,dolar,id,bigint,NO,null
+public,dolar,created_at,timestamp with time zone,NO,now()
+public,dolar,valor,numeric,YES,null
+public,dolar,uero,numeric,YES,null
+public,dolar,binace,numeric,YES,null
+public,historial_binance,id,uuid,NO,gen_random_uuid()
+public,historial_binance,fecha,date,NO,null
+public,historial_binance,valor,numeric,NO,null
+public,historial_binance,fuente,character varying,YES,'manual'::character varying
+public,historial_binance,created_at,timestamp with time zone,YES,now()
+public,historial_precios,id,uuid,NO,gen_random_uuid()
+public,historial_precios,entidad_tipo,character varying,NO,null
+public,historial_precios,entidad_id,uuid,NO,null
+public,historial_precios,entidad_nombre,character varying,YES,null
+public,historial_precios,precio_anterior,numeric,YES,null
+public,historial_precios,precio_nuevo,numeric,NO,null
+public,historial_precios,fuente,character varying,YES,'manual'::character varying
+public,historial_precios,nota,text,YES,null
+public,historial_precios,created_at,timestamp with time zone,YES,now()
+public,historial_tasa_binance,id,bigint,NO,nextval('historial_tasa_binance_id_seq'::regclass)
+public,historial_tasa_binance,fecha,date,NO,null
+public,historial_tasa_binance,tasa_bs,numeric,NO,null
+public,historial_tasa_binance,created_at,timestamp with time zone,YES,now()
+public,inventario_bajo,id,uuid,YES,null
+public,inventario_bajo,nombre,text,YES,null
+public,inventario_bajo,maquina,text,YES,null
+public,inventario_bajo,cantidad,numeric,YES,null
+public,inventario_bajo,minimo,numeric,YES,null
+public,inventario_bajo,unidad,text,YES,null
+public,inventario_bajo,porcentaje,numeric,YES,null
+public,inventario_bajo,created_at,timestamp with time zone,YES,null
+public,inventario_bajo,updated_at,timestamp with time zone,YES,null
+public,maquina_tinta_activa,id,uuid,NO,gen_random_uuid()
+public,maquina_tinta_activa,maquina_id,uuid,NO,null
+public,maquina_tinta_activa,tinta_id,uuid,NO,null
+public,maquina_tinta_activa,activo,boolean,YES,true
+public,maquina_tinta_activa,fecha_asignacion,timestamp with time zone,YES,now()
+public,maquina_tinta_activa,notas,text,YES,null
+public,maquina_tinta_activa,created_at,timestamp with time zone,YES,now()
+public,maquina_tinta_activa,updated_at,timestamp with time zone,YES,now()
+public,maquinas,id,uuid,NO,gen_random_uuid()
+public,maquinas,nombre,character varying,NO,null
+public,maquinas,marca,character varying,YES,null
+public,maquinas,modelo,character varying,YES,null
+public,maquinas,costo_adquisicion_usd,numeric,YES,0
+public,maquinas,meses_depreciacion,integer,YES,60
+public,maquinas,costo_depreciacion_mes,numeric,YES,null
+public,maquinas,velocidad_calidad_m2h,numeric,YES,null
+public,maquinas,velocidad_produccion_m2h,numeric,YES,null
+public,maquinas,velocidad_draft_m2h,numeric,YES,null
+public,maquinas,activa,boolean,YES,true
+public,maquinas,notas,text,YES,null
+public,maquinas,created_at,timestamp with time zone,YES,now()
+public,maquinas,estado,character varying,YES,'activa'::character varying
+public,maquinas,ancho_maximo,numeric,YES,0
+public,maquinas,es_tercero,boolean,YES,false
+public,marcas_tinta,id,uuid,NO,gen_random_uuid()
+public,marcas_tinta,nombre,text,NO,null
+public,marcas_tinta,created_at,timestamp with time zone,NO,now()
+public,materiales,id,uuid,NO,uuid_generate_v4()
+public,materiales,tipo,text,NO,null
+public,materiales,ancho,numeric,YES,null
+public,materiales,largo_original,numeric,YES,null
+public,materiales,largo_restante,numeric,YES,null
+public,materiales,proveedor,text,NO,null
+public,materiales,fecha_ingreso,date,NO,null
+public,materiales,precio_m2,numeric,NO,null
+public,materiales,stock,numeric,YES,1
+public,materiales,porcentaje,numeric,YES,null
+public,materiales,created_at,timestamp with time zone,NO,now()
+public,materiales,updated_at,timestamp with time zone,NO,now()
+public,materiales,precio_fuente,character varying,YES,'manual'::character varying
+public,materiales,precio_actualizado_en,timestamp with time zone,YES,now()
+public,materiales,unidad_medida,text,YES,'m2'::text
+public,materiales,cantidad_actual,numeric,YES,0
+public,materiales,cantidad_minima,numeric,YES,0
+public,materiales,precio_unitario,numeric,YES,0
+public,movimientos_caja,id,uuid,NO,gen_random_uuid()
+public,movimientos_caja,tipo,text,NO,null
+public,movimientos_caja,monto,numeric,NO,null
+public,movimientos_caja,concepto,text,NO,null
+public,movimientos_caja,metodo_pago,text,YES,null
+public,movimientos_caja,referencia,text,YES,null
+public,movimientos_caja,pedido_id,uuid,YES,null
+public,movimientos_caja,fecha,date,YES,CURRENT_DATE
+public,movimientos_caja,created_at,timestamp without time zone,YES,now()
+public,pedido_items,id,uuid,NO,gen_random_uuid()
+public,pedido_items,pedido_id,uuid,YES,null
+public,pedido_items,producto_id,uuid,YES,null
+public,pedido_items,alto,numeric,NO,null
+public,pedido_items,ancho,numeric,NO,null
+public,pedido_items,metros_cuadrados,numeric,YES,null
+public,pedido_items,precio_unitario,numeric,NO,null
+public,pedido_items,precio_total,numeric,NO,null
+public,pedido_items,notas,text,YES,null
+public,pedido_items,created_at,timestamp with time zone,NO,now()
+public,pedido_items,cantidad,integer,NO,1
+public,pedidos,id,uuid,NO,uuid_generate_v4()
+public,pedidos,cliente_id,uuid,YES,null
+public,pedidos,material_id,uuid,YES,null
+public,pedidos,alto,numeric,NO,null
+public,pedidos,ancho,numeric,NO,null
+public,pedidos,metros_cuadrados,numeric,YES,null
+public,pedidos,maquina_usar,text,NO,null
+public,pedidos,precio_total,numeric,NO,null
+public,pedidos,notas,text,YES,null
+public,pedidos,prioridad,text,NO,'media'::text
+public,pedidos,estado,text,NO,'pendiente'::text
+public,pedidos,archivo_trabajo_url,text,YES,null
+public,pedidos,created_at,timestamp with time zone,NO,now()
+public,pedidos,updated_at,timestamp with time zone,NO,now()
+public,pedidos,producto_id,uuid,YES,null
+public,pedidos,metodo_pago,text,YES,null
+public,pedidos,referencia_pago,text,YES,null
+public,pedidos,comprobante_url,text,YES,null
+public,pedidos,monto_pagado,numeric,YES,null
+public,pedidos,fecha_limite,date,YES,null
+public,pedidos,pdf_url,text,YES,null
+public,pedidos,grupo_pedido_id,uuid,YES,null
+public,pedidos,costo_material,numeric,YES,null
+public,pedidos,costo_tinta,numeric,YES,null
+public,pedidos,costo_overhead,numeric,YES,null
+public,pedidos,costo_maquina,numeric,YES,null
+public,pedidos,costo_total,numeric,YES,null
+public,pedidos,ganancia_bruta,numeric,YES,null
+public,pedidos,margen_real,numeric,YES,null
+public,pedidos,tipo_pago,text,YES,null
+public,pedidos,abono,numeric,YES,0
+public,pedidos,dias_credito,integer,YES,0
+public,pedidos_completos,id,uuid,YES,null
+public,pedidos_completos,alto,numeric,YES,null
+public,pedidos_completos,ancho,numeric,YES,null
+public,pedidos_completos,metros_cuadrados,numeric,YES,null
+public,pedidos_completos,maquina_usar,text,YES,null
+public,pedidos_completos,precio_total,numeric,YES,null
+public,pedidos_completos,notas,text,YES,null
+public,pedidos_completos,prioridad,text,YES,null
+public,pedidos_completos,estado,text,YES,null
+public,pedidos_completos,archivo_trabajo_url,text,YES,null
+public,pedidos_completos,created_at,timestamp with time zone,YES,null
+public,pedidos_completos,updated_at,timestamp with time zone,YES,null
+public,pedidos_completos,cliente_nombre,text,YES,null
+public,pedidos_completos,cliente_cedula,text,YES,null
+public,pedidos_completos,cliente_telefono,text,YES,null
+public,pedidos_completos,material_tipo,text,YES,null
+public,pedidos_completos,material_ancho,numeric,YES,null
+public,producto_perfil_tinta,id,uuid,NO,gen_random_uuid()
+public,producto_perfil_tinta,producto_id,uuid,YES,null
+public,producto_perfil_tinta,nombre,character varying,NO,null
+public,producto_perfil_tinta,cian_cc_m2,numeric,YES,0
+public,producto_perfil_tinta,magenta_cc_m2,numeric,YES,0
+public,producto_perfil_tinta,amarillo_cc_m2,numeric,YES,0
+public,producto_perfil_tinta,negro_cc_m2,numeric,YES,0
+public,producto_perfil_tinta,es_default,boolean,YES,false
+public,producto_perfil_tinta,created_at,timestamp with time zone,YES,now()
+public,productos,id,uuid,NO,uuid_generate_v4()
+public,productos,nombre,text,NO,null
+public,productos,descripcion,text,YES,null
+public,productos,precio_m2,numeric,NO,null
+public,productos,es_kit,boolean,NO,false
+public,productos,activo,boolean,NO,true
+public,productos,created_at,timestamp with time zone,NO,now()
+public,productos,updated_at,timestamp with time zone,NO,now()
+public,productos,costo_materiales_estimado_m2,numeric,YES,null
+public,productos,costo_tinta_m2,numeric,YES,null
+public,productos,costo_mo_m2,numeric,YES,null
+public,productos,margen_ganancia_porcentaje,numeric,YES,null
+public,productos,tipo_cobro,character varying,NO,'mt2'::character varying
+public,productos,precio_mercado_referencia,numeric,YES,null
+public,productos,maquina_id,uuid,YES,null
+public,productos,perfil_tinta_id,uuid,YES,null
+public,productos,categoria,text,YES,'gigantografia'::text
+public,productos_completos,id,uuid,YES,null
+public,productos_completos,nombre,text,YES,null
+public,productos_completos,descripcion,text,YES,null
+public,productos_completos,precio_m2,numeric,YES,null
+public,productos_completos,es_kit,boolean,YES,null
+public,productos_completos,activo,boolean,YES,null
+public,productos_completos,created_at,timestamp with time zone,YES,null
+public,productos_completos,updated_at,timestamp with time zone,YES,null
+public,productos_completos,materiales_consumo,json,YES,null
+public,productos_materiales,id,uuid,NO,gen_random_uuid()
+public,productos_materiales,producto_id,uuid,NO,null
+public,productos_materiales,material_id,uuid,NO,null
+public,productos_materiales,cantidad_por_m2,numeric,NO,0
+public,productos_materiales,created_at,timestamp with time zone,YES,now()
+public,productos_materiales,updated_at,timestamp with time zone,YES,now()
+public,productos_materiales,tipo_calculo,text,YES,'por_m2'::text
+public,productos_materiales_consumo,id,uuid,NO,uuid_generate_v4()
+public,productos_materiales_consumo,producto_id,uuid,NO,null
+public,productos_materiales_consumo,material_id,uuid,NO,null
+public,productos_materiales_consumo,unidad_consumo,text,NO,null
+public,productos_materiales_consumo,regla_consumo_formula,text,NO,null
+public,productos_materiales_consumo,created_at,timestamp with time zone,NO,now()
+public,productos_materiales_consumo,updated_at,timestamp with time zone,NO,now()
+public,proveedores,id,uuid,NO,uuid_generate_v4()
+public,proveedores,nombre,text,NO,null
+public,proveedores,rif,text,NO,null
+public,proveedores,telefono,text,YES,null
+public,proveedores,email,text,YES,null
+public,proveedores,direccion,text,YES,null
+public,proveedores,contacto_principal,text,YES,null
+public,proveedores,cuenta_por_pagar,numeric,YES,0
+public,proveedores,created_at,timestamp with time zone,NO,now()
+public,proveedores,updated_at,timestamp with time zone,NO,now()
+public,proveedores,moneda,character varying,YES,'USD'::character varying
+public,proveedores,credito,boolean,YES,false
+public,proveedores,dias_credito,integer,YES,0
+public,quote_items,id,uuid,NO,gen_random_uuid()
+public,quote_items,quote_id,uuid,YES,null
+public,quote_items,catalog_item_id,uuid,YES,null
+public,quote_items,calc_rule,text,NO,null
+public,quote_items,quantity,numeric,NO,0
+public,quote_items,unit_cost,numeric,NO,0
+public,quote_items,waste_percent,numeric,NO,0
+public,quote_items,line_total,numeric,NO,0
+public,quote_items,sort_order,integer,NO,0
+public,quote_items,item_name,text,NO,''::text
+public,quotes,id,uuid,NO,gen_random_uuid()
+public,quotes,cliente_id,uuid,YES,null
+public,quotes,name,text,NO,null
+public,quotes,width_cm,numeric,NO,0
+public,quotes,height_cm,numeric,NO,0
+public,quotes,subtotal_cost,numeric,NO,0
+public,quotes,profit_margin,numeric,NO,50
+public,quotes,tax_percent,numeric,NO,0
+public,quotes,total_price,numeric,NO,0
+public,quotes,status,text,NO,'borrador'::text
+public,quotes,notas,text,YES,null
+public,quotes,pedido_id,uuid,YES,null
+public,quotes,created_at,timestamp with time zone,YES,now()
+public,quotes,updated_at,timestamp with time zone,YES,now()
+public,quotes,items_data,jsonb,YES,'[]'::jsonb
+public,quotes,numero,integer,YES,nextval('quotes_numero_seq'::regclass)
+public,solicitud_items,id,uuid,NO,gen_random_uuid()
+public,solicitud_items,solicitud_id,uuid,NO,null
+public,solicitud_items,tipo,character varying,NO,null
+public,solicitud_items,item_id,uuid,YES,null
+public,solicitud_items,cantidad,numeric,NO,0
+public,solicitud_items,unidad,character varying,YES,'ml'::character varying
+public,solicitud_items,descripcion,text,YES,null
+public,solicitud_items,created_at,timestamp with time zone,YES,now()
+public,solicitud_items,datos_json,jsonb,YES,'{}'::jsonb
+public,solicitud_items,precio_total,numeric,YES,null
+public,solicitud_items,precio_unitario,numeric,YES,null
+public,solicitud_items,proveedor_id,uuid,YES,null
+public,solicitud_items,numero_factura,character varying,YES,null
+public,solicitud_items,fecha_compra,date,YES,null
+public,solicitudes_compra,id,uuid,NO,gen_random_uuid()
+public,solicitudes_compra,solicitante,character varying,NO,'Sistema'::character varying
+public,solicitudes_compra,estado,character varying,YES,'pendiente'::character varying
+public,solicitudes_compra,fecha_necesidad,date,YES,null
+public,solicitudes_compra,notas,text,YES,null
+public,solicitudes_compra,created_at,timestamp with time zone,YES,now()
+public,solicitudes_compra,updated_at,timestamp with time zone,YES,now()
+public,solicitudes_compra,compra_notas,text,YES,null
+public,solicitudes_compra,estado_pago,character varying,YES,'contado'::character varying
+public,solicitudes_compra,fecha_vencimiento,date,YES,null
+public,tintas,id,uuid,NO,uuid_generate_v4()
+public,tintas,nombre,text,NO,null
+public,tintas,maquina,text,NO,null
+public,tintas,cantidad,numeric,NO,null
+public,tintas,minimo,numeric,NO,null
+public,tintas,unidad,text,NO,null
+public,tintas,porcentaje,numeric,NO,null
+public,tintas,created_at,timestamp with time zone,NO,now()
+public,tintas,updated_at,timestamp with time zone,NO,now()
+public,tintas,marca,text,YES,null
+public,tintas,color,text,YES,null
+public,tintas,magenta_cantidad,numeric,YES,0
+public,tintas,cian_cantidad,numeric,YES,0
+public,tintas,amarillo_cantidad,numeric,YES,0
+public,tintas,negro_cantidad,numeric,YES,0
+public,tintas,magenta_minimo,numeric,YES,0
+public,tintas,cian_minimo,numeric,YES,0
+public,tintas,amarillo_minimo,numeric,YES,0
+public,tintas,negro_minimo,numeric,YES,0
+public,tintas,costo_por_cc,numeric,YES,0.075
+public,tintas,costo_fuente,character varying,YES,'manual'::character varying
+public,tintas,costo_actualizado_en,timestamp with time zone,YES,now()
+public,tintas,proveedor,text,YES,null
+public,trabajos,id,uuid,NO,uuid_generate_v4()
+public,trabajos,pedido_id,uuid,YES,null
+public,trabajos,descripcion,text,NO,null
+public,trabajos,metros_cuadrados,numeric,NO,null
+public,trabajos,material_tipo,text,NO,null
+public,trabajos,maquina_asignada,text,NO,null
+public,trabajos,prioridad,text,NO,'media'::text
+public,trabajos,estado,text,NO,'pendiente'::text
+public,trabajos,fecha_estimada,date,YES,null
+public,trabajos,created_at,timestamp with time zone,NO,now()
+public,trabajos,updated_at,timestamp with time zone,NO,now()
+public,trabajos_completos,id,uuid,YES,null
+public,trabajos_completos,descripcion,text,YES,null
+public,trabajos_completos,metros_cuadrados,numeric,YES,null
+public,trabajos_completos,material_tipo,text,YES,null
+public,trabajos_completos,maquina_asignada,text,YES,null
+public,trabajos_completos,prioridad,text,YES,null
+public,trabajos_completos,estado,text,YES,null
+public,trabajos_completos,fecha_estimada,date,YES,null
+public,trabajos_completos,created_at,timestamp with time zone,YES,null
+public,trabajos_completos,updated_at,timestamp with time zone,YES,null
+public,trabajos_completos,pedido_id,uuid,YES,null
+public,trabajos_completos,pedido_precio,numeric,YES,null
+public,trabajos_completos,cliente_nombre,text,YES,null

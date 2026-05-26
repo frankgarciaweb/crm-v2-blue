@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@700&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#ffb95f",
+                    "surface-tint": "#b4c5ff",
+                    "surface-container-highest": "#2d3449",
+                    "secondary-container": "#ee9800",
+                    "tertiary-container": "#007d55",
+                    "surface-container": "#171f33",
+                    "on-secondary-fixed": "#2a1700",
+                    "on-tertiary-container": "#bdffdb",
+                    "text-primary": "#F8FAFC",
+                    "on-primary": "#002a78",
+                    "status-alert": "#EF4444",
+                    "surface-container-high": "#222a3d",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "tertiary": "#4edea3",
+                    "primary": "#b4c5ff",
+                    "on-primary-fixed": "#00174b",
+                    "border-subtle": "rgba(255, 255, 255, 0.08)",
+                    "secondary": "#ffb95f",
+                    "text-secondary": "#94A3B8",
+                    "on-primary-container": "#eeefff",
+                    "surface": "#0b1326",
+                    "secondary-fixed": "#ffddb8",
+                    "surface-variant": "#2d3449",
+                    "error": "#ffb4ab",
+                    "surface-card": "#1E293B",
+                    "inverse-on-surface": "#283044",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-secondary": "#472a00",
+                    "surface-container-lowest": "#060e20",
+                    "status-pending": "#64748B",
+                    "on-surface-variant": "#c3c6d7",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary": "#003824",
+                    "background": "#0b1326",
+                    "outline": "#8d90a0",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-container": "#5b3800",
+                    "inverse-primary": "#0053db",
+                    "surface-bright": "#31394d",
+                    "status-production": "#3B82F6",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-background": "#dae2fd",
+                    "surface-deep": "#0B1120",
+                    "inverse-surface": "#dae2fd",
+                    "primary-container": "#2563eb",
+                    "surface-container-low": "#131b2e",
+                    "primary-fixed": "#dbe1ff",
+                    "status-ready": "#10B981",
+                    "outline-variant": "#434655",
+                    "on-surface": "#dae2fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "component-gap": "1rem",
+                    "gutter": "1.5rem",
+                    "stack-xs": "0.25rem",
+                    "container-margin": "2rem"
+            },
+            "fontFamily": {
+                    "label-caps": ["JetBrains Mono"],
+                    "data-table": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "title-sm": ["Geist"],
+                    "financial-metric": ["Geist"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-base text-body-base antialiased overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-gutter mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Blue CRM</h1>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Industrial Precision</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-1">
+<!-- Navigation Items from JSON -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">group</span> Clientes
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Productos
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">warehouse</span> Inventario
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">description</span> Pedidos
+            </a>
+<!-- Active State: Pedidos PDF -->
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all" href="#">
+<span class="material-symbols-outlined">picture_as_pdf</span> Pedidos PDF
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span> Archivos
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span> Trabajos
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">print</span> Plotter
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span> Finanzas
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span> Proveedores
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">request_quote</span> Cotizaciones
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span> Configuración
+            </a>
+</nav>
+<div class="px-gutter pt-4 mt-auto">
+<button class="w-full bg-primary-container py-3 rounded-lg text-on-primary font-bold hover:opacity-90 active:scale-[0.98] transition-all">
+                New Quote
+            </button>
+<div class="flex items-center gap-3 mt-6 p-2 bg-surface-container rounded-xl">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div class="overflow-hidden">
+<p class="font-body-sm text-body-sm font-bold truncate">Admin Blue</p>
+<p class="text-[10px] text-on-surface-variant truncate uppercase tracking-widest">Industrial User</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-[280px] min-h-screen flex flex-col relative overflow-hidden">
+<!-- TopNavBar -->
+<header class="h-16 fixed top-0 right-0 w-[calc(100%-280px)] bg-surface/80 backdrop-blur-md border-b border-border-subtle z-40 flex justify-between items-center px-gutter">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="bg-surface-container-lowest border border-border-subtle rounded-lg pl-10 pr-4 py-1.5 w-64 focus:ring-1 focus:ring-primary focus:border-primary transition-all text-body-sm" placeholder="Buscar pedidos o clientes..." type="text"/>
+</div>
+<div class="flex gap-4 items-center">
+<span class="text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">attach_money</span> $ Dólar: 38,5 Bs
+                    </span>
+<span class="text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">currency_bitcoin</span> Binance: 259,9 Bs
+                    </span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 text-primary font-bold rounded-lg hover:bg-primary/20 transition-all text-body-sm">
+<span class="material-symbols-outlined text-[20px]">add</span> New Order
+                </button>
+<div class="h-6 w-[1px] bg-border-subtle mx-2"></div>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="mt-16 p-gutter flex-1 overflow-y-auto space-y-6">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-text-primary">Pedidos PDF</h2>
+<p class="text-text-secondary font-body-base text-body-base">Gestión y descarga de documentos de pedidos generados</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-surface-container-high border border-border-subtle px-4 py-2 rounded-lg text-on-surface hover:bg-surface-variant transition-all font-medium text-body-sm">
+<span class="material-symbols-outlined">filter_list</span> Filtrar
+                    </button>
+<button class="flex items-center gap-2 bg-primary-container px-4 py-2 rounded-lg text-on-primary hover:opacity-90 transition-all font-bold text-body-sm">
+<span class="material-symbols-outlined">cloud_download</span> Exportar Lote
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats (Technical Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-card border border-border-subtle p-5 rounded-xl">
+<div class="flex justify-between items-start mb-2">
+<span class="text-on-surface-variant text-label-caps font-label-caps">PEDIDOS TOTALES</span>
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-primary">1,284</div>
+<div class="mt-2 text-[12px] text-status-ready flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12% este mes
+                    </div>
+</div>
+<div class="bg-surface-card border border-border-subtle p-5 rounded-xl">
+<div class="flex justify-between items-start mb-2">
+<span class="text-on-surface-variant text-label-caps font-label-caps">PDF GENERADOS</span>
+<span class="material-symbols-outlined text-secondary">picture_as_pdf</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-text-primary">1,150</div>
+<div class="mt-2 text-[12px] text-on-surface-variant">90% de los pedidos</div>
+</div>
+<div class="bg-surface-card border border-border-subtle p-5 rounded-xl">
+<div class="flex justify-between items-start mb-2">
+<span class="text-on-surface-variant text-label-caps font-label-caps">SIN DOCUMENTO</span>
+<span class="material-symbols-outlined text-status-alert">error_outline</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-status-alert">134</div>
+<div class="mt-2 text-[12px] text-on-surface-variant">Requiere atención manual</div>
+</div>
+<div class="bg-surface-card border border-border-subtle p-5 rounded-xl">
+<div class="flex justify-between items-start mb-2">
+<span class="text-on-surface-variant text-label-caps font-label-caps">TAMAÑO ALMACÉN</span>
+<span class="material-symbols-outlined text-tertiary">storage</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-text-primary">2.4 GB</div>
+<div class="mt-2 text-[12px] text-on-surface-variant">Nube: 75% capacidad</div>
+</div>
+</div>
+<!-- Filters & Tools -->
+<div class="bg-surface-container border border-border-subtle p-4 rounded-xl flex flex-wrap items-center gap-6">
+<div class="flex items-center gap-3">
+<label class="text-label-caps font-label-caps text-on-surface-variant">FECHA:</label>
+<input class="bg-surface-container-lowest border border-border-subtle rounded-lg px-3 py-1.5 text-body-sm focus:ring-1 focus:ring-primary outline-none" type="date"/>
+</div>
+<div class="flex items-center gap-3">
+<label class="text-label-caps font-label-caps text-on-surface-variant">CLIENTE:</label>
+<select class="bg-surface-container-lowest border border-border-subtle rounded-lg px-3 py-1.5 text-body-sm focus:ring-1 focus:ring-primary outline-none">
+<option>Todos los clientes</option>
+<option>Imprenta Nacional S.A.</option>
+<option>Global Print Solutions</option>
+<option>Taller Creativo 360</option>
+</select>
+</div>
+<div class="flex items-center gap-3">
+<label class="text-label-caps font-label-caps text-on-surface-variant">ESTADO:</label>
+<div class="flex bg-surface-container-lowest p-1 rounded-lg border border-border-subtle">
+<button class="px-3 py-1 text-body-sm rounded bg-primary-container text-on-primary font-bold">Todos</button>
+<button class="px-3 py-1 text-body-sm rounded text-on-surface-variant hover:text-on-surface transition-colors">Listos</button>
+<button class="px-3 py-1 text-body-sm rounded text-on-surface-variant hover:text-on-surface transition-colors">Pendientes</button>
+</div>
+</div>
+<div class="ml-auto flex items-center gap-2">
+<span class="text-body-sm text-on-surface-variant">Viendo 1-15 de 1,284</span>
+<div class="flex gap-1">
+<button class="p-1 border border-border-subtle rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="p-1 border border-border-subtle rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-card border border-border-subtle rounded-xl overflow-hidden shadow-2xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 border-b border-border-subtle">
+<th class="px-6 py-4 text-label-caps font-label-caps text-on-surface-variant">DOCUMENTO</th>
+<th class="px-6 py-4 text-label-caps font-label-caps text-on-surface-variant">CLIENTE</th>
+<th class="px-6 py-4 text-label-caps font-label-caps text-on-surface-variant">FECHA GENERACIÓN</th>
+<th class="px-6 py-4 text-label-caps font-label-caps text-on-surface-variant">ESTADO</th>
+<th class="px-6 py-4 text-label-caps font-label-caps text-on-surface-variant">TAMAÑO</th>
+<th class="px-6 py-4 text-label-caps font-label-caps text-on-surface-variant text-right">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-error/10 rounded-lg group-hover:bg-error/20 transition-colors">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-text-primary text-body-sm">ORD-2023-9482</div>
+<div class="text-[11px] text-on-surface-variant font-label-caps uppercase">Plotter High-Res XL</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-text-primary text-body-sm">Imprenta Nacional S.A.</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">Oct 24, 2023 • 14:30</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-status-ready/10 text-status-ready text-[11px] font-bold uppercase tracking-wider border border-status-ready/20">Generado</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">1.2 MB</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Ver PDF">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Descargar">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Compartir">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-error/10 rounded-lg group-hover:bg-error/20 transition-colors">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-text-primary text-body-sm">ORD-2023-9481</div>
+<div class="text-[11px] text-on-surface-variant font-label-caps uppercase">Vinil Mate 150m</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-text-primary text-body-sm">Global Print Solutions</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">Oct 24, 2023 • 12:15</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-status-ready/10 text-status-ready text-[11px] font-bold uppercase tracking-wider border border-status-ready/20">Generado</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">840 KB</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Ver PDF">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Descargar">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Compartir">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 3 (Pending) -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group opacity-75">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-on-surface-variant/10 rounded-lg group-hover:bg-on-surface-variant/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">description</span>
+</div>
+<div>
+<div class="font-bold text-text-primary text-body-sm">ORD-2023-9480</div>
+<div class="text-[11px] text-on-surface-variant font-label-caps uppercase">Suministros Tintas CMYK</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-text-primary text-body-sm">Taller Creativo 360</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">Oct 24, 2023 • 10:05</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-status-pending/10 text-status-pending text-[11px] font-bold uppercase tracking-wider border border-status-pending/20">En Cola</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">--</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1 bg-secondary text-on-secondary font-bold text-[11px] rounded-lg hover:opacity-90 active:scale-95 transition-all">
+                                        RE-GENERAR
+                                    </button>
+</div>
+</td>
+</tr>
+<!-- Table Row 4 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-error/10 rounded-lg group-hover:bg-error/20 transition-colors">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-text-primary text-body-sm">ORD-2023-9479</div>
+<div class="text-[11px] text-on-surface-variant font-label-caps uppercase">Cabezal Epson Series-P</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-text-primary text-body-sm">Distribuidora Oriente</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">Oct 23, 2023 • 17:45</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-status-ready/10 text-status-ready text-[11px] font-bold uppercase tracking-wider border border-status-ready/20">Generado</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">2.4 MB</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Ver PDF">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Descargar">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Compartir">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 5 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-error/10 rounded-lg group-hover:bg-error/20 transition-colors">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-text-primary text-body-sm">ORD-2023-9478</div>
+<div class="text-[11px] text-on-surface-variant font-label-caps uppercase">Lona Frontlit 3.2m</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-text-primary text-body-sm">Artes Gráficas Modernas</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">Oct 23, 2023 • 16:20</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-status-ready/10 text-status-ready text-[11px] font-bold uppercase tracking-wider border border-status-ready/20">Generado</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant text-body-sm font-data-table">1.1 MB</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Ver PDF">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Descargar">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all active:scale-90" title="Compartir">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="bg-surface-container-high px-6 py-4 border-t border-border-subtle flex justify-between items-center">
+<p class="text-on-surface-variant text-body-sm">Mostrando 5 de 1,284 pedidos</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-subtle rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all text-body-sm font-medium">Anterior</button>
+<button class="px-4 py-2 border border-border-subtle rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all text-body-sm font-medium">Siguiente</button>
+</div>
+</div>
+</div>
+<!-- Recent Exports (Secondary Content Section) -->
+<div class="bg-surface-card border border-border-subtle p-6 rounded-xl">
+<h3 class="font-title-sm text-title-sm font-bold text-text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span> Exportaciones Recientes
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border border-border-subtle hover:border-primary/40 transition-colors cursor-pointer group">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">folder_zip</span>
+</div>
+<div>
+<p class="font-bold text-body-sm">Cierre_Octubre_2023.zip</p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wide">Hace 2 horas • 120MB</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:text-primary transition-colors">download</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border border-border-subtle hover:border-primary/40 transition-colors cursor-pointer group">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div>
+<p class="font-bold text-body-sm">Resumen_Ventas_Q3.pdf</p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wide">Ayer • 4.5MB</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:text-primary transition-colors">download</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border border-border-subtle hover:border-primary/40 transition-colors cursor-pointer group">
+<div class="w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">history_edu</span>
+</div>
+<div>
+<p class="font-bold text-body-sm">Auditoria_Plotter_Sept.pdf</p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wide">20 Oct • 12MB</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:text-primary transition-colors">download</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interaction effects -->
+<script>
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.style.transform = 'scale(0.98)';
+            });
+            el.addEventListener('mouseup', () => {
+                el.style.transform = 'scale(1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple search highlight simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        });
+    </script>
+</body></html>
