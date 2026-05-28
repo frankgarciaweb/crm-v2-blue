@@ -261,10 +261,7 @@ export function Layout() {
         </header>
 
         {/* Page content */}
-        <main
-          className="flex-1 overflow-y-auto animate-fade-in"
-          style={{ padding: '1.5rem' }}
-        >
+        <main className="flex-1 overflow-y-auto animate-fade-in p-3 sm:p-6">
           <Outlet />
         </main>
       </div>
@@ -272,9 +269,9 @@ export function Layout() {
       {/* Chat IA Panel */}
       {chatOpen && (
         <div
-          className="fixed bottom-24 right-6 z-50 flex flex-col overflow-hidden shadow-2xl"
+          className="fixed bottom-20 inset-x-3 sm:inset-x-auto sm:right-6 sm:w-80 z-50 flex flex-col overflow-hidden shadow-2xl"
           style={{
-            width: '320px', height: '400px',
+            height: '400px',
             backgroundColor: '#0B1120',
             border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: '0.5rem',

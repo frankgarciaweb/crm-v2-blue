@@ -144,7 +144,7 @@ export default function Dashboard() {
 
   const pedidosRecientes = [...(pedidos || [])]
     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-    .slice(0, 7);
+    .slice(0, 5);
 
   const urgentJobs = [...(trabajos || [])]
     .filter(t => t.prioridad === 'urgente' && t.estado !== 'entregado')
@@ -251,14 +251,14 @@ export default function Dashboard() {
       >
         <div className="flex flex-col gap-5 p-5 xl:flex-row xl:items-center xl:justify-between xl:p-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(180,197,255,0.12)] bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#b4c5ff]">
+            <div className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[rgba(180,197,255,0.12)] bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#b4c5ff]">
               <Sparkles className="h-3.5 w-3.5" />
               Print quotation workstation
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight text-[#f8fafc]">
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-[#f8fafc]">
               Cotiza rapido. Responde al cliente en segundos.
             </h1>
-            <p className="max-w-2xl text-sm text-[#94A3B8]">
+            <p className="hidden sm:block max-w-2xl text-sm text-[#94A3B8]">
               Calculadora de precio al frente, etiquetas siempre visibles y una vista operativa para produccion, stock y pedidos.
             </p>
           </div>
@@ -295,7 +295,7 @@ export default function Dashboard() {
               </Button>
 
               {dolar?.valor ? (
-                <div className="ml-auto flex items-center gap-2 rounded-[14px] border border-[rgba(180,197,255,0.10)] bg-white/5 px-3 py-2 text-sm text-[#dae2fd]">
+                <div className="sm:ml-auto flex items-center gap-2 rounded-[14px] border border-[rgba(180,197,255,0.10)] bg-white/5 px-3 py-2 text-sm text-[#dae2fd]">
                   <LayoutDashboard className="h-4 w-4 text-[#b4c5ff]" />
                   <span className="text-[#94A3B8]">Tasa BCV</span>
                   <span className="font-semibold text-[#b4c5ff]">
@@ -344,7 +344,7 @@ export default function Dashboard() {
                   <Calculator className="h-4 w-4 text-[#b4c5ff]" />
                   Calculadora de Precio
                 </CardTitle>
-                <CardDescription>Calcula el precio rapido segun producto, medidas y cantidad.</CardDescription>
+                <CardDescription className="hidden sm:block">Calcula el precio rapido segun producto, medidas y cantidad.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="relative">
@@ -470,7 +470,7 @@ export default function Dashboard() {
                   <Sparkles className="h-4 w-4 text-[#4edea3]" />
                   Resultado en vivo
                 </CardTitle>
-                <CardDescription>Valor inmediato para responder al cliente sin cambiar de pantalla.</CardDescription>
+                <CardDescription className="hidden sm:block">Valor inmediato para responder al cliente sin cambiar de pantalla.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="rounded-[18px] border border-[rgba(16,185,129,0.18)] bg-[rgba(6,18,28,0.92)] p-4">
@@ -483,7 +483,7 @@ export default function Dashboard() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="hidden sm:grid grid-cols-2 gap-3">
                   <div className="rounded-[16px] border border-[rgba(255,255,255,0.06)] bg-white/5 p-3">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#94A3B8]">Costo unitario</p>
                     <p className="mt-1 text-lg font-semibold text-[#f8fafc]">${formatMoney(selectedPriceUnit)}</p>
@@ -510,36 +510,38 @@ export default function Dashboard() {
           </div>
 
           <Card className="overflow-hidden rounded-[20px] border border-[rgba(180,197,255,0.10)] bg-[linear-gradient(180deg,rgba(15,23,42,0.98),rgba(9,13,22,0.96))] shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
-            <CardHeader className="flex flex-row items-start justify-between gap-4 pb-4">
-              <div>
+            <CardHeader className="pb-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <CardTitle className="flex items-center gap-2">
                   <Box className="h-4 w-4 text-[#b4c5ff]" />
                   Calculadora de Etiquetas
                 </CardTitle>
-                <CardDescription>Calcula cuantas etiquetas caben por m² o cuanto material necesitas.</CardDescription>
+                <div className="flex gap-2">
+                  <Button
+                    variant={labelMode === 'cantidad' ? 'default' : 'outline'}
+                    size="sm"
+                    className="flex-1 sm:flex-none"
+                    onClick={() => {
+                      setLabelMode('cantidad');
+                      setLabelResult(null);
+                    }}
+                  >
+                    Por cantidad
+                  </Button>
+                  <Button
+                    variant={labelMode === 'metros' ? 'default' : 'outline'}
+                    size="sm"
+                    className="flex-1 sm:flex-none"
+                    onClick={() => {
+                      setLabelMode('metros');
+                      setLabelResult(null);
+                    }}
+                  >
+                    Por m²
+                  </Button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <Button
-                  variant={labelMode === 'cantidad' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => {
-                    setLabelMode('cantidad');
-                    setLabelResult(null);
-                  }}
-                >
-                  Por cantidad
-                </Button>
-                <Button
-                  variant={labelMode === 'metros' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => {
-                    setLabelMode('metros');
-                    setLabelResult(null);
-                  }}
-                >
-                  Por m²
-                </Button>
-              </div>
+              <CardDescription className="hidden sm:block">Calcula cuantas etiquetas caben por m² o cuanto material necesitas.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -588,11 +590,11 @@ export default function Dashboard() {
                 )}
               </div>
 
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-sm text-[#94A3B8]">
+              <div className="flex gap-3">
+                <p className="hidden flex-1 sm:block text-sm text-[#94A3B8]">
                   Usa esta herramienta para responder rapido cuantas piezas entran o cuanto material necesitas.
                 </p>
-                <Button onClick={runLabelCalculator} className="gap-2 rounded-[14px]">
+                <Button onClick={runLabelCalculator} className="gap-2 rounded-[14px] w-full sm:w-auto">
                   <Calculator className="h-4 w-4" />
                   Calcular etiquetas
                 </Button>
@@ -632,7 +634,7 @@ export default function Dashboard() {
                   <ReceiptText className="h-4 w-4 text-[#b4c5ff]" />
                   Pedidos recientes
                 </CardTitle>
-                <CardDescription>Tabla compacta para revisar lo ultimo que entro al sistema.</CardDescription>
+                <CardDescription className="hidden sm:block">Tabla compacta para revisar lo ultimo que entro al sistema.</CardDescription>
               </div>
               <Button variant="outline" size="sm" onClick={() => navigate('/pedidos')} className="gap-2">
                 Ver pedidos
@@ -640,7 +642,36 @@ export default function Dashboard() {
               </Button>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="overflow-x-auto">
+              {/* Vista móvil */}
+              <div className="sm:hidden divide-y divide-white/5">
+                {pedidosRecientes.length === 0 ? (
+                  <p className="px-4 py-8 text-center text-sm text-[#94A3B8]">No hay pedidos registrados</p>
+                ) : pedidosRecientes.map((pedido: any) => {
+                  const estado = pedido.estado || 'pendiente';
+                  const estadoColor = ESTADO_COLOR[estado] || '#64748B';
+                  return (
+                    <div key={pedido.id} className="flex items-center justify-between gap-3 px-4 py-3">
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-[#dae2fd]">{getPedidoDescripcion(pedido)}</p>
+                        <p className="mt-0.5 text-xs text-[#64748B]">
+                          #{String(pedido.id || '').slice(0, 8).toUpperCase()} · {pedido.created_at ? new Date(pedido.created_at).toLocaleDateString('es-VE') : '—'}
+                        </p>
+                      </div>
+                      <div className="flex shrink-0 flex-col items-end gap-1">
+                        <span
+                          className="inline-flex rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wide"
+                          style={{ backgroundColor: `${estadoColor}1a`, color: estadoColor, border: `1px solid ${estadoColor}33` }}
+                        >
+                          {ESTADO_LABEL[estado] || estado}
+                        </span>
+                        <span className="text-sm font-semibold text-[#f8fafc]">${formatMoney(Number(pedido.precio_total || 0))}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              {/* Vista escritorio */}
+              <div className="hidden sm:block overflow-x-auto">
                 <table className="min-w-full border-separate border-spacing-0 text-sm">
                   <thead>
                     <tr className="bg-[#0c1424]">
@@ -717,7 +748,7 @@ export default function Dashboard() {
                 <Bell className="h-4 w-4 text-[#ffb95f]" />
                 Trabajos urgentes
               </CardTitle>
-              <CardDescription>Lo que necesita respuesta inmediata.</CardDescription>
+              <CardDescription className="hidden sm:block">Lo que necesita respuesta inmediata.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {urgentJobs.length === 0 ? (
@@ -747,7 +778,7 @@ export default function Dashboard() {
                 <Wrench className="h-4 w-4 text-[#4edea3]" />
                 Estado de maquinas
               </CardTitle>
-              <CardDescription>Visibilidad rapida del flujo de produccion.</CardDescription>
+              <CardDescription className="hidden sm:block">Visibilidad rapida del flujo de produccion.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {maquinas.length === 0 ? (
@@ -780,7 +811,7 @@ export default function Dashboard() {
                 <TriangleAlert className="h-4 w-4 text-[#ffb95f]" />
                 Stock critico
               </CardTitle>
-              <CardDescription>Materiales y tintas por debajo del minimo.</CardDescription>
+              <CardDescription className="hidden sm:block">Materiales y tintas por debajo del minimo.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {totalStockBajo === 0 ? (
@@ -837,7 +868,7 @@ export default function Dashboard() {
                 <Layers3 className="h-4 w-4 text-[#b4c5ff]" />
                 Accesos rapidos
               </CardTitle>
-              <CardDescription>Salta directo a la tarea que mas usas.</CardDescription>
+              <CardDescription className="hidden sm:block">Salta directo a la tarea que mas usas.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-2">
