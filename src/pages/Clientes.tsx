@@ -105,79 +105,72 @@ export default function Clientes() {
   return (
     <>
       <div className="space-y-6 animate-fade-in">
-        {/* 1. PageHeader */}
         <PageHeader
           title="Clientes"
           description={`${filteredClientes.length} registros`}
           icon="group"
           actions={
-            <Button onClick={openNewForm}>
+            <Button onClick={openNewForm} className="gap-2">
               <span className="material-symbols-outlined" style={{ fontSize: '18px', marginRight: '0.5rem' }}>person_add</span>
               Registrar Cliente
             </Button>
           }
         />
 
-        {/* 2. Búsqueda */}
-        <div style={{ position: 'relative' }}>
-          <span className="material-symbols-outlined" style={{
-            position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
-            fontSize: '20px', color: '#94A3B8', pointerEvents: 'none',
-          }}>search</span>
-          <Input
-            placeholder="Buscar por nombre, cédula o teléfono..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{ paddingLeft: '2.5rem' }}
-          />
+        <div className="rounded-[20px] border border-[rgba(180,197,255,0.10)] bg-[linear-gradient(180deg,rgba(12,18,31,0.98),rgba(9,13,22,0.95))] p-4 shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
+          <div className="relative">
+            <span className="material-symbols-outlined" style={{
+              position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+              fontSize: '20px', color: '#94A3B8', pointerEvents: 'none',
+            }}>search</span>
+            <Input
+              placeholder="Buscar por nombre, cédula o teléfono..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{ paddingLeft: '2.5rem' }}
+            />
+          </div>
         </div>
 
-        {/* 3. Stats Bar */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
             { label: 'Total Clientes', value: stats.total, icon: 'group', color: '#b4c5ff' },
             { label: 'Activos', value: stats.activos, icon: 'check_circle', color: '#4edea3' },
             { label: 'Con Email', value: stats.conEmail, icon: 'email', color: '#b4c5ff' },
             { label: 'Con Teléfono', value: stats.conTelefono, icon: 'phone', color: '#ffb95f' },
           ].map(stat => (
-            <div key={stat.label} style={{
-              backgroundColor: '#1E293B',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: '0.25rem',
-              padding: '1rem',
-            }}>
-              <p style={{
-                fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700,
-                letterSpacing: '0.05em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: '0.25rem',
-              }}>
+            <div
+              key={stat.label}
+              className="rounded-[18px] border border-[rgba(180,197,255,0.10)] bg-[linear-gradient(180deg,rgba(15,23,42,0.98),rgba(9,13,22,0.96))] p-4 shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+            >
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#94A3B8]">
                 {stat.label}
               </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="material-symbols-outlined" style={{ fontSize: '20px', color: stat.color }}>{stat.icon}</span>
+              <div className="flex items-end justify-between gap-3">
                 <p style={{
-                  fontFamily: 'Geist, Inter, sans-serif', fontSize: '24px', fontWeight: 700,
-                  letterSpacing: '-0.01em', color: stat.color, margin: 0,
+                  fontFamily: 'Geist, Inter, sans-serif', fontSize: '28px', fontWeight: 700,
+                  letterSpacing: '-0.02em', color: stat.color, margin: 0,
                 }}>
                   {stat.value}
                 </p>
+                <span className="material-symbols-outlined" style={{ fontSize: '22px', color: stat.color }}>{stat.icon}</span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* 4. Tabla */}
-        <div style={{
-          backgroundColor: '#1E293B',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '0.25rem',
-          overflow: 'hidden',
-        }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
+        <div className="overflow-hidden rounded-[20px] border border-[rgba(180,197,255,0.10)] bg-[linear-gradient(180deg,rgba(15,23,42,0.98),rgba(9,13,22,0.96))] shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
+          <div className="border-b border-white/5 px-5 py-4">
+            <h2 className="text-base font-semibold text-[#f8fafc]">Listado de clientes</h2>
+            <p className="mt-1 text-sm text-[#94A3B8]">Selección rápida con vista compacta para trabajo diario.</p>
+          </div>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0 }}>
+              <thead>
               <tr style={{ backgroundColor: '#060e20', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 {['CLIENTE', 'CÉDULA/RIF', 'TELÉFONO', 'DIRECCIÓN', 'ESTADO', 'ACCIONES'].map(col => (
                   <th key={col} style={{
-                    padding: '1rem 1.5rem',
+                    padding: '0.9rem 1.25rem',
                     fontFamily: 'JetBrains Mono, monospace',
                     fontSize: '11px', fontWeight: 700,
                     letterSpacing: '0.05em', textTransform: 'uppercase',
@@ -185,8 +178,8 @@ export default function Clientes() {
                   }}>{col}</th>
                 ))}
               </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
               {filteredClientes.length === 0 ? (
                 <tr>
                   <td colSpan={6} style={{ padding: '3rem', textAlign: 'center', color: '#94A3B8' }}>
@@ -195,15 +188,20 @@ export default function Clientes() {
                   </td>
                 </tr>
               ) : (
-                filteredClientes.map(cliente => (
+                filteredClientes.map((cliente, index) => (
                   <tr
                     key={cliente.id}
-                    style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer' }}
-                    onMouseEnter={e => e.currentTarget.style.backgroundColor = '#222a3d'}
-                    onMouseLeave={e => e.currentTarget.style.backgroundColor = ''}
+                    style={{
+                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      cursor: 'pointer',
+                      backgroundColor: index % 2 === 0 ? '#0f172a' : '#101a30',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#16233b')}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.backgroundColor = index % 2 === 0 ? '#0f172a' : '#101a30';
+                    }}
                     onClick={() => openDrawer(cliente)}
                   >
-                    {/* CLIENTE */}
                     <td style={{ padding: '1rem 1.5rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <div style={{
@@ -227,19 +225,15 @@ export default function Clientes() {
                         </div>
                       </div>
                     </td>
-                    {/* CÉDULA/RIF */}
                     <td style={{ padding: '1rem 1.5rem', fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#F8FAFC' }}>
                       {cliente.cedula_rif || '—'}
                     </td>
-                    {/* TELÉFONO */}
                     <td style={{ padding: '1rem 1.5rem', fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#F8FAFC' }}>
                       {cliente.telefono || '—'}
                     </td>
-                    {/* DIRECCIÓN */}
                     <td style={{ padding: '1rem 1.5rem', fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#94A3B8', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {cliente.direccion || '—'}
                     </td>
-                    {/* ESTADO */}
                     <td style={{ padding: '1rem 1.5rem' }}>
                       <span style={{
                         display: 'inline-flex', alignItems: 'center', gap: '0.375rem',
@@ -250,13 +244,18 @@ export default function Clientes() {
                         {cliente.activo !== false ? 'ACTIVO' : 'INACTIVO'}
                       </span>
                     </td>
-                    {/* ACCIONES */}
                     <td style={{ padding: '1rem 1.5rem' }}>
                       <button
                         onClick={e => { e.stopPropagation(); openDrawer(cliente); }}
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8' }}
-                        onMouseEnter={e => (e.currentTarget.style.color = '#b4c5ff')}
-                        onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}
+                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(180,197,255,0.10)', cursor: 'pointer', color: '#b4c5ff', width: '38px', height: '38px', borderRadius: '12px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.backgroundColor = 'rgba(180,197,255,0.10)';
+                          e.currentTarget.style.borderColor = 'rgba(180,197,255,0.20)';
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                          e.currentTarget.style.borderColor = 'rgba(180,197,255,0.10)';
+                        }}
                       >
                         <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>edit</span>
                       </button>
@@ -264,8 +263,9 @@ export default function Clientes() {
                   </tr>
                 ))
               )}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -286,11 +286,11 @@ export default function Clientes() {
       <aside style={{
         position: 'fixed', top: 0, right: 0,
         height: '100vh', width: '480px',
-        backgroundColor: '#1E293B',
-        borderLeft: '1px solid rgba(255,255,255,0.08)',
+        background: 'linear-gradient(180deg, rgba(12,18,31,0.98), rgba(9,13,22,0.98))',
+        borderLeft: '1px solid rgba(180,197,255,0.12)',
         zIndex: 70,
         display: 'flex', flexDirection: 'column',
-        boxShadow: '-8px 0 32px rgba(0,0,0,0.4)',
+        boxShadow: '-16px 0 60px rgba(0,0,0,0.45)',
         transform: drawerCliente ? 'translateX(0)' : 'translateX(100%)',
         transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
       }}>
@@ -344,14 +344,14 @@ export default function Clientes() {
         </div>
 
         {/* Footer */}
-        <footer style={{ padding: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+        <footer style={{ padding: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', backgroundColor: 'rgba(255,255,255,0.02)' }}>
           <button type="button" onClick={closeDrawer}
-            style={{ padding: '0.75rem', backgroundColor: '#2d3449', border: 'none', borderRadius: '0.25rem', color: '#F8FAFC', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>
+            style={{ padding: '0.9rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(180,197,255,0.10)', borderRadius: '14px', color: '#F8FAFC', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>
             Cancelar
           </button>
           <button type="button" onClick={handleSubmit as any}
             disabled={createCliente.isPending || updateCliente.isPending}
-            style={{ padding: '0.75rem', backgroundColor: '#2563eb', border: 'none', borderRadius: '0.25rem', color: '#eeefff', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer', opacity: (createCliente.isPending || updateCliente.isPending) ? 0.7 : 1 }}>
+            style={{ padding: '0.9rem', background: 'linear-gradient(180deg, #2f6cff, #2454d6)', border: 'none', borderRadius: '14px', color: '#eeefff', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer', opacity: (createCliente.isPending || updateCliente.isPending) ? 0.7 : 1 }}>
             {(createCliente.isPending || updateCliente.isPending) ? 'Guardando...' : 'Guardar'}
           </button>
         </footer>

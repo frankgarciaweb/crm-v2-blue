@@ -19,11 +19,12 @@ export function StatCard({ label, value, icon, trend, accent = 'primary' }: Stat
 
   return (
     <div
-      className="flex flex-col justify-between p-5 transition-colors duration-150"
+      className="flex flex-col justify-between p-5 transition-all duration-200"
       style={{
-        backgroundColor: '#1E293B',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: '0.25rem',
+        background: 'linear-gradient(180deg, rgba(15,23,42,0.96), rgba(9,14,26,0.92))',
+        border: '1px solid rgba(180,197,255,0.10)',
+        borderRadius: '1rem',
+        boxShadow: '0 18px 45px rgba(0,0,0,0.18)',
       }}
       onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = `${color}40`; }}
       onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.08)'; }}

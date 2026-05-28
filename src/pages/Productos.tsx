@@ -56,13 +56,13 @@ const fmtMoney = (n: number) =>
 const selectStyle: React.CSSProperties = {
   width: '100%', padding: '0.5rem 0.75rem',
   backgroundColor: '#171f33', border: '1px solid rgba(255,255,255,0.15)',
-  borderRadius: '0.25rem', color: '#F8FAFC',
+  borderRadius: '14px', color: '#F8FAFC',
   fontFamily: 'Inter, sans-serif', fontSize: '14px', outline: 'none', height: '2.5rem',
 };
 
 const labelStyle: React.CSSProperties = {
   display: 'block', fontFamily: 'JetBrains Mono, monospace',
-  fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em',
+  fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em',
   textTransform: 'uppercase', color: '#94A3B8', marginBottom: '0.5rem',
 };
 
@@ -352,7 +352,7 @@ export default function Productos() {
           description={`${filteredProductos.length} productos`}
           icon="inventory_2"
           actions={
-            <button onClick={openNewDrawer} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', backgroundColor: '#2563eb', border: 'none', borderRadius: '0.25rem', color: '#eeefff', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>
+            <button onClick={openNewDrawer} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.65rem 1rem', background: 'linear-gradient(180deg, #2f6cff, #2454d6)', border: 'none', borderRadius: '14px', color: '#eeefff', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer', boxShadow: '0 12px 28px rgba(37,99,235,0.24)' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>add</span>
               Nuevo Producto
             </button>
@@ -368,32 +368,32 @@ export default function Productos() {
         {/* Pills */}
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           {(['todos', 'm2', 'unidad'] as const).map(tipo => (
-            <button key={tipo} onClick={() => setFilterTipo(tipo)} style={{ padding: '0.375rem 1rem', borderRadius: '999px', backgroundColor: filterTipo === tipo ? '#b4c5ff' : '#171f33', color: filterTipo === tipo ? '#002a78' : '#94A3B8', border: filterTipo === tipo ? 'none' : '1px solid rgba(255,255,255,0.08)', fontWeight: filterTipo === tipo ? 700 : 500, fontFamily: 'Inter, sans-serif', fontSize: '13px', cursor: 'pointer' }}>
-              {tipo === 'todos' ? 'Todos' : tipo === 'm2' ? 'Por m²' : 'Por Unidad'}
+            <button key={tipo} onClick={() => setFilterTipo(tipo)} style={{ padding: '0.5rem 1rem', borderRadius: '999px', backgroundColor: filterTipo === tipo ? '#2f6cff' : 'rgba(255,255,255,0.04)', color: filterTipo === tipo ? '#eef3ff' : '#94A3B8', border: filterTipo === tipo ? '1px solid rgba(180,197,255,0.22)' : '1px solid rgba(255,255,255,0.08)', fontWeight: filterTipo === tipo ? 700 : 500, fontFamily: 'Inter, sans-serif', fontSize: '13px', cursor: 'pointer', boxShadow: filterTipo === tipo ? '0 10px 24px rgba(47,108,255,0.22)' : 'none' }}>
+              {tipo === 'todos' ? 'Todos' : tipo === 'm2' ? 'Por m�' : 'Por Unidad'}
             </button>
           ))}
         </div>
 
         {/* Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
             { label: 'Total', value: totalProductos, icon: 'inventory_2', color: '#b4c5ff' },
-            { label: 'Por m²', value: productosPorM2, icon: 'straighten', color: '#b4c5ff' },
+            { label: 'Por m�', value: productosPorM2, icon: 'straighten', color: '#b4c5ff' },
             { label: 'Por Unidad', value: productosPorUnidad, icon: 'deployed_code', color: '#4edea3' },
             { label: 'Precio Promedio', value: `$${precioPromedio}`, icon: 'payments', color: '#ffb95f' },
           ].map(stat => (
-            <div key={stat.label} style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.25rem', padding: '1rem' }}>
-              <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: '0.25rem' }}>{stat.label}</p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div key={stat.label} style={{ background: 'linear-gradient(180deg, rgba(15,23,42,0.98), rgba(9,13,22,0.96))', border: '1px solid rgba(180,197,255,0.10)', borderRadius: '14px', padding: '1rem', boxShadow: '0 20px 40px rgba(0,0,0,0.14)' }}>
+              <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: '0.35rem' }}>{stat.label}</p>
+              <div style={{ display: 'flex', alignItems: 'end', justifyContent: 'space-between', gap: '0.75rem' }}>
                 <span className="material-symbols-outlined" style={{ fontSize: '20px', color: stat.color }}>{stat.icon}</span>
-                <p style={{ fontFamily: 'Geist, Inter, sans-serif', fontSize: '24px', fontWeight: 700, letterSpacing: '-0.01em', color: stat.color, margin: 0 }}>{stat.value}</p>
+                <p style={{ fontFamily: 'Geist, Inter, sans-serif', fontSize: '28px', fontWeight: 700, letterSpacing: '-0.01em', color: stat.color, margin: 0 }}>{stat.value}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5">
           {filteredProductos.length === 0 ? (
             <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '4rem 0', color: '#94A3B8' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '4rem', display: 'block', marginBottom: '1rem', opacity: 0.5 }}>inventory_2</span>
@@ -404,19 +404,19 @@ export default function Productos() {
             const accentColor = esM2 ? '#b4c5ff' : '#4edea3';
             const headerBg = esM2 ? 'rgba(37,99,235,0.15)' : 'rgba(0,125,85,0.15)';
             return (
-              <div key={producto.id} style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.25rem', overflow: 'hidden', display: 'flex', flexDirection: 'column', transition: 'border-color 0.2s, transform 0.2s' }}
+              <div key={producto.id} style={{ background: 'linear-gradient(180deg, rgba(15,23,42,0.98), rgba(9,13,22,0.96))', border: '1px solid rgba(180,197,255,0.10)', borderRadius: '14px', overflow: 'hidden', display: 'flex', flexDirection: 'column', transition: 'border-color 0.2s, transform 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,197,255,0.3)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.transform = ''; }}>
-                <div style={{ height: '7rem', backgroundColor: headerBg, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ minHeight: '5.25rem', backgroundColor: headerBg, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', padding: '0.85rem 1rem', position: 'relative', overflow: 'hidden', gap: '0.75rem' }}>
                   <span className="material-symbols-outlined" style={{ position: 'absolute', right: '-1rem', bottom: '-1rem', fontSize: '7rem', color: accentColor, opacity: 0.08, userSelect: 'none', pointerEvents: 'none' }}>{esM2 ? 'straighten' : 'deployed_code'}</span>
-                  <span style={{ padding: '0.25rem 0.75rem', backgroundColor: `${accentColor}22`, color: accentColor, border: `1px solid ${accentColor}44`, borderRadius: '0.125rem', fontSize: '10px', fontWeight: 700, fontFamily: 'JetBrains Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{esM2 ? 'Por m²' : 'Por Unidad'}</span>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button onClick={() => setCostModal(producto)} title="Costo estimado" style={{ padding: '0.375rem', backgroundColor: 'rgba(255,185,95,0.1)', border: '1px solid rgba(255,185,95,0.25)', borderRadius: '0.25rem', cursor: 'pointer', color: '#ffb95f', display: 'flex', alignItems: 'center' }}
+                  <span style={{ padding: '0.25rem 0.75rem', backgroundColor: `${accentColor}22`, color: accentColor, border: `1px solid ${accentColor}44`, borderRadius: '0.125rem', fontSize: '10px', fontWeight: 700, fontFamily: 'JetBrains Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{esM2 ? 'Por m�' : 'Por Unidad'}</span>
+                  <div style={{ display: 'flex', gap: '0.4rem', marginLeft: 'auto' }}>
+                    <button onClick={() => setCostModal(producto)} title="Costo estimado" style={{ padding: '0.375rem', backgroundColor: 'rgba(255,185,95,0.1)', border: '1px solid rgba(255,185,95,0.25)', borderRadius: '14px', cursor: 'pointer', color: '#ffb95f', display: 'flex', alignItems: 'center' }}
                       onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(255,185,95,0.25)')}
                       onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'rgba(255,185,95,0.1)')}>
                       <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>calculate</span>
                     </button>
-                    <button onClick={() => openDrawer(producto)} style={{ padding: '0.375rem', backgroundColor: `${accentColor}18`, border: `1px solid ${accentColor}33`, borderRadius: '0.25rem', cursor: 'pointer', color: accentColor, display: 'flex', alignItems: 'center' }}
+                    <button onClick={() => openDrawer(producto)} style={{ padding: '0.375rem', backgroundColor: `${accentColor}18`, border: `1px solid ${accentColor}33`, borderRadius: '14px', cursor: 'pointer', color: accentColor, display: 'flex', alignItems: 'center' }}
                       onMouseEnter={e => (e.currentTarget.style.backgroundColor = `${accentColor}33`)}
                       onMouseLeave={e => (e.currentTarget.style.backgroundColor = `${accentColor}18`)}>
                       <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>edit</span>
@@ -424,33 +424,33 @@ export default function Productos() {
                     <button onClick={async () => {
                       if (!window.confirm(`¿Eliminar "${producto.nombre}"?`)) return;
                       try { await deleteProducto.mutateAsync(producto.id); } catch (err: any) { alert(`Error: ${err?.message || err}`); }
-                    }} style={{ padding: '0.375rem', backgroundColor: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '0.25rem', cursor: 'pointer', color: '#EF4444', display: 'flex', alignItems: 'center' }}
+                    }} style={{ padding: '0.375rem', backgroundColor: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '14px', cursor: 'pointer', color: '#EF4444', display: 'flex', alignItems: 'center' }}
                       onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(239,68,68,0.25)')}
                       onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'rgba(239,68,68,0.1)')}>
                       <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>delete</span>
                     </button>
                   </div>
                 </div>
-                <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.75rem' }}>
                     <h3 style={{ fontFamily: 'Geist, Inter, sans-serif', fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: 0, flex: 1, paddingRight: '0.5rem' }}>{producto.nombre}</h3>
                     <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                      <div style={{ fontFamily: 'Geist, Inter, sans-serif', fontSize: '22px', fontWeight: 700, letterSpacing: '-0.01em', color: accentColor }}>${fmtMoney(Number(producto.precio_m2 || 0))}</div>
+                      <div style={{ fontFamily: 'Geist, Inter, sans-serif', fontSize: '20px', fontWeight: 700, letterSpacing: '-0.01em', color: accentColor }}>${fmtMoney(Number(producto.precio_m2 || 0))}</div>
                       <div style={{ fontSize: '10px', color: '#94A3B8', fontFamily: 'Inter, sans-serif' }}>{esM2 ? 'por m²' : 'por unidad'}</div>
                     </div>
                   </div>
                   {producto.descripcion && (
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#94A3B8', margin: '0 0 1rem 0', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{producto.descripcion}</p>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: '#94A3B8', margin: '0 0 0.85rem 0', lineHeight: '1.45', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{producto.descripcion}</p>
                   )}
-                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem', marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#94A3B8' }}>
+                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.85rem', marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'end', justifyContent: 'space-between', gap: '0.75rem', color: '#94A3B8' }}>
                       <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>{esM2 ? 'straighten' : 'deployed_code'}</span>
                       <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px' }}>Cobro:</span>
                     </div>
                     <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', fontWeight: 700, color: '#F8FAFC' }}>{esM2 ? 'Metro Cuadrado' : 'Por Unidad'}</span>
                   </div>
                   {producto.es_kit && (
-                    <div style={{ marginTop: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.3rem 0.6rem', backgroundColor: 'rgba(78,222,163,0.12)', border: '1px solid rgba(78,222,163,0.25)', borderRadius: '0.25rem', color: '#4edea3', fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <div style={{ marginTop: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.3rem 0.6rem', backgroundColor: 'rgba(78,222,163,0.12)', border: '1px solid rgba(78,222,163,0.25)', borderRadius: '14px', color: '#4edea3', fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                       <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>layers</span>
                       Compuesto
                     </div>
@@ -466,7 +466,7 @@ export default function Productos() {
       {drawerProducto && <div onClick={closeDrawer} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(11,17,32,0.7)', backdropFilter: 'blur(4px)', zIndex: 60 }} />}
 
       {/* Drawer */}
-      <aside style={{ position: 'fixed', top: 0, right: 0, height: '100vh', width: '460px', backgroundColor: '#1E293B', borderLeft: '1px solid rgba(255,255,255,0.08)', zIndex: 70, display: 'flex', flexDirection: 'column', boxShadow: '-8px 0 32px rgba(0,0,0,0.4)', transform: drawerProducto ? 'translateX(0)' : 'translateX(100%)', transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)' }}>
+      <aside style={{ position: 'fixed', top: 0, right: 0, height: '100vh', width: '460px', background: 'linear-gradient(180deg, rgba(15,23,42,0.98), rgba(9,13,22,0.96))', borderLeft: '1px solid rgba(255,255,255,0.08)', zIndex: 70, display: 'flex', flexDirection: 'column', boxShadow: '-8px 0 32px rgba(0,0,0,0.4)', transform: drawerProducto ? 'translateX(0)' : 'translateX(100%)', transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)' }}>
         {/* Drawer header */}
         <header style={{ padding: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
           <div>
@@ -477,7 +477,7 @@ export default function Productos() {
               {form.nombre || 'Nuevo Producto'}
             </h3>
           </div>
-          <button onClick={closeDrawer} className="material-symbols-outlined" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', fontSize: '24px', width: '2.5rem', height: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}
+          <button onClick={closeDrawer} className="material-symbols-outlined" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', fontSize: '28px', width: '2.5rem', height: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}
             onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d3449')}
             onMouseLeave={e => (e.currentTarget.style.backgroundColor = '')}>close</button>
         </header>
@@ -499,7 +499,7 @@ export default function Productos() {
             <div>
               <label style={labelStyle}>Tipo de Cobro</label>
               <select value={form.tipo_cobro} onChange={e => setForm({ ...form, tipo_cobro: e.target.value as 'm2' | 'unidad' })} style={selectStyle}>
-                <option value="m2">Por m²</option>
+                <option value="m2">Por m�</option>
                 <option value="unidad">Por Unidad</option>
               </select>
             </div>
@@ -512,7 +512,7 @@ export default function Productos() {
           </div>
 
           {/* Es compuesto */}
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.875rem', backgroundColor: form.es_kit ? 'rgba(78,222,163,0.08)' : '#171f33', border: `1px solid ${form.es_kit ? 'rgba(78,222,163,0.3)' : 'rgba(255,255,255,0.08)'}`, borderRadius: '0.25rem', color: '#F8FAFC', fontFamily: 'Inter, sans-serif', fontSize: '14px', cursor: 'pointer', transition: 'all 0.2s' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.875rem', backgroundColor: form.es_kit ? 'rgba(78,222,163,0.08)' : '#171f33', border: `1px solid ${form.es_kit ? 'rgba(78,222,163,0.3)' : 'rgba(255,255,255,0.08)'}`, borderRadius: '14px', color: '#F8FAFC', fontFamily: 'Inter, sans-serif', fontSize: '14px', cursor: 'pointer', transition: 'all 0.2s' }}>
             <input type="checkbox" checked={form.es_kit} onChange={e => setForm({ ...form, es_kit: e.target.checked })} style={{ width: '1rem', height: '1rem', accentColor: '#4edea3', cursor: 'pointer' }} />
             <div>
               <div style={{ fontWeight: 600, color: form.es_kit ? '#4edea3' : '#F8FAFC' }}>Es producto compuesto</div>
@@ -530,7 +530,7 @@ export default function Productos() {
                     {drawerProductId ? 'Estos materiales se descuentan del inventario al vender.' : 'Guarda el producto primero para agregar materiales.'}
                   </p>
                 </div>
-                <span style={{ background: 'rgba(78,222,163,0.12)', color: '#4edea3', border: '1px solid rgba(78,222,163,0.25)', borderRadius: '0.25rem', padding: '0.25rem 0.6rem', fontSize: '12px', fontWeight: 700, fontFamily: 'JetBrains Mono, monospace' }}>
+                <span style={{ background: 'rgba(78,222,163,0.12)', color: '#4edea3', border: '1px solid rgba(78,222,163,0.25)', borderRadius: '14px', padding: '0.25rem 0.6rem', fontSize: '12px', fontWeight: 700, fontFamily: 'JetBrains Mono, monospace' }}>
                   {(drawerMaterials || []).length} ítem{(drawerMaterials || []).length !== 1 ? 's' : ''}
                 </span>
               </div>
@@ -541,9 +541,9 @@ export default function Productos() {
                   {(drawerMaterials || []).length > 0 && (
                     <div style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                       {/* Header */}
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 80px 36px', gap: '0.5rem', padding: '0.4rem 0.75rem', backgroundColor: '#0d1525', borderRadius: '0.25rem' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 80px 36px', gap: '0.5rem', padding: '0.4rem 0.75rem', backgroundColor: '#0d1525', borderRadius: '14px' }}>
                         {['Material', 'Cantidad', 'Unidad', ''].map(h => (
-                          <span key={h} style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: '#64748B' }}>{h}</span>
+                          <span key={h} style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#64748B' }}>{h}</span>
                         ))}
                       </div>
                       {(drawerMaterials || []).map((row: any) => {
@@ -551,11 +551,11 @@ export default function Productos() {
                         const nombreMat = mat?.nombre || mat?.tipo || mat?.descripcion || row.material_id?.slice(0, 8) || '—';
                         const unidadLabel = mat?.unidad_medida ? getUnidadLabel(mat.unidad_medida) : getUnidadLabel(row.tipo_calculo || 'm2');
                         return (
-                          <div key={row.id} style={{ display: 'grid', gridTemplateColumns: '1fr 80px 80px 36px', gap: '0.5rem', alignItems: 'center', padding: '0.6rem 0.75rem', backgroundColor: '#171f33', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '0.25rem' }}>
+                          <div key={row.id} style={{ display: 'grid', gridTemplateColumns: '1fr 80px 80px 36px', gap: '0.5rem', alignItems: 'center', padding: '0.6rem 0.75rem', backgroundColor: '#171f33', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px' }}>
                             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#F8FAFC', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={nombreMat}>{nombreMat}</span>
                             <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '13px', color: '#b4c5ff', fontWeight: 700 }}>{Number(row.cantidad_por_m2)}</span>
                             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: '#94A3B8' }}>{unidadLabel}</span>
-                            <button onClick={() => handleDeleteComp(row.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '0.25rem', padding: '0.25rem', opacity: 0.7 }}
+                            <button onClick={() => handleDeleteComp(row.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', padding: '0.25rem', opacity: 0.7 }}
                               onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
                               onMouseLeave={e => (e.currentTarget.style.opacity = '0.7')}>
                               <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>delete</span>
@@ -567,8 +567,8 @@ export default function Productos() {
                   )}
 
                   {/* Agregar nuevo material */}
-                  <div style={{ backgroundColor: '#060e20', border: '1px dashed rgba(180,197,255,0.2)', borderRadius: '0.25rem', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748B' }}>Agregar material</span>
+                  <div style={{ backgroundColor: '#060e20', border: '1px dashed rgba(180,197,255,0.2)', borderRadius: '14px', padding: '1rem', boxShadow: '0 20px 40px rgba(0,0,0,0.14)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B' }}>Agregar material</span>
                     <Input
                       value={materialSearch}
                       onChange={e => setMaterialSearch(e.target.value)}
@@ -589,7 +589,7 @@ export default function Productos() {
                         ))}
                       </select>
                       <Input type="number" min="0" step="0.01" value={newComp.cantidad} onChange={e => setNewComp({ ...newComp, cantidad: e.target.value })} placeholder="Cant." />
-                      <div style={{ height: '2.5rem', padding: '0 0.75rem', backgroundColor: 'rgba(180,197,255,0.08)', border: '1px solid rgba(180,197,255,0.2)', borderRadius: '0.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'JetBrains Mono, monospace', fontSize: '12px', fontWeight: 700, color: '#b4c5ff', whiteSpace: 'nowrap', minWidth: '52px' }}>
+                      <div style={{ height: '2.5rem', padding: '0 0.75rem', backgroundColor: 'rgba(180,197,255,0.08)', border: '1px solid rgba(180,197,255,0.2)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'JetBrains Mono, monospace', fontSize: '12px', fontWeight: 700, color: '#b4c5ff', whiteSpace: 'nowrap', minWidth: '52px' }}>
                         {newComp.material_id ? getUnidadLabel(newComp.unidad) : '—'}
                       </div>
                     </div>
@@ -603,14 +603,14 @@ export default function Productos() {
                         Unidad tomada del inventario: <strong style={{ color: '#94A3B8' }}>{getUnidadLabel(newComp.unidad)}</strong>
                       </p>
                     )}
-                    <button onClick={handleAddComp} disabled={addingComp || !newComp.material_id || !newComp.cantidad} style={{ padding: '0.6rem 1rem', backgroundColor: addingComp || !newComp.material_id || !newComp.cantidad ? '#1e293b' : '#4edea3', color: '#002a20', border: 'none', borderRadius: '0.25rem', cursor: addingComp || !newComp.material_id || !newComp.cantidad ? 'not-allowed' : 'pointer', fontFamily: 'Inter, sans-serif', fontSize: '13px', fontWeight: 700, opacity: addingComp || !newComp.material_id || !newComp.cantidad ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
+                    <button onClick={handleAddComp} disabled={addingComp || !newComp.material_id || !newComp.cantidad} style={{ padding: '0.6rem 1rem', backgroundColor: addingComp || !newComp.material_id || !newComp.cantidad ? '#1e293b' : '#4edea3', color: '#002a20', border: 'none', borderRadius: '14px', cursor: addingComp || !newComp.material_id || !newComp.cantidad ? 'not-allowed' : 'pointer', fontFamily: 'Inter, sans-serif', fontSize: '13px', fontWeight: 700, opacity: addingComp || !newComp.material_id || !newComp.cantidad ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
                       <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>add</span>
                       {addingComp ? 'Agregando…' : 'Agregar material'}
                     </button>
                   </div>
                 </>
               ) : (
-                <div style={{ padding: '1rem', backgroundColor: '#171f33', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '0.25rem', color: '#94A3B8', fontFamily: 'Inter, sans-serif', fontSize: '13px', textAlign: 'center' }}>
+                <div style={{ padding: '1rem', boxShadow: '0 20px 40px rgba(0,0,0,0.14)', backgroundColor: '#171f33', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px', color: '#94A3B8', fontFamily: 'Inter, sans-serif', fontSize: '13px', textAlign: 'center' }}>
                   <span className="material-symbols-outlined" style={{ fontSize: '28px', display: 'block', marginBottom: '0.5rem', opacity: 0.4 }}>save</span>
                   Guarda el producto primero, luego podrás definir sus materiales.
                 </div>
@@ -620,36 +620,36 @@ export default function Productos() {
         </div>
 
         {/* Drawer footer */}
-        <footer style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
+        <footer style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', gap: '0.75rem', flexShrink: 0, backgroundColor: 'rgba(255,255,255,0.02)' }}>
           {drawerProductId && (
-            <button type="button" onClick={() => setCostModal(drawerProducto)} style={{ padding: '0.75rem 1rem', backgroundColor: 'rgba(255,185,95,0.1)', border: '1px solid rgba(255,185,95,0.3)', borderRadius: '0.25rem', color: '#ffb95f', fontWeight: 600, fontFamily: 'Inter, sans-serif', fontSize: '13px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <button type="button" onClick={() => setCostModal(drawerProducto)} style={{ padding: '0.75rem 1rem', backgroundColor: 'rgba(255,185,95,0.1)', border: '1px solid rgba(255,185,95,0.3)', borderRadius: '14px', color: '#ffb95f', fontWeight: 600, fontFamily: 'Inter, sans-serif', fontSize: '13px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>calculate</span>
               Costo estimado
             </button>
           )}
-          <button type="button" onClick={closeDrawer} style={{ flex: 1, padding: '0.75rem', backgroundColor: '#2d3449', border: 'none', borderRadius: '0.25rem', color: '#F8FAFC', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>Cancelar</button>
-          <button type="button" onClick={handleSubmit} disabled={createProducto.isPending || updateProducto.isPending} style={{ flex: 2, padding: '0.75rem', backgroundColor: '#2563eb', border: 'none', borderRadius: '0.25rem', color: '#eeefff', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer', opacity: createProducto.isPending || updateProducto.isPending ? 0.7 : 1 }}>
+          <button type="button" onClick={closeDrawer} style={{ flex: 1, padding: '0.75rem', backgroundColor: '#2d3449', border: 'none', borderRadius: '14px', color: '#F8FAFC', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>Cancelar</button>
+          <button type="button" onClick={handleSubmit} disabled={createProducto.isPending || updateProducto.isPending} style={{ flex: 2, padding: '0.75rem', background: 'linear-gradient(180deg, #2f6cff, #2454d6)', border: 'none', borderRadius: '14px', color: '#eeefff', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer', opacity: createProducto.isPending || updateProducto.isPending ? 0.7 : 1 }}>
             {createProducto.isPending || updateProducto.isPending ? 'Guardando…' : 'Guardar'}
           </button>
         </footer>
       </aside>
 
       {/* Cost Modal overlay */}
-      {costModal && <div onClick={() => setCostModal(null)} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(11,17,32,0.75)', backdropFilter: 'blur(4px)', zIndex: 80, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }} />}
+      {costModal && <div onClick={() => setCostModal(null)} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(11,17,32,0.75)', backdropFilter: 'blur(4px)', zIndex: 80, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', boxShadow: '0 20px 40px rgba(0,0,0,0.14)' }} />}
 
       {/* Cost Modal */}
       {costModal && (() => {
         const { matCost, subtotal, sugerido, costoTintaTotal, m2Rollo } = costData;
         const mats = costModalMaterials || [];
         return (
-          <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 90, width: '100%', maxWidth: '520px', backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', boxShadow: '0 24px 64px rgba(0,0,0,0.6)', display: 'flex', flexDirection: 'column', maxHeight: '90vh', overflow: 'hidden' }}>
+          <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 90, width: '100%', maxWidth: '520px', background: 'linear-gradient(180deg, rgba(15,23,42,0.98), rgba(9,13,22,0.96))', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', boxShadow: '0 24px 64px rgba(0,0,0,0.6)', display: 'flex', flexDirection: 'column', maxHeight: '90vh', overflow: 'hidden' }}>
             {/* Modal header */}
             <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
               <div>
                 <span style={{ fontSize: '10px', fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ffb95f', backgroundColor: 'rgba(255,185,95,0.1)', padding: '2px 8px', borderRadius: '0.125rem', display: 'inline-block', marginBottom: '0.4rem' }}>Costo Estimado</span>
                 <h3 style={{ margin: 0, fontFamily: 'Geist, Inter, sans-serif', fontSize: '18px', fontWeight: 600, color: '#F8FAFC' }}>{costModal.nombre}</h3>
               </div>
-              <button onClick={() => setCostModal(null)} className="material-symbols-outlined" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', fontSize: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', width: '2rem', height: '2rem' }}
+              <button onClick={() => setCostModal(null)} className="material-symbols-outlined" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', fontSize: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', width: '2rem', height: '2rem' }}
                 onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d3449')}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = '')}>close</button>
             </div>
@@ -659,7 +659,7 @@ export default function Productos() {
               {/* Materiales */}
               {mats.length > 0 ? (
                 <div>
-                  <p style={{ margin: '0 0 0.75rem', fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#94A3B8' }}>Materiales de composición</p>
+                  <p style={{ margin: '0 0 0.75rem', fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94A3B8' }}>Materiales de composición</p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
                     {mats.map((row: any) => {
                       const mat = materialMap.get(row.material_id);
@@ -673,7 +673,7 @@ export default function Productos() {
                       const sinPrecio = precio === 0;
                       const usaCompra = tieneOrden && precio > 0;
                       return (
-                        <div key={row.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0.75rem', alignItems: 'center', padding: '0.6rem 0.75rem', backgroundColor: '#171f33', borderRadius: '0.25rem', border: `1px solid ${sinPrecio ? 'rgba(239,68,68,0.2)' : usaCompra ? 'rgba(255,185,95,0.22)' : 'rgba(255,255,255,0.06)'}` }}>
+                        <div key={row.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0.75rem', alignItems: 'center', padding: '0.6rem 0.75rem', backgroundColor: '#171f33', borderRadius: '14px', border: `1px solid ${sinPrecio ? 'rgba(239,68,68,0.2)' : usaCompra ? 'rgba(255,185,95,0.22)' : 'rgba(255,255,255,0.06)'}` }}>
                           <div>
                             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#F8FAFC' }}>{nombre}</span>
                             {sinPrecio && <span style={{ display: 'block', fontSize: '10px', color: '#EF4444', fontFamily: 'Inter, sans-serif', marginTop: '2px' }}>Sin precio en inventario</span>}
@@ -689,7 +689,7 @@ export default function Productos() {
                   </div>
                 </div>
               ) : (
-                <div style={{ padding: '0.875rem', backgroundColor: '#171f33', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '0.25rem', color: '#94A3B8', fontSize: '13px', fontFamily: 'Inter, sans-serif' }}>
+                <div style={{ padding: '0.875rem', backgroundColor: '#171f33', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px', color: '#94A3B8', fontSize: '13px', fontFamily: 'Inter, sans-serif' }}>
                   Este producto no tiene materiales de composición definidos.
                 </div>
               )}
@@ -710,7 +710,7 @@ export default function Productos() {
                 </div>
                 <button
                   onClick={() => handleApplyPrice(sugerido)}
-                  style={{ marginTop: '0.5rem', alignSelf: 'flex-end', padding: '0.4rem 0.8rem', backgroundColor: '#2563eb', color: '#fff', border: 'none', borderRadius: '0.25rem', fontSize: '13px', cursor: 'pointer' }}
+                  style={{ marginTop: '0.5rem', alignSelf: 'flex-end', padding: '0.4rem 0.8rem', background: 'linear-gradient(180deg, #2f6cff, #2454d6)', color: '#fff', border: 'none', borderRadius: '14px', fontSize: '13px', cursor: 'pointer' }}
                 >
                   Aplicar precio sugerido
                 </button>
@@ -718,9 +718,9 @@ export default function Productos() {
 
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                  <p style={{ margin: 0, fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#94A3B8' }}>Costos operativos (por m²)</p>
+                  <p style={{ margin: 0, fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94A3B8' }}>Costos operativos (por m²)</p>
                   {!hasOperationalConfig && (
-                    <span style={{ fontSize: '10px', color: '#f59e0b', fontFamily: 'Inter, sans-serif', backgroundColor: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: '0.25rem', padding: '2px 6px' }}>
+                    <span style={{ fontSize: '10px', color: '#f59e0b', fontFamily: 'Inter, sans-serif', backgroundColor: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: '14px', padding: '2px 6px' }}>
                       Configura en Configuración
                     </span>
                   )}
@@ -732,7 +732,7 @@ export default function Productos() {
                     { label: 'Acabado', value: costoAcabadoM2 },
                     { label: 'Costos fijos prorrateados', value: costoFijoPorM2 },
                   ].map(item => (
-                    <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0.75rem', backgroundColor: '#171f33', borderRadius: '0.25rem', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0.75rem', backgroundColor: '#171f33', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.06)' }}>
                       <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', color: '#94A3B8' }}>{item.label}</span>
                       <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '13px', color: '#F8FAFC', fontWeight: 600 }}>${fmtMoney(item.value)}</span>
                     </div>
@@ -741,7 +741,7 @@ export default function Productos() {
               </div>
 
               {/* Resumen */}
-              <div style={{ backgroundColor: '#060e20', border: '1px solid rgba(180,197,255,0.2)', borderRadius: '0.375rem', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <div style={{ backgroundColor: '#060e20', border: '1px solid rgba(180,197,255,0.2)', borderRadius: '0.375rem', padding: '1rem', boxShadow: '0 20px 40px rgba(0,0,0,0.14)', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: '#94A3B8', fontFamily: 'Inter, sans-serif' }}>
                   <span>Subtotal materiales</span><span style={{ color: '#F8FAFC', fontWeight: 600, fontFamily: 'JetBrains Mono, monospace' }}>${fmtMoney(matCost)}</span>
                 </div>
@@ -753,8 +753,8 @@ export default function Productos() {
                 </div>
                 <div style={{ height: '1px', backgroundColor: 'rgba(180,197,255,0.15)', margin: '0.25rem 0' }} />
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#4edea3' }}>Precio sugerido</span>
-                  <span style={{ fontFamily: 'Geist, sans-serif', fontSize: '24px', fontWeight: 700, color: '#4edea3' }}>${fmtMoney(sugerido)}</span>
+                  <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#4edea3' }}>Precio sugerido</span>
+                  <span style={{ fontFamily: 'Geist, sans-serif', fontSize: '28px', fontWeight: 700, color: '#4edea3' }}>${fmtMoney(sugerido)}</span>
                 </div>
                 <div style={{ fontSize: '11px', color: '#64748B', fontFamily: 'Inter, sans-serif' }}>
                   Precio actual del producto: <strong style={{ color: '#94A3B8' }}>${fmtMoney(Number(costModal.precio_m2 || 0))}</strong>
@@ -764,8 +764,8 @@ export default function Productos() {
 
             {/* Modal footer */}
             <div style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
-              <button onClick={() => setCostModal(null)} style={{ flex: 1, padding: '0.75rem', backgroundColor: '#2d3449', border: 'none', borderRadius: '0.25rem', color: '#F8FAFC', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>Cerrar</button>
-              <button onClick={() => handleApplyPrice(sugerido)} disabled={sugerido <= 0 || updateProducto.isPending} style={{ flex: 2, padding: '0.75rem', backgroundColor: sugerido <= 0 ? '#1e293b' : '#4edea3', color: '#002a20', border: 'none', borderRadius: '0.25rem', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: sugerido <= 0 ? 'not-allowed' : 'pointer', opacity: sugerido <= 0 ? 0.5 : 1 }}>
+              <button onClick={() => setCostModal(null)} style={{ flex: 1, padding: '0.75rem', backgroundColor: '#2d3449', border: 'none', borderRadius: '14px', color: '#F8FAFC', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>Cerrar</button>
+              <button onClick={() => handleApplyPrice(sugerido)} disabled={sugerido <= 0 || updateProducto.isPending} style={{ flex: 2, padding: '0.75rem', backgroundColor: sugerido <= 0 ? '#1e293b' : '#4edea3', color: '#002a20', border: 'none', borderRadius: '14px', fontWeight: 700, fontFamily: 'Inter, sans-serif', cursor: sugerido <= 0 ? 'not-allowed' : 'pointer', opacity: sugerido <= 0 ? 0.5 : 1 }}>
                 Aplicar precio sugerido
               </button>
             </div>

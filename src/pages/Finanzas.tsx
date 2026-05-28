@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+﻿import { useEffect, useMemo, useState } from 'react';
 import { useMovimientosCaja, usePedidos, useComprasMaterial, useCreateMovimientoCaja, useUpdateMovimientoCaja, useDolar, useConfiguracionNegocio, useUpdateConfiguracion, useSolicitudesCompra, useOrdenesCompra, useCreateOrdenCompra, useUpdateOrdenCompra, useUpdateSolicitudCompra, useProveedores, useConsumoMateriales, useConsumoTintaPedido, useMateriales, useProductoMaterialesAll, useRecipeModuleEnabled, useTintas, useUpdateTinta, useCreateTinta } from '@/hooks/useSupabase';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 
@@ -91,7 +91,7 @@ export default function Finanzas() {
   const [editingCostoFijoId, setEditingCostoFijoId] = useState<string | null>(null);
   const [m2ReferenciaForm, setM2ReferenciaForm] = useState('70');
   const [costeoSummary, setCosteoSummary] = useState<string | null>(null);
-  const [tab, setTab] = useState<'movimientos' | 'dashboard' | 'compras' | 'rentabilidad'>('movimientos');
+  const [tab, setTab] = useState<'movimientos' | 'dashboard' | 'compras' | 'rentabilidad'>('dashboard');
   const [backfilling, setBackfilling] = useState(false);
   const [backfillSummary, setBackfillSummary] = useState<string | null>(null);
 
@@ -146,6 +146,22 @@ export default function Finanzas() {
   const totalEgresos = movimientos?.filter(m => m.tipo === 'egreso')
     .reduce((sum, m) => sum + (m.monto || 0), 0) || 0;
   const balance = totalIngresos - totalEgresos;
+  const pedidosPendientesPagoUsd = (pedidos || []).reduce((sum, pedido: any) => {
+    const tipoPago = String(pedido.tipo_pago || '').toLowerCase();
+    if (tipoPago === 'contado') return sum;
+    const total = Number(pedido.precio_total) || 0;
+    const abono = Number(pedido.abono) || 0;
+    return sum + Math.max(total - abono, 0);
+  }, 0);
+  const comprasPendientesPagoUsd = (comprasMaterial || []).reduce((sum, compra: any) => {
+    if (!compra?.es_credito) return sum;
+    return sum + (Number(compra.precio_usd || compra.precio_moneda || 0) || 0);
+  }, 0);
+  const pendientesPagoTotalUsd = pedidosPendientesPagoUsd + comprasPendientesPagoUsd;
+  const pendientesPagoCount = (pedidos || []).filter((pedido: any) => {
+    const tipoPago = String(pedido.tipo_pago || '').toLowerCase();
+    return tipoPago === 'abono' || tipoPago === 'parcial' || tipoPago === 'credito';
+  }).length + (comprasMaterial || []).filter((compra: any) => compra?.es_credito).length;
 
   const dolaresBs = Number(dolar?.valor ?? 0);
   const binanceBs = Number(dolar?.binace ?? dolar?.binance ?? 0);
@@ -705,6 +721,12 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
   const formatCurrency = (val: number) => '$' + val.toLocaleString('es-CL');
   const formatMoney = (val: number, moneda: 'USD' | 'EUR' | 'Binance' | 'BS') =>
     `${moneda} ${val.toLocaleString('es-CL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const financeSurfaceStyle = {
+    background: 'linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(10,16,31,0.96) 100%)',
+    border: '1px solid rgba(148,163,184,0.12)',
+    borderRadius: '16px',
+    boxShadow: '0 18px 50px rgba(2,6,23,0.35)',
+  } as const;
 
   function abrirAprobar(sol: any) {
     setSelectedSolicitud(sol);
@@ -867,6 +889,356 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
     }
   }
 
+  const renderFinanceSummary = () => {
+    const goToTab = (value: 'movimientos' | 'dashboard' | 'compras' | 'rentabilidad') => setTab(value);
+    const summaryTabs = [
+      { key: 'dashboard', label: 'Resumen', icon: 'space_dashboard' },
+      { key: 'movimientos', label: 'Movimientos', icon: 'list_alt' },
+      { key: 'rentabilidad', label: 'Costos', icon: 'query_stats' },
+      { key: 'compras', label: 'Compras', icon: 'shopping_cart' },
+      { key: 'config', label: 'Configuración', icon: 'tune' },
+    ] as const;
+
+    const summaryCards = [
+      { label: 'Ingresos Totales', value: formatCurrency(totalIngresos), icon: 'trending_up', color: '#10B981', note: 'Ingresos del sistema' },
+      { label: 'Egresos Totales', value: formatCurrency(totalEgresos), icon: 'trending_down', color: '#EF4444', note: 'Egresos del sistema' },
+      { label: 'Balance General', value: formatCurrency(balance), icon: 'account_balance_wallet', color: balance >= 0 ? '#4ade80' : '#f87171', note: 'Ingresos menos egresos' },
+      { label: 'Pagos Pendientes', value: formatCurrency(pendientesPagoTotalUsd), icon: 'payments', color: '#ffb95f', note: `${pendientesPagoCount} abiertos` },
+    ];
+
+    const visibleMovimientos = filteredMovimientos.slice(0, 10);
+
+    const cardStyle = {
+      background: 'linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(10,16,31,0.96) 100%)',
+      border: '1px solid rgba(148,163,184,0.12)',
+      borderRadius: '16px',
+      boxShadow: '0 18px 50px rgba(2,6,23,0.35)',
+    } as const;
+
+    const inputStyle = {
+      width: '100%',
+      backgroundColor: 'rgba(7,12,24,0.9)',
+      border: '1px solid rgba(148,163,184,0.14)',
+      color: '#dbeafe',
+      borderRadius: '12px',
+      padding: '12px 14px',
+      outline: 'none',
+      fontSize: '14px',
+    } as const;
+
+    const actionStyle = (active = false) => ({
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '8px',
+      borderRadius: '12px',
+      padding: '10px 14px',
+      border: active ? '1px solid rgba(59,130,246,0.45)' : '1px solid rgba(148,163,184,0.14)',
+      background: active ? 'linear-gradient(135deg, rgba(37,99,235,0.95), rgba(59,130,246,0.75))' : 'rgba(15,23,42,0.82)',
+      color: active ? '#ffffff' : '#cbd5e1',
+      boxShadow: active ? '0 0 0 1px rgba(37,99,235,0.15), 0 12px 28px rgba(37,99,235,0.18)' : 'none',
+      cursor: 'pointer',
+      fontSize: '13px',
+      fontWeight: 700,
+    } as const);
+
+    return (
+      <div className="space-y-6 animate-fade-in">
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '18px', alignItems: 'flex-end', padding: '18px 20px', ...cardStyle }}>
+          <div style={{ minWidth: 0, flex: '1 1 420px' }}>
+            <div style={{ fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#64748B', fontWeight: 700 }}>
+              Finanzas / Centro de Control
+            </div>
+            <h1 style={{ fontFamily: 'Geist, sans-serif', fontSize: '32px', lineHeight: 1.1, marginTop: '8px', color: '#f8fafc', fontWeight: 800 }}>
+              Finanzas
+            </h1>
+            <p style={{ marginTop: '8px', color: '#94A3B8', fontSize: '14px', maxWidth: '54rem' }}>
+              Controla ingresos, egresos y pagos pendientes desde una sola vista operativa.
+            </p>
+          </div>
+
+          <div style={{ flex: '1 1 420px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+              <div style={{ flex: '1 1 320px', minWidth: '260px' }}>
+                <div style={{ position: 'relative' }}>
+                  <span className="material-symbols-outlined" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#64748B', fontSize: '18px' }}>search</span>
+                  <input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Buscar movimientos, conceptos, categorías..."
+                    style={{ ...inputStyle, paddingLeft: '42px' }}
+                  />
+                </div>
+              </div>
+              <button onClick={() => { setTab('movimientos'); setShowForm(true); }} style={actionStyle(true)}>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
+                Nuevo movimiento
+              </button>
+              <button onClick={() => { setTab('movimientos'); setShowCostoFijoForm(true); }} style={actionStyle(false)}>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>tune</span>
+                Nuevo costo
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'flex-end' }}>
+              {summaryTabs.map((tabItem) => {
+                const active = tab === tabItem.key;
+                const onClick = tabItem.key === 'config'
+                  ? () => { setTab('movimientos'); setShowCostoFijoForm(true); }
+                  : () => goToTab(tabItem.key as 'movimientos' | 'dashboard' | 'compras' | 'rentabilidad');
+                return (
+                  <button key={tabItem.label} onClick={onClick} style={actionStyle(active)}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>{tabItem.icon}</span>
+                    {tabItem.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          {summaryCards.map((card) => (
+            <div key={card.label} style={{ ...cardStyle, padding: '18px', minHeight: '132px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                <span className="material-symbols-outlined" style={{ color: card.color, fontSize: '22px' }}>{card.icon}</span>
+                <span style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{card.note}</span>
+              </div>
+              <div>
+                <div style={{ fontFamily: 'Geist, sans-serif', fontSize: '32px', fontWeight: 800, color: card.color, lineHeight: 1.1 }}>
+                  {card.value}
+                </div>
+                <div style={{ marginTop: '6px', fontSize: '11px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  {card.label}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_340px] gap-6 items-start">
+          <div style={{ ...cardStyle, padding: '18px' }}>
+            <div className="flex items-center justify-between gap-4 mb-4">
+              <div>
+                <div style={{ fontFamily: 'Geist, sans-serif', fontSize: '18px', fontWeight: 800, color: '#f8fafc' }}>Movimientos</div>
+                <div style={{ fontSize: '13px', color: '#94A3B8', marginTop: '2px' }}>Actividad reciente con filas compactas y legibles.</div>
+              </div>
+              <button onClick={() => goToTab('movimientos')} style={actionStyle(false)}>
+                Ver todo
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_220px] gap-3 mb-4">
+              <div style={{ position: 'relative' }}>
+                <span className="material-symbols-outlined" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#64748B', fontSize: '18px' }}>search</span>
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Filtrar por concepto o categoría"
+                  style={{ ...inputStyle, paddingLeft: '42px' }}
+                />
+              </div>
+              <select value={filterTipo} onChange={(e) => setFilterTipo(e.target.value)} style={inputStyle}>
+                <option value="todos">Todos los tipos</option>
+                <option value="ingreso">Ingreso</option>
+                <option value="egreso">Egreso</option>
+              </select>
+            </div>
+
+            <div style={{ overflowX: 'auto', borderRadius: '14px', border: '1px solid rgba(148,163,184,0.12)' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '760px' }}>
+                <thead>
+                  <tr style={{ backgroundColor: 'rgba(15,23,42,0.85)' }}>
+                    {['Fecha', 'Concepto', 'Categoría', 'Tipo', 'Monto'].map((header) => (
+                      <th key={header} style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94A3B8', borderBottom: '1px solid rgba(148,163,184,0.12)' }}>
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {visibleMovimientos.map((mov, index) => {
+                    const tipoColor = mov.tipo === 'ingreso' ? '#10B981' : '#EF4444';
+                    const rowBg = index % 2 === 0 ? 'rgba(7,12,24,0.88)' : 'rgba(10,16,31,0.95)';
+                    return (
+                      <tr key={mov.id} style={{ backgroundColor: rowBg, borderBottom: '1px solid rgba(148,163,184,0.08)' }}>
+                        <td style={{ padding: '13px 16px', color: '#cbd5e1', fontSize: '13px', whiteSpace: 'nowrap' }}>
+                          {new Date(mov.fecha || mov.created_at).toLocaleDateString('es-CL')}
+                        </td>
+                        <td style={{ padding: '13px 16px', color: '#f8fafc', fontSize: '13px', fontWeight: 700 }}>
+                          <div style={{ maxWidth: '320px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {mov.concepto || 'Sin concepto'}
+                          </div>
+                        </td>
+                        <td style={{ padding: '13px 16px', color: '#cbd5e1', fontSize: '13px' }}>
+                          {CATEGORIA_LABELS[mov.categoria] || mov.categoria || 'Otros'}
+                        </td>
+                        <td style={{ padding: '13px 16px' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', padding: '5px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 800, color: tipoColor, backgroundColor: tipoColor === '#10B981' ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)', border: `1px solid ${tipoColor === '#10B981' ? 'rgba(16,185,129,0.24)' : 'rgba(239,68,68,0.24)'}`, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                            {mov.tipo}
+                          </span>
+                        </td>
+                        <td style={{ padding: '13px 16px', color: tipoColor, fontSize: '14px', fontWeight: 800, whiteSpace: 'nowrap' }}>
+                          {mov.tipo === 'ingreso' ? '+' : '-'}{formatCurrency(Number(mov.monto) || 0)}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                  {visibleMovimientos.length === 0 && (
+                    <tr>
+                      <td colSpan={5} style={{ padding: '32px 16px', color: '#64748B', textAlign: 'center' }}>
+                        No hay movimientos para mostrar.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div style={{ ...cardStyle, padding: '18px' }}>
+              <div style={{ fontFamily: 'Geist, sans-serif', fontSize: '16px', fontWeight: 800, color: '#f8fafc' }}>Monedas</div>
+              <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(7,12,24,0.9)', border: '1px solid rgba(148,163,184,0.12)' }}>
+                  <div>
+                    <div style={{ fontSize: '12px', color: '#94A3B8' }}>BCV</div>
+                    <div style={{ fontSize: '16px', fontWeight: 800, color: '#f8fafc' }}>{dolaresBs ? `${dolaresBs.toLocaleString('es-CL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs` : '—'}</div>
+                  </div>
+                  <span className="material-symbols-outlined" style={{ color: '#60a5fa', fontSize: '22px' }}>paid</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(7,12,24,0.9)', border: '1px solid rgba(148,163,184,0.12)' }}>
+                  <div>
+                    <div style={{ fontSize: '12px', color: '#94A3B8' }}>Binance</div>
+                    <div style={{ fontSize: '16px', fontWeight: 800, color: '#f8fafc' }}>{binanceBs ? `${binanceBs.toLocaleString('es-CL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs` : '—'}</div>
+                  </div>
+                  <span className="material-symbols-outlined" style={{ color: '#34d399', fontSize: '22px' }}>currency_bitcoin</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ ...cardStyle, padding: '18px' }}>
+              <div style={{ fontFamily: 'Geist, sans-serif', fontSize: '16px', fontWeight: 800, color: '#f8fafc' }}>Acciones rápidas</div>
+              <div style={{ display: 'grid', gap: '10px', marginTop: '12px' }}>
+                <button onClick={() => { setTab('movimientos'); setShowForm(true); }} style={actionStyle(true)}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add_circle</span>
+                  Nuevo movimiento
+                </button>
+                <button onClick={() => goToTab('compras')} style={actionStyle(false)}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>shopping_cart</span>
+                  Compras
+                </button>
+                <button onClick={() => goToTab('rentabilidad')} style={actionStyle(false)}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>query_stats</span>
+                  Costos
+                </button>
+                <button onClick={() => { setTab('movimientos'); setShowCostoFijoForm(true); }} style={actionStyle(false)}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>tune</span>
+                  Configuración
+                </button>
+              </div>
+            </div>
+
+            <div style={{ ...cardStyle, padding: '18px' }}>
+              <div style={{ fontFamily: 'Geist, sans-serif', fontSize: '16px', fontWeight: 800, color: '#f8fafc' }}>Alertas operativas</div>
+              <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(7,12,24,0.9)', border: '1px solid rgba(148,163,184,0.12)', color: movimientosSinNotas > 0 ? '#ffb95f' : '#94A3B8' }}>
+                  <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Movimientos sin notas</div>
+                  <div style={{ fontSize: '18px', fontWeight: 800 }}>{movimientosSinNotas}</div>
+                </div>
+                <div style={{ padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(7,12,24,0.9)', border: '1px solid rgba(148,163,184,0.12)', color: pendientesConciliacion > 0 ? '#ffb95f' : '#34d399' }}>
+                  <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Pendientes por conciliar</div>
+                  <div style={{ fontSize: '18px', fontWeight: 800 }}>{pendientesConciliacion}</div>
+                </div>
+                <div style={{ padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(7,12,24,0.9)', border: '1px solid rgba(148,163,184,0.12)', color: '#94A3B8' }}>
+                  <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Movimientos manuales</div>
+                  <div style={{ fontSize: '18px', fontWeight: 800 }}>{movimientosManual}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderFinanceControlRow = () => (
+    <div className="flex flex-col xl:flex-row xl:items-center gap-3 xl:gap-4">
+      <div className="relative flex-1 min-w-[260px]">
+        <span className="material-symbols-outlined" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#64748B', fontSize: '18px' }}>search</span>
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Buscar movimientos, conceptos, categorías..."
+          style={{ width: '100%', backgroundColor: 'rgba(7,12,24,0.9)', border: '1px solid rgba(148,163,184,0.14)', color: '#dbeafe', borderRadius: '12px', padding: '12px 14px 12px 42px', outline: 'none', fontSize: '14px' }}
+        />
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <button
+          onClick={() => { setTab('movimientos'); setShowForm(true); }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '12px', padding: '10px 14px', border: '1px solid rgba(59,130,246,0.45)', background: 'linear-gradient(135deg, rgba(37,99,235,0.95), rgba(59,130,246,0.75))', color: '#ffffff', boxShadow: '0 0 0 1px rgba(37,99,235,0.15), 0 12px 28px rgba(37,99,235,0.18)', cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
+          Nuevo movimiento
+        </button>
+        <button
+          onClick={() => { setTab('movimientos'); setEditingCostoFijoId(null); setCostoFijoForm(emptyCostoFijoForm); setShowCostoFijoForm(true); }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '12px', padding: '10px 14px', border: '1px solid rgba(148,163,184,0.14)', background: 'rgba(15,23,42,0.82)', color: '#cbd5e1', cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>tune</span>
+          Nuevo costo
+        </button>
+      </div>
+      <div className="flex flex-wrap gap-2 xl:ml-auto">
+        <button
+          onClick={() => setTab('dashboard')}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '12px', padding: '10px 14px', border: tab === 'dashboard' ? '1px solid rgba(59,130,246,0.45)' : '1px solid rgba(148,163,184,0.14)', background: tab === 'dashboard' ? 'linear-gradient(135deg, rgba(37,99,235,0.95), rgba(59,130,246,0.75))' : 'rgba(15,23,42,0.82)', color: tab === 'dashboard' ? '#ffffff' : '#cbd5e1', boxShadow: tab === 'dashboard' ? '0 0 0 1px rgba(37,99,235,0.15), 0 12px 28px rgba(37,99,235,0.18)' : 'none', cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>space_dashboard</span>
+          Resumen
+        </button>
+        <button
+          onClick={() => setTab('movimientos')}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '12px', padding: '10px 14px', border: tab === 'movimientos' ? '1px solid rgba(59,130,246,0.45)' : '1px solid rgba(148,163,184,0.14)', background: tab === 'movimientos' ? 'linear-gradient(135deg, rgba(37,99,235,0.95), rgba(59,130,246,0.75))' : 'rgba(15,23,42,0.82)', color: tab === 'movimientos' ? '#ffffff' : '#cbd5e1', boxShadow: tab === 'movimientos' ? '0 0 0 1px rgba(37,99,235,0.15), 0 12px 28px rgba(37,99,235,0.18)' : 'none', cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>list_alt</span>
+          Movimientos
+        </button>
+        <button
+          onClick={() => setTab('rentabilidad')}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '12px', padding: '10px 14px', border: tab === 'rentabilidad' ? '1px solid rgba(59,130,246,0.45)' : '1px solid rgba(148,163,184,0.14)', background: tab === 'rentabilidad' ? 'linear-gradient(135deg, rgba(37,99,235,0.95), rgba(59,130,246,0.75))' : 'rgba(15,23,42,0.82)', color: tab === 'rentabilidad' ? '#ffffff' : '#cbd5e1', boxShadow: tab === 'rentabilidad' ? '0 0 0 1px rgba(37,99,235,0.15), 0 12px 28px rgba(37,99,235,0.18)' : 'none', cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>query_stats</span>
+          Costos
+        </button>
+        <button
+          onClick={() => setTab('compras')}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '12px', padding: '10px 14px', border: tab === 'compras' ? '1px solid rgba(59,130,246,0.45)' : '1px solid rgba(148,163,184,0.14)', background: tab === 'compras' ? 'linear-gradient(135deg, rgba(37,99,235,0.95), rgba(59,130,246,0.75))' : 'rgba(15,23,42,0.82)', color: tab === 'compras' ? '#ffffff' : '#cbd5e1', boxShadow: tab === 'compras' ? '0 0 0 1px rgba(37,99,235,0.15), 0 12px 28px rgba(37,99,235,0.18)' : 'none', cursor: 'pointer', fontSize: '13px', fontWeight: 700, position: 'relative' }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>shopping_cart</span>
+          Compras
+          {(solicitudes || []).filter((s: any) => s.estado === 'pendiente').length > 0 && (
+            <span style={{ position: 'absolute', top: '-6px', right: '-6px', backgroundColor: '#ffb95f', color: '#002a78', borderRadius: '999px', fontSize: '10px', fontWeight: 700, padding: '1px 5px', lineHeight: 1.4 }}>
+              {(solicitudes || []).filter((s: any) => s.estado === 'pendiente').length}
+            </span>
+          )}
+        </button>
+        <button
+          onClick={() => {
+            setTab('movimientos');
+            setEditingCostoFijoId(null);
+            setCostoFijoForm(emptyCostoFijoForm);
+            setShowCostoFijoForm(true);
+          }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '12px', padding: '10px 14px', border: '1px solid rgba(148,163,184,0.14)', background: 'rgba(15,23,42,0.82)', color: '#cbd5e1', cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>tune</span>
+          Configuración
+        </button>
+      </div>
+    </div>
+  );
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -876,6 +1248,10 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
   }
 
   // ─── VISTA A: MOVIMIENTOS ──────────────────────────────────────
+  if (tab === 'dashboard') {
+    return renderFinanceSummary();
+  }
+
   if (tab === 'movimientos') {
     return (
       <div className="space-y-6 animate-fade-in">
@@ -889,60 +1265,9 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
               Finanzas
             </h1>
           </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setTab('rentabilidad')}
-              style={{ border: '1px solid rgba(180,197,255,0.35)', backgroundColor: 'rgba(180,197,255,0.08)', color: '#b4c5ff', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>query_stats</span>
-              Rentabilidad
-            </button>
-            <button
-              onClick={() => setTab('compras')}
-              style={{ border: '1px solid rgba(255,185,95,0.35)', backgroundColor: 'rgba(255,185,95,0.08)', color: '#ffb95f', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px', position: 'relative' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>shopping_cart</span>
-              Órdenes de Compra
-              {(solicitudes || []).filter((s: any) => s.estado === 'pendiente').length > 0 && (
-                <span style={{ position: 'absolute', top: '-6px', right: '-6px', backgroundColor: '#ffb95f', color: '#002a78', borderRadius: '999px', fontSize: '10px', fontWeight: 700, padding: '1px 5px', lineHeight: 1.4 }}>
-                  {(solicitudes || []).filter((s: any) => s.estado === 'pendiente').length}
-                </span>
-              )}
-            </button>
-            <button
-              onClick={() => setTab('dashboard')}
-              style={{ border: '1px solid rgba(255,255,255,0.08)', backgroundColor: 'transparent', color: '#94A3B8', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>bar_chart</span>
-              Dashboard
-            </button>
-            <button
-              onClick={() => setShowForm(!showForm)}
-              style={{ backgroundColor: '#2563eb', color: '#ffffff', fontWeight: 700, padding: '8px 16px', borderRadius: '0.25rem', border: 'none', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
-              Nuevo Movimiento
-            </button>
-            <button
-              onClick={() => {
-                setEditingCostoFijoId(null);
-                setCostoFijoForm(emptyCostoFijoForm);
-                setShowCostoFijoForm(v => !v);
-              }}
-              style={{ backgroundColor: '#ffb95f', color: '#002a78', fontWeight: 700, padding: '8px 16px', borderRadius: '0.25rem', border: 'none', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>receipt_long</span>
-              Nuevo Costo Fijo
-            </button>
-            <button
-              onClick={backfillTrazabilidadHistorica}
-              disabled={backfilling}
-              style={{ border: '1px solid rgba(180,197,255,0.35)', backgroundColor: 'rgba(180,197,255,0.08)', color: '#b4c5ff', padding: '8px 16px', borderRadius: '0.25rem', cursor: backfilling ? 'wait' : 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px', opacity: backfilling ? 0.6 : 1 }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>{backfilling ? 'progress_activity' : 'manage_search'}</span>
-              {backfilling ? 'Normalizando...' : 'Backfill histórico'}
-            </button>
-          </div>
+
+          {renderFinanceControlRow()}
+
         </div>
 
         {(backfillSummary || movimientosHistoricosSinTrazabilidad > 0) && (
@@ -951,6 +1276,14 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
             <span style={{ fontSize: '13px' }}>
               {backfillSummary || `${movimientosHistoricosSinTrazabilidad} movimientos siguen sin trazabilidad explícita.`}
             </span>
+            <button
+              onClick={backfillTrazabilidadHistorica}
+              disabled={backfilling}
+              style={{ marginLeft: 'auto', border: '1px solid rgba(180,197,255,0.35)', backgroundColor: 'rgba(180,197,255,0.08)', color: '#b4c5ff', padding: '8px 14px', borderRadius: '12px', cursor: backfilling ? 'wait' : 'pointer', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px', opacity: backfilling ? 0.6 : 1 }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>{backfilling ? 'progress_activity' : 'manage_search'}</span>
+              {backfilling ? 'Normalizando...' : 'Backfill histórico'}
+            </button>
           </div>
         )}
 
@@ -970,7 +1303,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
           ].map((stat) => (
             <div
               key={stat.label}
-              style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '20px' }}
+              style={{ ...financeSurfaceStyle, padding: '20px' }}
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="material-symbols-outlined" style={{ color: stat.color, fontSize: '24px' }}>{stat.icon}</span>
@@ -983,7 +1316,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
 
         {/* Formulario inline */}
         {showForm && (
-          <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '20px' }}>
+          <div style={{ ...financeSurfaceStyle, padding: '20px' }}>
             <div className="flex items-center justify-between mb-4">
               <span style={{ fontFamily: 'Geist, sans-serif', fontWeight: 600, color: '#F8FAFC', fontSize: '15px' }}>Registrar Movimiento</span>
               <button onClick={() => { setShowForm(false); setForm(emptyForm); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', padding: '4px' }}>
@@ -1044,7 +1377,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
         )}
 
         {showCostoFijoForm && (
-          <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '20px' }}>
+          <div style={{ ...financeSurfaceStyle, padding: '20px' }}>
             <div className="flex items-center justify-between mb-4">
               <span style={{ fontFamily: 'Geist, sans-serif', fontWeight: 600, color: '#F8FAFC', fontSize: '15px' }}>{editingCostoFijoId ? 'Editar Costo Fijo' : 'Registrar Costo Fijo'}</span>
               <button onClick={() => { setShowCostoFijoForm(false); setCostoFijoForm(emptyCostoFijoForm); setEditingCostoFijoId(null); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', padding: '4px' }}>
@@ -1109,7 +1442,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
           </div>
         )}
 
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '20px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '20px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
             COSTOS FIJOS POR PERIODO (USD)
           </div>
@@ -1128,7 +1461,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
           </div>
         </div>
 
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '20px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '20px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
             PRORRATEO COSTO FIJO POR M2
           </div>
@@ -1381,29 +1714,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
               Compras
             </h1>
           </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setTab('rentabilidad')}
-              style={{ border: '1px solid rgba(180,197,255,0.35)', backgroundColor: 'rgba(180,197,255,0.08)', color: '#b4c5ff', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>query_stats</span>
-              Rentabilidad
-            </button>
-            <button
-              onClick={() => setTab('movimientos')}
-              style={{ border: '1px solid rgba(255,255,255,0.08)', backgroundColor: 'transparent', color: '#94A3B8', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>list</span>
-              Movimientos
-            </button>
-            <button
-              onClick={() => setTab('dashboard')}
-              style={{ border: '1px solid rgba(255,255,255,0.08)', backgroundColor: 'transparent', color: '#94A3B8', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>bar_chart</span>
-              Dashboard
-            </button>
-          </div>
+          {renderFinanceControlRow()}
         </div>
 
         {/* KPIs */}
@@ -1414,7 +1725,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
             { label: 'Órdenes emitidas', value: ordenesEmitidas.length, color: '#b4c5ff', icon: 'receipt_long' },
             { label: 'Comprometido', value: formatCurrency(totalComprometido), color: '#e879f9', icon: 'payments' },
           ].map((k, i) => (
-            <div key={i} style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '16px' }}>
+            <div key={i} style={{ ...financeSurfaceStyle, padding: '16px' }}>
               <span className="material-symbols-outlined" style={{ color: k.color, fontSize: '20px', display: 'block', marginBottom: '6px' }}>{k.icon}</span>
               <div style={{ fontFamily: 'Geist, sans-serif', fontSize: '22px', fontWeight: 700, color: k.color }}>{k.value}</div>
               <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '9px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '4px' }}>{k.label}</div>
@@ -1423,7 +1734,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
         </div>
 
         {/* Solicitudes con filtro de estado */}
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '20px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
             <span className="material-symbols-outlined" style={{ color: '#ffb95f', fontSize: '20px' }}>add_shopping_cart</span>
             <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SOLICITUDES</span>
@@ -1751,29 +2062,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
               Rentabilidad por Pedido
             </h1>
           </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setTab('movimientos')}
-              style={{ border: '1px solid rgba(255,255,255,0.08)', backgroundColor: 'transparent', color: '#94A3B8', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>list</span>
-              Movimientos
-            </button>
-            <button
-              onClick={() => setTab('dashboard')}
-              style={{ border: '1px solid rgba(255,255,255,0.08)', backgroundColor: 'transparent', color: '#94A3B8', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>bar_chart</span>
-              Dashboard
-            </button>
-            <button
-              onClick={() => setTab('compras')}
-              style={{ border: '1px solid rgba(255,185,95,0.35)', backgroundColor: 'rgba(255,185,95,0.08)', color: '#ffb95f', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>shopping_cart</span>
-              Compras
-            </button>
-          </div>
+          {renderFinanceControlRow()}
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1783,7 +2072,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
             { label: 'Costo real', value: formatCurrency(summary.costoReal), icon: 'inventory_2', color: '#EF4444' },
             { label: 'Utilidad real', value: formatCurrency(summary.utilidadReal), icon: 'trending_up', color: summary.utilidadReal >= 0 ? '#10B981' : '#EF4444' },
           ].map((stat) => (
-            <div key={stat.label} style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '20px' }}>
+            <div key={stat.label} style={{ ...financeSurfaceStyle, padding: '20px' }}>
               <div className="flex items-center justify-between mb-2">
                 <span className="material-symbols-outlined" style={{ color: stat.color, fontSize: '24px' }}>{stat.icon}</span>
               </div>
@@ -1915,34 +2204,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
             Dashboard Financiero
           </h1>
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setTab('rentabilidad')}
-            style={{ border: '1px solid rgba(180,197,255,0.35)', backgroundColor: 'rgba(180,197,255,0.08)', color: '#b4c5ff', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>query_stats</span>
-            Rentabilidad
-          </button>
-          <button
-            onClick={() => setTab('compras')}
-            style={{ border: '1px solid rgba(255,185,95,0.35)', backgroundColor: 'rgba(255,185,95,0.08)', color: '#ffb95f', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px', position: 'relative' }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>shopping_cart</span>
-            Compras
-            {(solicitudes || []).filter((s: any) => s.estado === 'pendiente').length > 0 && (
-              <span style={{ position: 'absolute', top: '-6px', right: '-6px', backgroundColor: '#ffb95f', color: '#002a78', borderRadius: '999px', fontSize: '10px', fontWeight: 700, padding: '1px 5px', lineHeight: 1.4 }}>
-                {(solicitudes || []).filter((s: any) => s.estado === 'pendiente').length}
-              </span>
-            )}
-          </button>
-          <button
-            onClick={() => setTab('movimientos')}
-            style={{ border: '1px solid rgba(255,255,255,0.08)', backgroundColor: 'transparent', color: '#94A3B8', padding: '8px 16px', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>list</span>
-            Ver Movimientos
-          </button>
-        </div>
+        {renderFinanceControlRow()}
       </div>
 
       {/* Balance del mes */}
@@ -1960,7 +2222,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
             CONCILIACIÓN OPERATIVA
           </div>
@@ -1992,7 +2254,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
           </div>
         </div>
 
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
             MOVIMIENTOS MANUALES
           </div>
@@ -2004,7 +2266,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
           </div>
         </div>
 
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
             TIPO DE CAMBIO
           </div>
@@ -2024,7 +2286,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
         </div>
       </div>
 
-      <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+      <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
         <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
           FUENTES RECIENTES
         </div>
@@ -2054,7 +2316,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
             INGRESOS DESDE PEDIDOS
           </div>
@@ -2089,7 +2351,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
           </div>
         </div>
 
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
             EGRESOS DESDE COMPRAS
           </div>
@@ -2126,7 +2388,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
       </div>
 
       {/* Últimos 6 meses */}
-      <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+      <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
         <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '20px' }}>
           ÚLTIMOS 6 MESES
         </div>
@@ -2160,7 +2422,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
       {/* Por categoría + Métricas */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Por categoría */}
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '20px' }}>
             POR CATEGORÍA
           </div>
@@ -2183,7 +2445,7 @@ function getMaterialCosteUsd(consumosMateriales: any[] | undefined, pedidoId: st
         </div>
 
         {/* Métricas */}
-        <div style={{ backgroundColor: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '0.5rem', padding: '24px' }}>
+        <div style={{ ...financeSurfaceStyle, padding: '24px' }}>
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '20px' }}>
             FLUJO INGRESO VS EGRESO
           </div>

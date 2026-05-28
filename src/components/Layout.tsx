@@ -17,7 +17,6 @@ const navItems: NavItem[] = [
   { label: 'Pedidos',       path: '/pedidos',      icon: 'description' },
   { label: 'Archivos',      path: '/archivos',     icon: 'folder_open' },
   { label: 'Trabajos',      path: '/trabajos',     icon: 'precision_manufacturing' },
-  { label: 'Plotter',       path: '/plotter',      icon: 'print' },
   { label: 'Finanzas',      path: '/finanzas',     icon: 'payments' },
   { label: 'Proveedores',   path: '/proveedores',  icon: 'local_shipping' },
   { label: 'Cotizaciones',  path: '/cotizaciones', icon: 'request_quote' },
