@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configuración - Blue CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@700&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#ffb95f",
+                      "surface-tint": "#b4c5ff",
+                      "surface-container-highest": "#2d3449",
+                      "secondary-container": "#ee9800",
+                      "tertiary-container": "#007d55",
+                      "surface-container": "#171f33",
+                      "on-secondary-fixed": "#2a1700",
+                      "on-tertiary-container": "#bdffdb",
+                      "text-primary": "#F8FAFC",
+                      "on-primary": "#002a78",
+                      "status-alert": "#EF4444",
+                      "surface-container-high": "#222a3d",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "tertiary": "#4edea3",
+                      "primary": "#b4c5ff",
+                      "on-primary-fixed": "#00174b",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "secondary": "#ffb95f",
+                      "text-secondary": "#94A3B8",
+                      "on-primary-container": "#eeefff",
+                      "surface": "#0b1326",
+                      "secondary-fixed": "#ffddb8",
+                      "surface-variant": "#2d3449",
+                      "error": "#ffb4ab",
+                      "surface-card": "#1E293B",
+                      "inverse-on-surface": "#283044",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-secondary": "#472a00",
+                      "surface-container-lowest": "#060e20",
+                      "status-pending": "#64748B",
+                      "on-surface-variant": "#c3c6d7",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-tertiary": "#003824",
+                      "background": "#0b1326",
+                      "outline": "#8d90a0",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-dim": "#0b1326",
+                      "on-secondary-container": "#5b3800",
+                      "inverse-primary": "#0053db",
+                      "surface-bright": "#31394d",
+                      "status-production": "#3B82F6",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "on-background": "#dae2fd",
+                      "surface-deep": "#0B1120",
+                      "inverse-surface": "#dae2fd",
+                      "primary-container": "#2563eb",
+                      "surface-container-low": "#131b2e",
+                      "primary-fixed": "#dbe1ff",
+                      "status-ready": "#10B981",
+                      "outline-variant": "#434655",
+                      "on-surface": "#dae2fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "0.5rem",
+                      "component-gap": "1rem",
+                      "gutter": "1.5rem",
+                      "stack-xs": "0.25rem",
+                      "container-margin": "2rem"
+              },
+              "fontFamily": {
+                      "label-caps": ["JetBrains Mono"],
+                      "data-table": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-base": ["Inter"],
+                      "headline-md": ["Geist"],
+                      "display-lg": ["Geist"],
+                      "title-sm": ["Geist"],
+                      "financial-metric": ["Geist"]
+              },
+              "fontSize": {
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Authority: Shared Components JSON) -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-gutter mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Blue CRM</h1>
+<p class="text-on-surface-variant font-body-sm opacity-70">Industrial Precision</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-base text-body-base">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-base text-body-base">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-base text-body-base">Productos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">warehouse</span>
+<span class="font-body-base text-body-base">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-base text-body-base">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+<span class="font-body-base text-body-base">Pedidos PDF</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-body-base text-body-base">Archivos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-body-base text-body-base">Trabajos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">print</span>
+<span class="font-body-base text-body-base">Plotter</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-base text-body-base">Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-body-base text-body-base">Proveedores</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+<span class="font-body-base text-body-base">Cotizaciones</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-base text-body-base">Configuración</span>
+</a>
+</nav>
+<div class="px-gutter mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-bold hover:scale-[0.98] transition-all">
+                New Quote
+            </button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-[280px] flex-1 flex flex-col min-h-screen">
+<!-- TopNavBar (Authority: Shared Components JSON) -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-gutter">
+<span class="font-title-sm text-title-sm font-bold text-primary">Configuración Global</span>
+<div class="flex gap-4">
+<span class="text-on-surface-variant font-body-sm">$ Dólar: 38,5 Bs</span>
+<span class="text-on-surface-variant font-body-sm">Binance: 259,9 Bs</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">search</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">notifications</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-1.5 border border-border-subtle rounded-lg text-on-surface font-body-sm hover:bg-surface-container-high transition-colors">Quick Quote</button>
+<button class="px-4 py-1.5 bg-primary-container text-white rounded-lg font-body-sm hover:opacity-80 transition-opacity">New Order</button>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest flex items-center justify-center border border-primary/20">
+<img alt="Blue CRM Admin Avatar" data-alt="Close up professional portrait of a male production manager with a clean-cut appearance. He is wearing a dark navy corporate shirt, set against a blurred industrial background with blue and amber ambient lighting reflecting the technical modernist aesthetic of the Blue CRM workspace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2KDKBaU9Q8uZIIcJT3OeRbDmSHQH1qDQ0URkC_4G5rOZFzzhp9W6-mw3xqfUpM2VT2c_nmdNrLYlz4EZ5gSlEdLsYH9Z21FxfP2rFzRsdnRbMpYzjbSSUD2LfHZ7Z3fR5JMwmnd3q-TaJ8c69oLkeHYzo8_ubPoFIXi9vLrANoYQ1e4npbtGMYrKz4DICPmUIA8XdmCc2xfPHbkrv17agZZMSouoY8THlL4eiV0kSVQn1kUF9R8bg96kZEa_BCX-0eIkru9r3MBQ"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="mt-16 p-gutter flex-1 space-y-gutter overflow-y-auto">
+<!-- Header Section -->
+<div class="flex flex-col gap-2">
+<h2 class="font-display-lg text-display-lg text-text-primary">Parámetros del Sistema</h2>
+<p class="text-text-secondary font-body-base max-w-2xl">Gestión centralizada de márgenes operativos, costos fijos y especificaciones técnicas de maquinaria para optimización de producción industrial.</p>
+</div>
+<!-- Bento Grid - Configuration Modules -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Margen de Utilidad Card -->
+<section class="col-span-12 lg:col-span-4 glass-panel p-gutter rounded-xl flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">percent</span>
+<h3 class="font-title-sm text-title-sm">Margen de Utilidad</h3>
+</div>
+<span class="text-status-ready font-label-caps bg-status-ready/10 px-2 py-1 rounded">Activo</span>
+</div>
+<div class="space-y-4 flex-1">
+<div class="p-4 bg-surface-container-low rounded-lg border border-border-subtle">
+<label class="font-label-caps text-on-surface-variant mb-2 block">MARGEN GENERAL (%)</label>
+<input class="w-full bg-surface-deep border-border-subtle rounded-lg text-financial-metric font-financial-metric text-primary focus:ring-primary focus:border-primary" type="number" value="35"/>
+</div>
+<p class="text-body-sm text-text-secondary italic">Este porcentaje se aplica automáticamente a todos los cálculos de cotización base.</p>
+</div>
+<button class="mt-6 w-full py-2 bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary/20 transition-all font-medium">Actualizar Margen</button>
+</section>
+<!-- Tasas de Cambio Card -->
+<section class="col-span-12 lg:col-span-8 glass-panel p-gutter rounded-xl">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">currency_exchange</span>
+<h3 class="font-title-sm text-title-sm">Tasas de Cambio Real-time</h3>
+</div>
+<span class="text-text-secondary text-body-sm">Last update: 2 mins ago</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container-lowest border border-border-subtle rounded-xl flex items-center justify-between">
+<div>
+<p class="font-label-caps text-on-surface-variant">DÓLAR BCV (BS)</p>
+<span class="text-display-lg font-display-lg text-primary">38,50</span>
+</div>
+<div class="text-right">
+<span class="text-status-ready flex items-center gap-1 font-bold">+0.12% <span class="material-symbols-outlined">trending_up</span></span>
+<p class="text-body-sm text-on-surface-variant opacity-60">Official Rate</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest border border-border-subtle rounded-xl flex items-center justify-between">
+<div>
+<p class="font-label-caps text-on-surface-variant">BINANCE P2P (BS)</p>
+<span class="text-display-lg font-display-lg text-secondary">259,90</span>
+</div>
+<div class="text-right">
+<span class="text-status-alert flex items-center gap-1 font-bold">-0.05% <span class="material-symbols-outlined">trending_down</span></span>
+<p class="text-body-sm text-on-surface-variant opacity-60">Parallel Market</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Gastos Fijos & Operativos -->
+<section class="col-span-12 lg:col-span-7 glass-panel p-gutter rounded-xl">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+<h3 class="font-title-sm text-title-sm">Gastos Fijos Mensuales</h3>
+</div>
+<button class="text-primary text-body-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Añadir Concepto
+                        </button>
+</div>
+<div class="overflow-hidden rounded-lg border border-border-subtle">
+<table class="w-full text-left">
+<thead class="bg-surface-container-high">
+<tr>
+<th class="px-4 py-3 font-label-caps text-on-surface-variant border-b border-border-subtle">CONCEPTO</th>
+<th class="px-4 py-3 font-label-caps text-on-surface-variant border-b border-border-subtle">FRECUENCIA</th>
+<th class="px-4 py-3 font-label-caps text-on-surface-variant border-b border-border-subtle text-right">MONTO (USD)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle font-data-table text-data-table">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3">Alquiler de Galpón Industrial</td>
+<td class="px-4 py-3"><span class="bg-surface-container px-2 py-1 rounded text-xs">MENSUAL</span></td>
+<td class="px-4 py-3 text-right font-bold text-primary">$ 1,200.00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3">Suministro Eléctrico (Trifásica)</td>
+<td class="px-4 py-3"><span class="bg-surface-container px-2 py-1 rounded text-xs">MENSUAL</span></td>
+<td class="px-4 py-3 text-right font-bold text-primary">$ 450.00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3">Servicio de Internet Fibra Óptica</td>
+<td class="px-4 py-3"><span class="bg-surface-container px-2 py-1 rounded text-xs">MENSUAL</span></td>
+<td class="px-4 py-3 text-right font-bold text-primary">$ 85.00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3">Mantenimiento Preventivo Plotters</td>
+<td class="px-4 py-3"><span class="bg-surface-container px-2 py-1 rounded text-xs">TRIMESTRAL</span></td>
+<td class="px-4 py-3 text-right font-bold text-primary">$ 600.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Gestión de Máquinas (Visual Card) -->
+<section class="col-span-12 lg:col-span-5 glass-panel p-gutter rounded-xl bg-gradient-to-br from-surface-card to-surface-deep">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">print</span>
+<h3 class="font-title-sm text-title-sm">Estatus de Maquinaria</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border-l-4 border-status-ready">
+<div class="w-12 h-12 bg-surface-deep rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-status-ready">precision_manufacturing</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-body-base">Roland XF-640</p>
+<p class="text-xs text-on-surface-variant">Ink Usage: 84% Efficiency</p>
+</div>
+<div class="text-right">
+<span class="text-status-ready font-label-caps">ONLINE</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border-l-4 border-status-production">
+<div class="w-12 h-12 bg-surface-deep rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-status-production">precision_manufacturing</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-body-base">Epson SC-S80600L</p>
+<p class="text-xs text-on-surface-variant">Ink Usage: 92% Efficiency</p>
+</div>
+<div class="text-right">
+<span class="text-status-production font-label-caps">BUSY</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border-l-4 border-status-alert">
+<div class="w-12 h-12 bg-surface-deep rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-status-alert">warning</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-body-base">Mimaki UCJV300</p>
+<p class="text-xs text-on-surface-variant">Low Yellow Ink (CC: 12.5)</p>
+</div>
+<div class="text-right">
+<span class="text-status-alert font-label-caps">ALERT</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Perfiles de Tinta & Sustratos -->
+<section class="col-span-12 glass-panel p-gutter rounded-xl">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">palette</span>
+<h3 class="font-title-sm text-title-sm">Perfiles de Tinta &amp; Costos por CC</h3>
+</div>
+<div class="flex gap-2">
+<select class="bg-surface-container border-border-subtle rounded text-body-sm px-3 py-1 text-on-surface">
+<option>Ecosolvente</option>
+<option>UV Curable</option>
+<option>Sublimación</option>
+</select>
+<button class="bg-primary text-on-primary px-4 py-1 rounded text-body-sm font-bold">Exportar Config</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-cyan-500 mb-2 shadow-[0_0_15px_rgba(6,182,212,0.5)]"></div>
+<p class="font-label-caps text-on-surface-variant">CYAN</p>
+<p class="font-financial-metric text-primary">$ 0.18 <span class="text-xs">/ cc</span></p>
+<div class="w-full bg-surface-deep h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-cyan-500 h-full w-[65%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-pink-500 mb-2 shadow-[0_0_15px_rgba(236,72,153,0.5)]"></div>
+<p class="font-label-caps text-on-surface-variant">MAGENTA</p>
+<p class="font-financial-metric text-primary">$ 0.18 <span class="text-xs">/ cc</span></p>
+<div class="w-full bg-surface-deep h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-pink-500 h-full w-[42%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-yellow-400 mb-2 shadow-[0_0_15px_rgba(250,204,21,0.5)]"></div>
+<p class="font-label-caps text-on-surface-variant">YELLOW</p>
+<p class="font-financial-metric text-primary">$ 0.18 <span class="text-xs">/ cc</span></p>
+<div class="w-full bg-surface-deep h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-yellow-400 h-full w-[15%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-slate-900 border border-white/20 mb-2 shadow-[0_0_15px_rgba(0,0,0,0.5)]"></div>
+<p class="font-label-caps text-on-surface-variant">BLACK</p>
+<p class="font-financial-metric text-primary">$ 0.16 <span class="text-xs">/ cc</span></p>
+<div class="w-full bg-surface-deep h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-slate-900 h-full w-[88%]"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Footer Info -->
+<footer class="p-gutter text-center border-t border-border-subtle bg-surface-deep/50">
+<p class="text-on-surface-variant font-body-sm opacity-50">Blue CRM © 2024 - Sistema de Gestión de Producción Industrial de Alta Fidelidad. Configuración del Núcleo V2.4.1</p>
+</footer>
+</main>
+<script>
+        // Micro-interactions: Number input focus effect
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('ring-1', 'ring-primary/50');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('ring-1', 'ring-primary/50');
+            });
+        });
+
+        // Simulating real-time currency variation
+        setInterval(() => {
+            const dollar = document.querySelector('.text-display-lg.text-primary');
+            const variation = (Math.random() * 0.05 - 0.025).toFixed(2);
+            let currentVal = parseFloat(dollar.textContent);
+            dollar.textContent = (currentVal + parseFloat(variation)).toFixed(2);
+        }, 8000);
+    </script>
+</body></html>

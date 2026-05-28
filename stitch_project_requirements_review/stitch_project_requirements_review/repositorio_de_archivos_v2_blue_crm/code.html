@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@700&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            overflow-x: hidden;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb95f",
+                        "surface-tint": "#b4c5ff",
+                        "surface-container-highest": "#2d3449",
+                        "secondary-container": "#ee9800",
+                        "tertiary-container": "#007d55",
+                        "surface-container": "#171f33",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-tertiary-container": "#bdffdb",
+                        "text-primary": "#F8FAFC",
+                        "on-primary": "#002a78",
+                        "status-alert": "#EF4444",
+                        "surface-container-high": "#222a3d",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary": "#4edea3",
+                        "primary": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "secondary": "#ffb95f",
+                        "text-secondary": "#94A3B8",
+                        "on-primary-container": "#eeefff",
+                        "surface": "#0b1326",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-variant": "#2d3449",
+                        "error": "#ffb4ab",
+                        "surface-card": "#1E293B",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary": "#472a00",
+                        "surface-container-lowest": "#060e20",
+                        "status-pending": "#64748B",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary": "#003824",
+                        "background": "#0b1326",
+                        "outline": "#8d90a0",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-container": "#5b3800",
+                        "inverse-primary": "#0053db",
+                        "surface-bright": "#31394d",
+                        "status-production": "#3B82F6",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-background": "#dae2fd",
+                        "surface-deep": "#0B1120",
+                        "inverse-surface": "#dae2fd",
+                        "primary-container": "#2563eb",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed": "#dbe1ff",
+                        "status-ready": "#10B981",
+                        "outline-variant": "#434655",
+                        "on-surface": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "0.5rem",
+                        "component-gap": "1rem",
+                        "gutter": "1.5rem",
+                        "stack-xs": "0.25rem",
+                        "container-margin": "2rem"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "data-table": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-base": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "title-sm": ["Geist"],
+                        "financial-metric": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body-base text-body-base bg-background">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-gutter mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Blue CRM</h1>
+<p class="text-on-surface-variant font-body-sm opacity-60">Industrial Precision</p>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar px-3 space-y-1">
+<!-- Nav Item: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-sm">Dashboard</span>
+</a>
+<!-- Nav Item: Clientes -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-body-sm">Clientes</span>
+</a>
+<!-- Nav Item: Productos -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-body-sm">Productos</span>
+</a>
+<!-- Nav Item: Inventario -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="warehouse">warehouse</span>
+<span class="text-body-sm">Inventario</span>
+</a>
+<!-- Nav Item: Pedidos -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-body-sm">Pedidos</span>
+</a>
+<!-- Nav Item: Pedidos PDF -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="text-body-sm">Pedidos PDF</span>
+</a>
+<!-- Nav Item: Archivos (Active) -->
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all rounded-r-none" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+<span class="text-body-sm">Archivos</span>
+</a>
+<!-- Nav Item: Trabajos -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="text-body-sm">Trabajos</span>
+</a>
+<!-- Nav Item: Plotter -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+<span class="text-body-sm">Plotter</span>
+</a>
+<!-- Nav Item: Finanzas -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-body-sm">Finanzas</span>
+</a>
+<!-- Nav Item: Proveedores -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="text-body-sm">Proveedores</span>
+</a>
+<!-- Nav Item: Cotizaciones -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="request_quote">request_quote</span>
+<span class="text-body-sm">Cotizaciones</span>
+</a>
+<!-- Nav Item: Configuración -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-sm">Configuración</span>
+</a>
+</div>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                New Quote
+            </button>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-on-surface-variant font-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-ready"></span>
+<span>$ Dólar: 38,5 Bs</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Binance: 259,9 Bs</span>
+</div>
+</div>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-border-subtle rounded-lg py-1.5 pl-10 pr-4 text-body-sm focus:outline-none focus:border-primary transition-all" placeholder="Buscar archivos..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-px bg-border-subtle mx-2"></div>
+<button class="bg-secondary text-on-secondary px-4 py-1.5 rounded-lg text-body-sm font-bold active:opacity-80 transition-all">
+                New Order
+            </button>
+<button class="border border-border-subtle text-text-primary px-4 py-1.5 rounded-lg text-body-sm font-bold hover:bg-surface-container-high transition-all">
+                Quick Quote
+            </button>
+<img alt="User Profile" class="w-10 h-10 rounded-full border border-border-subtle" data-alt="A professional headshot of a mature businessman with a confident expression, wearing a high-quality navy blue suit in a clean, brightly lit corporate studio. The lighting is sophisticated and soft, emphasizing professional reliability and executive elegance. The color palette is composed of deep blues, crisp whites, and neutral greys, matching a modern industrial tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI8YDAWLeFn_5OIWE7iPDVbtD_J-772pY1GWCCTjHVijjjRHuUullMTqN_dYiXAvXaBhlncbN3OAFT4_b2HD7SWoC90HbwsI9cukRLG-poTSgsIxcekt5Cuceg7HegAeauZZehr9L6uwgu9EUKTYrAp4cjhcG1JemTyFomCp7mVfCwX6XymifcBDo80ziJewppsb88KmwXZZvro3K2gyGKkkbhjBda4hSonJzPwBvuvfVany3mlsMNzAxbsJ--eSzzmBdpKb2-dvo"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] mt-16 p-gutter">
+<!-- Header Section -->
+<section class="flex justify-between items-end mb-8">
+<div>
+<nav class="flex gap-2 text-on-surface-variant text-label-caps mb-2">
+<span>REPOSITORIO</span>
+<span>/</span>
+<span class="text-primary">ARTES Y TRABAJOS</span>
+</nav>
+<h2 class="font-headline-md text-headline-md text-text-primary">Gestión de Archivos</h2>
+</div>
+<div class="flex gap-3">
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-border-subtle">
+<button class="px-4 py-1.5 rounded text-body-sm font-bold bg-primary-container text-on-primary-container shadow-sm transition-all" id="btnRecent">Recientes</button>
+<button class="px-4 py-1.5 rounded text-body-sm font-medium text-on-surface-variant hover:text-on-surface transition-all" id="btnByOrder">Por Pedido</button>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold flex items-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined" data-icon="upload">upload</span>
+                    Subir Archivo
+                </button>
+</div>
+</section>
+<!-- Stats Overview (Technical Aesthetic) -->
+<section class="grid grid-cols-4 gap-gutter mb-8">
+<div class="bg-surface-card border border-border-subtle p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="folder_zip">folder_zip</span>
+<span class="text-status-ready text-label-caps">ESTABLE</span>
+</div>
+<p class="text-text-secondary text-body-sm">Almacenamiento Total</p>
+<h3 class="font-financial-metric text-financial-metric text-text-primary">1.2 TB</h3>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+</div>
+<div class="bg-surface-card border border-border-subtle p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="text-on-surface-variant text-label-caps">HOY</span>
+</div>
+<p class="text-text-secondary text-body-sm">Archivos Recibidos</p>
+<h3 class="font-financial-metric text-financial-metric text-text-primary">142</h3>
+<p class="text-status-ready text-body-sm mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                    +12% vs ayer
+                </p>
+</div>
+<div class="bg-surface-card border border-border-subtle p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="image">image</span>
+<span class="text-on-surface-variant text-label-caps">ARTS</span>
+</div>
+<p class="text-text-secondary text-body-sm">Artes para Plotter</p>
+<h3 class="font-financial-metric text-financial-metric text-text-primary">84</h3>
+<p class="text-on-surface-variant text-body-sm mt-2">En cola de impresión</p>
+</div>
+<div class="bg-surface-card border border-border-subtle p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-status-alert" data-icon="warning">warning</span>
+<span class="text-status-alert text-label-caps">ALERTA</span>
+</div>
+<p class="text-text-secondary text-body-sm">Archivos Corruptos</p>
+<h3 class="font-financial-metric text-financial-metric text-text-primary">0</h3>
+<p class="text-on-surface-variant text-body-sm mt-2">Sistema íntegro</p>
+</div>
+</section>
+<!-- Main Data Grid -->
+<section class="bg-surface-card border border-border-subtle rounded-xl overflow-hidden">
+<div class="p-gutter border-b border-border-subtle flex justify-between items-center bg-surface-container-low/50">
+<div class="flex items-center gap-4">
+<h3 class="font-title-sm text-title-sm text-text-primary">Repositorio de Artes</h3>
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded text-label-caps">2,450 ÍTEMS</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="view_list">view_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-data-table text-data-table border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant border-b border-border-subtle">
+<th class="px-gutter py-4 font-bold uppercase tracking-wider text-[11px]">Nombre de archivo</th>
+<th class="px-gutter py-4 font-bold uppercase tracking-wider text-[11px]">Tipo</th>
+<th class="px-gutter py-4 font-bold uppercase tracking-wider text-[11px]">Tamaño</th>
+<th class="px-gutter py-4 font-bold uppercase tracking-wider text-[11px]">Pedido Relacionado</th>
+<th class="px-gutter py-4 font-bold uppercase tracking-wider text-[11px]">Fecha</th>
+<th class="px-gutter py-4 font-bold uppercase tracking-wider text-[11px] text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<div class="text-text-primary font-semibold">Banner_Publicitario_V2.pdf</div>
+<div class="text-text-secondary text-[12px]">Cyan, Magenta, Yellow, Black (CMYK)</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[11px] font-bold">PDF/X-4</span>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">42.5 MB</td>
+<td class="px-gutter py-4">
+<a class="text-primary hover:underline flex items-center gap-1" href="#">
+                                    #ORD-89210
+                                    <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">24 May 2024, 14:20</td>
+<td class="px-gutter py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="download">download</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-status-alert"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+</div>
+<div>
+<div class="text-text-primary font-semibold">Logo_Industrial_Alpha.ai</div>
+<div class="text-text-secondary text-[12px]">Vectores escalables</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded text-[11px] font-bold">ILLUSTRATOR</span>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">12.8 MB</td>
+<td class="px-gutter py-4">
+<a class="text-primary hover:underline flex items-center gap-1" href="#">
+                                    #ORD-89155
+                                    <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">24 May 2024, 11:05</td>
+<td class="px-gutter py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="download">download</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-status-alert"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+</div>
+<div>
+<div class="text-text-primary font-semibold">Textura_Metalica_HD.tiff</div>
+<div class="text-text-secondary text-[12px]">Alta resolución 300 DPI</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="bg-tertiary/10 text-tertiary px-2 py-0.5 rounded text-[11px] font-bold">TIFF</span>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">156.2 MB</td>
+<td class="px-gutter py-4">
+<span class="text-on-surface-variant opacity-40">—</span>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">23 May 2024, 16:45</td>
+<td class="px-gutter py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="download">download</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-status-alert"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<div>
+<div class="text-text-primary font-semibold">Especificaciones_Corte.txt</div>
+<div class="text-text-secondary text-[12px]">Instrucciones técnicas plotter</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded text-[11px] font-bold">TXT</span>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">4 KB</td>
+<td class="px-gutter py-4">
+<a class="text-primary hover:underline flex items-center gap-1" href="#">
+                                    #ORD-89210
+                                    <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">23 May 2024, 10:12</td>
+<td class="px-gutter py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="download">download</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded text-status-alert"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Pagination -->
+<div class="px-gutter py-4 bg-surface-container-lowest/50 border-t border-border-subtle flex justify-between items-center">
+<span class="text-body-sm text-on-surface-variant">Mostrando 1-4 de 2,450 archivos</span>
+<div class="flex gap-1">
+<button class="p-2 border border-border-subtle rounded hover:bg-surface-container-high transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary text-on-primary rounded text-body-sm font-bold">1</button>
+<button class="px-3 py-1 hover:bg-surface-container-high rounded text-body-sm text-on-surface-variant transition-colors">2</button>
+<button class="px-3 py-1 hover:bg-surface-container-high rounded text-body-sm text-on-surface-variant transition-colors">3</button>
+<span class="px-2 py-1 text-on-surface-variant">...</span>
+<button class="px-3 py-1 hover:bg-surface-container-high rounded text-body-sm text-on-surface-variant transition-colors">612</button>
+<button class="p-2 border border-border-subtle rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Plotter Preview Sidebar (Contextual) -->
+<aside class="fixed right-0 top-16 h-[calc(100%-64px)] w-80 bg-surface-container border-l border-border-subtle p-gutter translate-x-full transition-transform duration-300 z-30 shadow-2xl" id="previewSidebar">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-title-sm text-title-sm text-text-primary">Vista Previa</h4>
+<button class="text-on-surface-variant hover:text-text-primary" onclick="togglePreview()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="space-y-6">
+<div class="aspect-square bg-black rounded-lg border border-border-subtle flex items-center justify-center overflow-hidden">
+<img alt="Technical Art Preview" class="max-w-full max-h-full object-contain" data-alt="A high-resolution technical artwork preview for a large-format plotter. The image shows a complex blueprint of a mechanical gear system with clean white vector lines on a deep black background. The style is strictly technical and industrial, emphasizing precision, mathematics, and high-quality engineering. Subtle electric blue glow accents highlight certain measurements and technical annotations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXN8xf8S76IGsT9LEQ-XV6XlBQzrTbzimhxBmrY20fkdyVzEek5j7lHX23DkINKNieFrOQ4twofmyuM6lElnvLLuT5S1d4D_J7hKztJ3bmHq35WiHerS1JSg7Y5fjOJOagk5wooZTyySV6TbKSfjtyZSWrakHqXklPb9CUQ0kTkhPlga10ME9OSUSEad1TCZCTkkW4LAp-tDxgAsUgU2WjZ1kRxhpgsvow-oGOyDvIZHsATkPhLj8ke1IkKKO8oqas4fSUpu4JLkY"/>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container-high rounded-lg border border-border-subtle">
+<p class="text-label-caps text-primary mb-1">DIMENSIONES</p>
+<p class="font-financial-metric text-lg text-text-primary">2,400mm x 1,200mm</p>
+</div>
+<div class="p-4 bg-surface-container-high rounded-lg border border-border-subtle">
+<p class="text-label-caps text-secondary mb-1">CONSUMO ESTIMADO</p>
+<p class="font-financial-metric text-lg text-text-primary">2.88 m² / 45ml Ink</p>
+</div>
+<div class="p-4 bg-surface-container-high rounded-lg border border-border-subtle">
+<p class="text-label-caps text-tertiary mb-1">MATERIAL</p>
+<p class="font-body-base text-text-primary">Vinil Autoadhesivo Premium</p>
+</div>
+</div>
+<button class="w-full bg-status-production text-on-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+                Enviar a Producción
+            </button>
+</div>
+</aside>
+<script>
+        // Toggle Active State for Tabs
+        const btnRecent = document.getElementById('btnRecent');
+        const btnByOrder = document.getElementById('btnByOrder');
+
+        btnRecent.addEventListener('click', () => {
+            btnRecent.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-sm');
+            btnRecent.classList.remove('text-on-surface-variant');
+            btnByOrder.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-sm');
+            btnByOrder.classList.add('text-on-surface-variant');
+        });
+
+        btnByOrder.addEventListener('click', () => {
+            btnByOrder.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-sm');
+            btnByOrder.classList.remove('text-on-surface-variant');
+            btnRecent.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-sm');
+            btnRecent.classList.add('text-on-surface-variant');
+        });
+
+        // Sidebar preview toggle
+        let previewOpen = false;
+        function togglePreview() {
+            const sidebar = document.getElementById('previewSidebar');
+            if (previewOpen) {
+                sidebar.classList.add('translate-x-full');
+            } else {
+                sidebar.classList.remove('translate-x-full');
+            }
+            previewOpen = !previewOpen;
+        }
+
+        // Mock interaction: Click row to preview
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                togglePreview();
+            });
+            row.style.cursor = 'pointer';
+        });
+    </script>
+</body></html>

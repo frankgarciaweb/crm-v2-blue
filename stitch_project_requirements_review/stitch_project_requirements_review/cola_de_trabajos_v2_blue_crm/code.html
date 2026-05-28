@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@700&amp;family=Geist:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(180, 197, 255, 0.1);
+            border-radius: 10px;
+        }
+        .kanban-column {
+            min-width: 320px;
+            max-width: 320px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb95f",
+                        "surface-tint": "#b4c5ff",
+                        "surface-container-highest": "#2d3449",
+                        "secondary-container": "#ee9800",
+                        "tertiary-container": "#007d55",
+                        "surface-container": "#171f33",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-tertiary-container": "#bdffdb",
+                        "text-primary": "#F8FAFC",
+                        "on-primary": "#002a78",
+                        "status-alert": "#EF4444",
+                        "surface-container-high": "#222a3d",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary": "#4edea3",
+                        "primary": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "secondary": "#ffb95f",
+                        "text-secondary": "#94A3B8",
+                        "on-primary-container": "#eeefff",
+                        "surface": "#0b1326",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-variant": "#2d3449",
+                        "error": "#ffb4ab",
+                        "surface-card": "#1E293B",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary": "#472a00",
+                        "surface-container-lowest": "#060e20",
+                        "status-pending": "#64748B",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary": "#003824",
+                        "background": "#0b1326",
+                        "outline": "#8d90a0",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-container": "#5b3800",
+                        "inverse-primary": "#0053db",
+                        "surface-bright": "#31394d",
+                        "status-production": "#3B82F6",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-background": "#dae2fd",
+                        "surface-deep": "#0B1120",
+                        "inverse-surface": "#dae2fd",
+                        "primary-container": "#2563eb",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed": "#dbe1ff",
+                        "status-ready": "#10B981",
+                        "outline-variant": "#434655",
+                        "on-surface": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "0.5rem",
+                        "component-gap": "1rem",
+                        "gutter": "1.5rem",
+                        "stack-xs": "0.25rem",
+                        "container-margin": "2rem"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "data-table": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-base": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "title-sm": ["Geist"],
+                        "financial-metric": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-base overflow-hidden">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-gutter mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Blue CRM</h1>
+<p class="text-on-surface-variant font-body-sm opacity-60">Industrial Precision</p>
+</div>
+<nav class="flex-1 overflow-y-auto custom-scrollbar px-3 space-y-1">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">dashboard</span>
+<span class="text-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">group</span>
+<span class="text-body-sm">Clientes</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">inventory_2</span>
+<span class="text-body-sm">Productos</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">warehouse</span>
+<span class="text-body-sm">Inventario</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">description</span>
+<span class="text-body-sm">Pedidos</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">picture_as_pdf</span>
+<span class="text-body-sm">Pedidos PDF</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">folder_open</span>
+<span class="text-body-sm">Archivos</span>
+</a>
+<!-- ACTIVE ITEM: Trabajos -->
+<a class="flex items-center px-4 py-3 gap-3 rounded text-primary font-bold bg-primary-container/10 border-r-2 border-primary" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="text-body-sm">Trabajos</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">print</span>
+<span class="text-body-sm">Plotter</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">payments</span>
+<span class="text-body-sm">Finanzas</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">local_shipping</span>
+<span class="text-body-sm">Proveedores</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">request_quote</span>
+<span class="text-body-sm">Cotizaciones</span>
+</a>
+<a class="flex items-center px-4 py-3 gap-3 rounded transition-colors hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100">settings</span>
+<span class="text-body-sm">Configuración</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 bg-primary text-on-primary font-bold rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Quote
+            </button>
+<div class="flex items-center gap-3 mt-6 p-2 rounded-lg bg-surface-container">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div>
+<p class="text-body-sm font-bold">Admin User</p>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Production Chief</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Authority: JSON) -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-8">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
+</span>
+<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 w-80 text-body-sm focus:ring-1 focus:ring-primary" placeholder="Buscar trabajos o pedidos..." type="text"/>
+</div>
+<div class="flex gap-4">
+<span class="text-body-sm font-label-caps text-on-surface-variant">$ Dólar: <span class="text-primary">38,5 Bs</span></span>
+<span class="text-body-sm font-label-caps text-on-surface-variant">Binance: <span class="text-primary">259,9 Bs</span></span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-border-subtle pr-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-1.5 border border-border-subtle rounded text-body-sm font-medium hover:bg-surface-container-high transition-colors">Quick Quote</button>
+<button class="px-4 py-1.5 bg-primary/10 border border-primary/30 text-primary rounded text-body-sm font-bold hover:bg-primary/20 transition-colors">New Order</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] mt-16 p-gutter h-[calc(100vh-64px)] overflow-hidden flex flex-col gap-gutter">
+<!-- Dashboard Header & Tabs -->
+<header class="flex justify-between items-end">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary">Cola de Producción</h2>
+<p class="text-on-surface-variant font-body-base">Gestión operativa de trabajos en tiempo real.</p>
+</div>
+<div class="flex p-1 bg-surface-container-low rounded-lg border border-border-subtle">
+<button class="px-6 py-2 bg-surface-container-high text-primary rounded-md font-bold text-body-sm shadow-lg">Tablero</button>
+<button class="px-6 py-2 text-on-surface-variant hover:text-primary rounded-md font-medium text-body-sm transition-colors">Lista</button>
+<button class="px-6 py-2 text-on-surface-variant hover:text-primary rounded-md font-medium text-body-sm transition-colors">Máquinas</button>
+</div>
+</header>
+<!-- Kanban Board Area -->
+<div class="flex-1 overflow-x-auto custom-scrollbar flex gap-6 pb-4">
+<!-- Column: Pendiente -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-status-pending"></div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase">Pendiente</h3>
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant border border-border-subtle">12</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_horiz</span></button>
+</div>
+<div class="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1">
+<!-- Work Card -->
+<div class="glass-card p-4 rounded-xl space-y-3 cursor-grab active:cursor-grabbing border-l-4 border-l-status-pending hover:scale-[1.01] transition-transform">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-label-caps px-2 py-0.5 bg-status-alert/20 text-status-alert rounded border border-status-alert/30 uppercase">Prioridad Alta</span>
+<span class="text-on-surface-variant font-label-caps text-[11px]">#PED-8902</span>
+</div>
+<h4 class="font-title-sm text-[16px] font-bold text-primary">Valla Publicitaria 12x4m</h4>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span class="text-body-sm">Distribuidora Alimentos C.A.</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">square_foot</span>
+<span class="text-body-sm">48.00 m² (Lona Frontlit)</span>
+</div>
+</div>
+<div class="pt-2 border-t border-border-subtle flex justify-between items-center">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">print</span>
+<span class="text-[11px] font-medium uppercase text-secondary">Plotter 1 (Roland)</span>
+</div>
+<img class="w-6 h-6 rounded-full border border-border-subtle" data-alt="A professional business avatar for an industrial production manager, depicted in a minimalist workspace with soft studio lighting. The aesthetic matches the dark-mode UI with deep navy and electric blue tones. Professional and focused atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEEU6tiSke9Oskb8b8QQLoxrSMvbc-L_DhQPlc33BB1FUTpLWMY7Py9OjrApQnpuEu4RkhrpF6w_dEW6-9x11fkFbRlhhPEpOfYginkwopK7Zu9HEOHkbGp6sTvoQbUpz_eTKLUoIRsyy4-5rLW6qA2plkKDYwi50NY4O65moGQpltjcaOacshtcaocsiTb7fYDJIg2qlQUI9YlyBBwkN6xr9brdDKkm0-wqQF-UgCb5zytF5bBFd72yzno6MgzqEeVPr93BG9ohA"/>
+</div>
+</div>
+<!-- Work Card -->
+<div class="glass-card p-4 rounded-xl space-y-3 border-l-4 border-l-status-pending">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-label-caps px-2 py-0.5 bg-surface-container text-on-surface-variant rounded border border-border-subtle uppercase">Normal</span>
+<span class="text-on-surface-variant font-label-caps text-[11px]">#PED-8905</span>
+</div>
+<h4 class="font-title-sm text-[16px] font-bold text-primary">Vinil Microperforado 2x1</h4>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span class="text-body-sm">Inmobiliaria Horizonte</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">square_foot</span>
+<span class="text-body-sm">2.00 m²</span>
+</div>
+</div>
+<div class="pt-2 border-t border-border-subtle flex justify-between items-center">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span class="text-[11px] font-medium uppercase">Plotter 2 (HP)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Programado -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase">Programado</h3>
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant border border-border-subtle">5</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1">
+<div class="glass-card p-4 rounded-xl space-y-3 border-l-4 border-l-secondary">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-label-caps px-2 py-0.5 bg-secondary/20 text-secondary rounded border border-secondary/30 uppercase">Agendado 14:00</span>
+<span class="text-on-surface-variant font-label-caps text-[11px]">#PED-8890</span>
+</div>
+<h4 class="font-title-sm text-[16px] font-bold text-primary">Pendones Corp. (Pack 20)</h4>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span class="text-body-sm">Banco Global Regional</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">square_foot</span>
+<span class="text-body-sm">15.00 m² (Vinil Gloss)</span>
+</div>
+</div>
+<div class="pt-2 border-t border-border-subtle flex justify-between items-center">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]">precision_manufacturing</span>
+<span class="text-[11px] font-medium uppercase">Cortadora Laser X</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: En Producción -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-status-production animate-pulse"></div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase">En Producción</h3>
+<span class="bg-status-production/20 px-2 py-0.5 rounded text-[10px] text-status-production border border-status-production/30 font-bold">ACTIVE</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1">
+<div class="glass-card p-4 rounded-xl space-y-3 border-l-4 border-l-status-production bg-status-production/5">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-production opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-status-production"></span>
+</span>
+<span class="text-[10px] font-label-caps text-status-production uppercase font-bold">Imprimiendo 65%</span>
+</div>
+<span class="text-on-surface-variant font-label-caps text-[11px]">#PED-8811</span>
+</div>
+<h4 class="font-title-sm text-[16px] font-bold text-primary">Rotulación Vehicular (Van)</h4>
+<div class="w-full bg-surface-container rounded-full h-1 my-2 overflow-hidden">
+<div class="bg-status-production h-full w-[65%]" style="box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);"></div>
+</div>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span class="text-body-sm">Transporte Express 24</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">square_foot</span>
+<span class="text-body-sm">12.50 m² (Vinil Cast)</span>
+</div>
+</div>
+<div class="pt-2 border-t border-border-subtle flex justify-between items-center">
+<div class="flex items-center gap-1.5 text-status-production">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">print</span>
+<span class="text-[11px] font-bold uppercase">Plotter 1 (Roland)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Pausado -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-status-alert"></div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase">Pausado</h3>
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant border border-border-subtle">2</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1">
+<div class="glass-card p-4 rounded-xl space-y-3 border-l-4 border-l-status-alert opacity-80">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-label-caps px-2 py-0.5 bg-status-alert/20 text-status-alert rounded border border-status-alert/30 uppercase">Falta Material</span>
+<span class="text-on-surface-variant font-label-caps text-[11px]">#PED-8700</span>
+</div>
+<h4 class="font-title-sm text-[16px] font-bold text-primary">Flyers Promocionales x5000</h4>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span class="text-body-sm">Restaurante El Faro</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="text-body-sm text-status-alert">Stock Bajo: Papel Couche 150g</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Completado -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-status-ready"></div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase">Completado</h3>
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant border border-border-subtle">45 Today</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1">
+<div class="glass-card p-4 rounded-xl space-y-3 border-l-4 border-l-status-ready/40 opacity-60">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-label-caps px-2 py-0.5 bg-status-ready/10 text-status-ready rounded border border-status-ready/30 uppercase">Finalizado</span>
+<span class="text-on-surface-variant font-label-caps text-[11px]">#PED-8800</span>
+</div>
+<h4 class="font-title-sm text-[16px] font-bold text-on-surface-variant line-through">Exhibidor Acrílico</h4>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="text-body-sm">Control de Calidad: OK</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Stats / Legend -->
+<footer class="mt-auto h-24 border-t border-border-subtle flex items-center justify-between px-6 bg-surface-container-low/50 rounded-xl">
+<div class="flex gap-12">
+<div class="flex flex-col">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Producción Hoy</span>
+<span class="font-financial-metric text-financial-metric text-primary">124.5 m²</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Tiempo Promedio</span>
+<span class="font-financial-metric text-financial-metric text-secondary">42 min</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Uso de Tinta (Cyan)</span>
+<span class="font-financial-metric text-financial-metric text-status-production">84%</span>
+</div>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-deep" data-alt="Close-up portrait of a technician wearing safety glasses in a high-tech workshop. Dark, technical atmosphere with glowing blue indicators in the background. Digital industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH_XvDBC-cXhVmwpvV482Vfikx2Y6AWirg7TXrx-YN5vzDzGLIYYZU0v_CYM1_LCe8diRmj6IcRJww_ex-BnoUqUeGZojyi4E03adjtW576-BxLpJTOSOBn7E4tUSvAweyCAVc1rNGrmZfkOTITgka03uM0d48qhvbOwS7YxyCBuTpSUjcc8wSVSNpRqA3q1cyYs_x3Mr-6DyxoFF8oZpMUZCyYOL2mg0m8K9i3w3PFkEWsfTrNcAj1WRfHI-X-KFFoCMh3-EV4gE"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-deep" data-alt="Industrial equipment operator in a sleek, modern print shop environment. Soft, dramatic lighting emphasizing the professionalism and technical focus of the Blue CRM brand. Deep blues and vibrant secondary accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUhcldu1LQIk3xFxYCmv9-LwWqnIJmp99S0c7CvAqXlwzt2uP78r-OBUZsn8VRaBxKwNTvdFNbyciwQImLRhGgw5TgshgTB_V-jq5tWThQGPDEpeJxvqfjjrzN6TPzex5FT2mitGuFDNAVBZx8vJKsEFjT1jARs7WsqRzvdSwWBgg1VxddirmYEZBlaorKz9aZ87oaZgwJh5J_C8pZu1-RdrN2vL8f483ZTEz9muq90iYvKDwX64OZK_RwIZJ0jFw2NBDsKY-TCDc"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-deep" data-alt="Senior print production supervisor looking at a digital monitor, reflecting a blue technological glow on their face. Set in a premium, dark industrial facility. Modern, efficient, and analytical mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk714en6hvS8UvJpGE4e6BVYo9O1WBOA09Xy8hmDBR0wvqIwwqQ05NnSBfni8uyFZyFsk4SphbGqmYGEqYmBCATr-WcAa0GZbU4vQlB1LnleUDCyGyuvVAklo5HHRNlCZ7nBJq4Ka0U7mm-8DDH33i_sZBRo9zf50C4c-Y769bqrfysdODCoXUHgvSphYSW6mqOAgs7hBK4qy2iY-vTMBlgDl-bf8dGJKP6EApVO4Cs6Dpq0Ai1_gVG6FO_2d6cDXObCFqIz3F_yo"/>
+<div class="w-8 h-8 rounded-full bg-surface-container border-2 border-surface-deep flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+4</div>
+</div>
+<div class="text-right">
+<p class="text-[11px] font-bold text-primary">Equipo Activo</p>
+<p class="text-[10px] text-on-surface-variant">Turno de Tarde (8:00 - 18:00)</p>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1.01)';
+            });
+        });
+    </script>
+</body></html>

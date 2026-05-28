@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blue CRM - Proveedores &amp; Compras</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@700&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb95f",
+                        "surface-tint": "#b4c5ff",
+                        "surface-container-highest": "#2d3449",
+                        "secondary-container": "#ee9800",
+                        "tertiary-container": "#007d55",
+                        "surface-container": "#171f33",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-tertiary-container": "#bdffdb",
+                        "text-primary": "#F8FAFC",
+                        "on-primary": "#002a78",
+                        "status-alert": "#EF4444",
+                        "surface-container-high": "#222a3d",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary": "#4edea3",
+                        "primary": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "secondary": "#ffb95f",
+                        "text-secondary": "#94A3B8",
+                        "on-primary-container": "#eeefff",
+                        "surface": "#0b1326",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-variant": "#2d3449",
+                        "error": "#ffb4ab",
+                        "surface-card": "#1E293B",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary": "#472a00",
+                        "surface-container-lowest": "#060e20",
+                        "status-pending": "#64748B",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary": "#003824",
+                        "background": "#0b1326",
+                        "outline": "#8d90a0",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-container": "#5b3800",
+                        "inverse-primary": "#0053db",
+                        "surface-bright": "#31394d",
+                        "status-production": "#3B82F6",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-background": "#dae2fd",
+                        "surface-deep": "#0B1120",
+                        "inverse-surface": "#dae2fd",
+                        "primary-container": "#2563eb",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed": "#dbe1ff",
+                        "status-ready": "#10B981",
+                        "outline-variant": "#434655",
+                        "on-surface": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "0.5rem",
+                        "component-gap": "1rem",
+                        "gutter": "1.5rem",
+                        "stack-xs": "0.25rem",
+                        "container-margin": "2rem"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "data-table": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-base": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "title-sm": ["Geist"],
+                        "financial-metric": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0b1326; color: #dae2fd; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .glass-panel { backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0b1120; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #2d3449; border-radius: 2px; }
+    </style>
+</head>
+<body class="font-body-base text-body-base overflow-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Blue CRM</h1>
+<p class="text-on-surface-variant text-xs opacity-60 uppercase tracking-widest">Industrial Precision</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-3 space-y-1 custom-scrollbar">
+<!-- Nav Items Mapping from JSON -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-body-sm font-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-body-sm font-body-sm">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="text-body-sm font-body-sm">Productos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">warehouse</span>
+<span class="text-body-sm font-body-sm">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-body-sm font-body-sm">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="text-body-sm font-body-sm">Pedidos PDF</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+<span class="text-body-sm font-body-sm">Archivos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">precision_manufacturing</span>
+<span class="text-body-sm font-body-sm">Trabajos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span class="text-body-sm font-body-sm">Plotter</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-body-sm font-body-sm">Finanzas</span>
+</a>
+<!-- ACTIVE ITEM: Proveedores -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+<span class="text-body-sm font-body-sm">Proveedores</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">request_quote</span>
+<span class="text-body-sm font-body-sm">Cotizaciones</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-body-sm font-body-sm">Configuración</span>
+</a>
+</nav>
+<div class="mt-auto px-6 pt-6 border-t border-border-subtle">
+<button class="w-full bg-primary-container text-on-primary-container py-3 px-4 rounded font-bold hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                New Quote
+            </button>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-lowest border-none rounded py-2 pl-10 pr-4 w-80 text-body-sm focus:ring-1 focus:ring-primary transition-all" placeholder="Buscar proveedores o facturas..." type="text"/>
+</div>
+<div class="hidden lg:flex items-center gap-4 text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary">payments</span> $ Dólar: 38,5 Bs</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary">currency_bitcoin</span> Binance: 259,9 Bs</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 mr-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">search</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-status-alert rounded-full border border-surface"></span>
+</button>
+</div>
+<div class="h-8 w-px bg-border-subtle mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-body-sm font-bold text-primary leading-none">Admin Blue</p>
+<p class="text-[10px] text-on-surface-variant font-label-caps uppercase opacity-60">Operaciones</p>
+</div>
+<img alt="Blue CRM Admin Avatar" class="w-10 h-10 rounded bg-surface-container-high object-cover ring-1 ring-border-subtle" data-alt="A professional headshot of a middle-aged male executive in a sleek, charcoal-grey business suit. He is posed against a neutral, dark studio background with professional, high-key dramatic lighting that highlights his features and creates a sharp, authoritative corporate look. The image embodies the executive elegance and technical precision of the Blue CRM brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0f2kiRhIgetX5l_Y8P65c2NrROcn1eSqWjSN98B_U9qSGuCg5NDSUmmb43Egk7mESKwQUA62xWlFejmm4OfwuJkLcfMoNlmAl2gUtcNbgx50-M1KFqrFJsT-ziIbHWId7QOOKZi_H4HWZXVhgDHdvPpeWcBfNFj3O02LxU_gDUTTb5HqTKmdpeHyHatE1Hqt5u9akR_WLDPhBsyWZeua1azPgiePf0yMaX17H7gfPVCq5bqeb8SSSOtwWoZHDsLPV0kLEHijM_E0"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] pt-16 h-screen overflow-y-auto custom-scrollbar bg-surface-deep">
+<div class="p-gutter max-w-[1600px] mx-auto space-y-component-gap">
+<!-- Page Header Area -->
+<section class="flex justify-between items-end mb-4">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary tracking-tighter">Módulo de Proveedores</h2>
+<p class="text-text-secondary font-body-base">Gestión técnica de suministros, insumos para plotter y logística industrial.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high border border-border-subtle text-text-primary px-4 py-2.5 rounded font-medium hover:bg-surface-variant transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Exportar Reporte
+                    </button>
+<button class="bg-primary text-on-primary font-bold px-6 py-2.5 rounded hover:opacity-90 active:scale-[0.98] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+                        Nueva Compra
+                    </button>
+</div>
+</section>
+<!-- KPI Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-component-gap">
+<div class="glass-panel bg-surface-container-low p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-caps text-label-caps">PROVEEDORES ACTIVOS</span>
+<span class="material-symbols-outlined text-primary">hub</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-primary">42</div>
+<div class="text-xs text-status-ready mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +3 este mes
+                    </div>
+</div>
+<div class="glass-panel bg-surface-container-low p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-caps text-label-caps">DEUDA TOTAL (BS)</span>
+<span class="material-symbols-outlined text-secondary">account_balance_wallet</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-secondary">842.150,00</div>
+<div class="text-xs text-on-surface-variant mt-1 opacity-60">Vencimiento prom: 12 días</div>
+</div>
+<div class="glass-panel bg-surface-container-low p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-caps text-label-caps">COMPRAS EN TRÁNSITO</span>
+<span class="material-symbols-outlined text-status-production">local_shipping</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-text-primary">12</div>
+<div class="text-xs text-status-production mt-1">Próxima entrega: 2h 15m</div>
+</div>
+<div class="glass-panel bg-surface-container-low p-gutter rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-caps text-label-caps">STOCK CRÍTICO</span>
+<span class="material-symbols-outlined text-status-alert">warning</span>
+</div>
+<div class="font-financial-metric text-financial-metric text-status-alert">05</div>
+<div class="text-xs text-on-surface-variant mt-1">Requiere orden inmediata</div>
+</div>
+</section>
+<!-- Directory & Active Purchase List (Main Section) -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-component-gap">
+<!-- Data Table: Proveedores -->
+<section class="xl:col-span-2 glass-panel bg-surface-card rounded-xl overflow-hidden">
+<div class="px-gutter py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-high/40">
+<h3 class="font-title-sm text-title-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">badge</span> Directorio de Proveedores
+                        </h3>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-sm">filter_alt</span></button>
+<button class="p-1.5 hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-sm">sort</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-border-subtle">
+<th class="px-gutter py-3 font-label-caps text-label-caps text-on-surface-variant">PROVEEDOR</th>
+<th class="px-gutter py-3 font-label-caps text-label-caps text-on-surface-variant">RIF / ID</th>
+<th class="px-gutter py-3 font-label-caps text-label-caps text-on-surface-variant">TELÉFONO</th>
+<th class="px-gutter py-3 font-label-caps text-label-caps text-on-surface-variant text-right">SALDO PENDIENTE</th>
+<th class="px-gutter py-3 font-label-caps text-label-caps text-on-surface-variant text-center">ESTADO</th>
+</tr>
+</thead>
+<tbody class="text-data-table font-data-table divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center text-primary font-bold">PI</div>
+<div>
+<div class="text-primary font-semibold">Plotter Insumos C.A.</div>
+<div class="text-[10px] text-on-surface-variant opacity-60">Tintas &amp; Repuestos</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono text-on-surface-variant">J-30421948-2</td>
+<td class="px-gutter py-4 text-on-surface-variant">+58 212 993-4211</td>
+<td class="px-gutter py-4 text-right text-secondary">15.200,00 Bs.</td>
+<td class="px-gutter py-4 text-center">
+<span class="px-2 py-0.5 rounded-full text-[10px] bg-status-ready/10 text-status-ready border border-status-ready/20 font-bold uppercase tracking-wide">Activo</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container/20 flex items-center justify-center text-secondary font-bold">SM</div>
+<div>
+<div class="text-primary font-semibold">Suministros Magnéticos</div>
+<div class="text-[10px] text-on-surface-variant opacity-60">Papel Fotográfico</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono text-on-surface-variant">J-40118231-0</td>
+<td class="px-gutter py-4 text-on-surface-variant">+58 414 122-8344</td>
+<td class="px-gutter py-4 text-right text-primary">0,00 Bs.</td>
+<td class="px-gutter py-4 text-center">
+<span class="px-2 py-0.5 rounded-full text-[10px] bg-status-ready/10 text-status-ready border border-status-ready/20 font-bold uppercase tracking-wide">Activo</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-status-alert/20 flex items-center justify-center text-status-alert font-bold">TC</div>
+<div>
+<div class="text-primary font-semibold">Techno Color Import</div>
+<div class="text-[10px] text-on-surface-variant opacity-60">Cabezales DX5/DX7</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono text-on-surface-variant">J-31558229-1</td>
+<td class="px-gutter py-4 text-on-surface-variant">+58 212 552-1922</td>
+<td class="px-gutter py-4 text-right text-status-alert font-bold">125.800,00 Bs.</td>
+<td class="px-gutter py-4 text-center">
+<span class="px-2 py-0.5 rounded-full text-[10px] bg-status-alert/10 text-status-alert border border-status-alert/20 font-bold uppercase tracking-wide">Mora</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center text-primary font-bold">EV</div>
+<div>
+<div class="text-primary font-semibold">Euro-Vinil Group</div>
+<div class="text-[10px] text-on-surface-variant opacity-60">Viniles Adhesivos</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono text-on-surface-variant">J-29881720-3</td>
+<td class="px-gutter py-4 text-on-surface-variant">+58 424 221-5588</td>
+<td class="px-gutter py-4 text-right text-on-surface-variant">4.200,50 Bs.</td>
+<td class="px-gutter py-4 text-center">
+<span class="px-2 py-0.5 rounded-full text-[10px] bg-status-ready/10 text-status-ready border border-status-ready/20 font-bold uppercase tracking-wide">Activo</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer group">
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-status-pending/20 flex items-center justify-center text-status-pending font-bold">AL</div>
+<div>
+<div class="text-primary font-semibold">Alu-Plast Ind.</div>
+<div class="text-[10px] text-on-surface-variant opacity-60">Lonas y Materiales</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono text-on-surface-variant">J-40552199-0</td>
+<td class="px-gutter py-4 text-on-surface-variant">+58 241 822-1144</td>
+<td class="px-gutter py-4 text-right text-on-surface-variant">0,00 Bs.</td>
+<td class="px-gutter py-4 text-center">
+<span class="px-2 py-0.5 rounded-full text-[10px] bg-status-pending/10 text-status-pending border border-status-pending/20 font-bold uppercase tracking-wide">Inactivo</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Sidebar Content: Recent Purchases -->
+<aside class="space-y-component-gap">
+<section class="glass-panel bg-surface-container rounded-xl overflow-hidden">
+<div class="px-gutter py-4 border-b border-border-subtle bg-surface-container-high/40">
+<h3 class="font-title-sm text-title-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">receipt_long</span> Facturas Recientes
+                            </h3>
+</div>
+<div class="p-4 space-y-3">
+<div class="p-3 bg-surface-container-low rounded border border-border-subtle hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-label-caps text-on-surface-variant opacity-60">F-10928</span>
+<span class="text-[10px] font-bold text-status-ready">PAGADA</span>
+</div>
+<div class="text-body-sm font-bold text-primary truncate">Plotter Insumos C.A.</div>
+<div class="flex justify-between items-end mt-2">
+<span class="text-xs text-on-surface-variant">12 May 2024</span>
+<span class="text-sm font-bold text-primary">8.420,00 Bs</span>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded border border-border-subtle hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-label-caps text-on-surface-variant opacity-60">F-10931</span>
+<span class="text-[10px] font-bold text-secondary">PENDIENTE</span>
+</div>
+<div class="text-body-sm font-bold text-primary truncate">Techno Color Import</div>
+<div class="flex justify-between items-end mt-2">
+<span class="text-xs text-on-surface-variant">14 May 2024</span>
+<span class="text-sm font-bold text-secondary">42.150,00 Bs</span>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded border border-border-subtle hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-label-caps text-on-surface-variant opacity-60">F-11002</span>
+<span class="text-[10px] font-bold text-status-production">PEDIDA</span>
+</div>
+<div class="text-body-sm font-bold text-primary truncate">Euro-Vinil Group</div>
+<div class="flex justify-between items-end mt-2">
+<span class="text-xs text-on-surface-variant">Hoy</span>
+<span class="text-sm font-bold text-primary">3.200,00 Bs</span>
+</div>
+</div>
+</div>
+<button class="w-full py-3 text-body-sm font-bold text-primary hover:bg-surface-variant transition-colors border-t border-border-subtle">Ver todo el historial</button>
+</section>
+<!-- Procurement Quick Actions -->
+<section class="glass-panel bg-primary-container/5 rounded-xl p-gutter border-dashed border-primary/20">
+<h4 class="text-primary font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">rocket_launch</span> Acciones Rápidas
+                        </h4>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex flex-col items-center justify-center p-3 bg-surface-container rounded hover:bg-surface-container-high transition-all gap-1 border border-border-subtle">
+<span class="material-symbols-outlined text-primary">request_quote</span>
+<span class="text-[10px] font-label-caps">PEDIR COT</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-surface-container rounded hover:bg-surface-container-high transition-all gap-1 border border-border-subtle">
+<span class="material-symbols-outlined text-secondary">inventory_2</span>
+<span class="text-[10px] font-label-caps">COMPRAR STOCK</span>
+</button>
+</div>
+</section>
+</aside>
+</div>
+<!-- Specialized Graphic Context Section -->
+<section class="glass-panel bg-surface-card p-gutter rounded-xl">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-title-sm text-title-sm text-primary">Análisis de Costos de Insumos</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+<span class="text-xs text-on-surface-variant">Tintas CMYK</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-secondary rounded-full"></div>
+<span class="text-xs text-on-surface-variant">Sustratos (m²)</span>
+</div>
+</div>
+</div>
+<div class="h-[240px] flex items-end gap-4 overflow-hidden px-4">
+<!-- Fake Technical Chart -->
+<div class="flex-1 bg-primary/20 rounded-t h-[60%] transition-all hover:bg-primary/40 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Feb: $4.2k</div>
+</div>
+<div class="flex-1 bg-secondary/20 rounded-t h-[45%] transition-all hover:bg-secondary/40 relative group"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[75%] transition-all hover:bg-primary/40 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Abr: $5.8k</div>
+</div>
+<div class="flex-1 bg-secondary/20 rounded-t h-[90%] transition-all hover:bg-secondary/40 relative group"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[30%] transition-all hover:bg-primary/40 relative group"></div>
+<div class="flex-1 bg-secondary/20 rounded-t h-[55%] transition-all hover:bg-secondary/40 relative group"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[85%] transition-all hover:bg-primary/40 relative group"></div>
+<div class="flex-1 bg-secondary/20 rounded-t h-[40%] transition-all hover:bg-secondary/40 relative group"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[95%] transition-all hover:bg-primary/40 relative group"></div>
+<div class="flex-1 bg-secondary/20 rounded-t h-[65%] transition-all hover:bg-secondary/40 relative group"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[50%] transition-all hover:bg-primary/40 relative group"></div>
+<div class="flex-1 bg-secondary/20 rounded-t h-[70%] transition-all hover:bg-secondary/40 relative group"></div>
+</div>
+<div class="flex justify-between mt-4 px-4 text-[10px] font-label-caps text-on-surface-variant opacity-40">
+<span>ENE</span><span>FEB</span><span>MAR</span><span>ABR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AGO</span><span>SEP</span><span>OCT</span><span>NOV</span><span>DIC</span>
+</div>
+</section>
+</div>
+</main>
+<!-- FAB for quick creation (hidden on subpages per rules but relevant for main module dashboard) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 md:hidden">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<script>
+        // Micro-interactions and aesthetic enhancements
+        document.querySelectorAll('.hover\\:bg-surface-container\\/50').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Simulating loading of data for specific charts
+        window.addEventListener('load', () => {
+            console.log('Blue CRM - Technical System Initialized');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blue CRM - Catálogo de Productos Industriales</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b4c5ff;
+        }
+        .glass-card {
+            background: #1E293B;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease-in-out;
+        }
+        .glass-card:hover {
+            border-color: rgba(180, 197, 255, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#ffb95f",
+                      "surface-tint": "#b4c5ff",
+                      "surface-container-highest": "#2d3449",
+                      "secondary-container": "#ee9800",
+                      "tertiary-container": "#007d55",
+                      "surface-container": "#171f33",
+                      "on-secondary-fixed": "#2a1700",
+                      "on-tertiary-container": "#bdffdb",
+                      "text-primary": "#F8FAFC",
+                      "on-primary": "#002a78",
+                      "status-alert": "#EF4444",
+                      "surface-container-high": "#222a3d",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "tertiary": "#4edea3",
+                      "primary": "#b4c5ff",
+                      "on-primary-fixed": "#00174b",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "secondary": "#ffb95f",
+                      "text-secondary": "#94A3B8",
+                      "on-primary-container": "#eeefff",
+                      "surface": "#0b1326",
+                      "secondary-fixed": "#ffddb8",
+                      "surface-variant": "#2d3449",
+                      "error": "#ffb4ab",
+                      "surface-card": "#1E293B",
+                      "inverse-on-surface": "#283044",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-secondary": "#472a00",
+                      "surface-container-lowest": "#060e20",
+                      "status-pending": "#64748B",
+                      "on-surface-variant": "#c3c6d7",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-tertiary": "#003824",
+                      "background": "#0b1326",
+                      "outline": "#8d90a0",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-dim": "#0b1326",
+                      "on-secondary-container": "#5b3800",
+                      "inverse-primary": "#0053db",
+                      "surface-bright": "#31394d",
+                      "status-production": "#3B82F6",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "on-background": "#dae2fd",
+                      "surface-deep": "#0B1120",
+                      "inverse-surface": "#dae2fd",
+                      "primary-container": "#2563eb",
+                      "surface-container-low": "#131b2e",
+                      "primary-fixed": "#dbe1ff",
+                      "status-ready": "#10B981",
+                      "outline-variant": "#434655",
+                      "on-surface": "#dae2fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "0.5rem",
+                      "component-gap": "1rem",
+                      "gutter": "1.5rem",
+                      "stack-xs": "0.25rem",
+                      "container-margin": "2rem"
+              },
+              "fontFamily": {
+                      "label-caps": ["JetBrains Mono"],
+                      "data-table": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-base": ["Inter"],
+                      "headline-md": ["Geist"],
+                      "display-lg": ["Geist"],
+                      "title-sm": ["Geist"],
+                      "financial-metric": ["Geist"]
+              },
+              "fontSize": {
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="font-body-base text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-gutter mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">print</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary leading-tight">Blue CRM</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Industrial Precision</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-1">
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-sm text-body-sm">Clientes</span>
+</a>
+<!-- Active Tab: Productos -->
+<a class="flex items-center gap-3 px-4 py-3 rounded text-primary font-bold bg-primary-container/10 border-r-2 border-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-body-sm text-body-sm">Productos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">warehouse</span>
+<span class="font-body-sm text-body-sm">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-sm text-body-sm">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+<span class="font-body-sm text-body-sm">Pedidos PDF</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-body-sm text-body-sm">Archivos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-body-sm text-body-sm">Trabajos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">print</span>
+<span class="font-body-sm text-body-sm">Plotter</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-sm text-body-sm">Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-body-sm text-body-sm">Proveedores</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+<span class="font-body-sm text-body-sm">Cotizaciones</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant font-medium hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm">Configuración</span>
+</a>
+</div>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full flex items-center justify-center gap-2 bg-primary-container text-white py-3 rounded font-bold hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add</span>
+<span class="font-body-sm text-body-sm">New Quote</span>
+</button>
+<div class="mt-6 flex items-center gap-3 px-2">
+<img alt="Blue CRM Admin Avatar" class="w-10 h-10 rounded-full border border-primary/20" data-alt="A professional portrait of a tech executive with a confident expression, set against a dark, moody office background with subtle blue backlighting. The lighting is sophisticated, emphasizing sharp features and a modern, high-contrast aesthetic typical of an industrial print industry software interface. The colors are dominated by deep navy blues and crisp white highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVq1WtTKuTIAUtWYW3bCe-P_raKuNH14S5RMFNJKzzYiDr_YFwggXPJZYRLovfBboe27elOS73imtFqGcTxpY9EV61n9sII_IwWzwtxYtN70ff6jRQLwlH9EJxmOkfusZxLQUlwJ4-CwJvlxYQ4soTNJXmEWgMPchMxITjmCZ-AURLUbV3PEMWq5rA-T5ooRIYhp2zSrZvkVGcWC-Kcq8WHqm3YOIfg7xmrlKMscjoNSZF6MpqR3zwK65IasiguLKehDWoR-aLahk"/>
+<div class="overflow-hidden">
+<p class="font-body-sm text-body-sm font-bold truncate">Admin Blue</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">System Master</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-border-subtle px-4 py-2 rounded-lg w-[400px]">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm w-full placeholder:text-on-surface-variant/50" placeholder="Buscar productos, SKUs o máquinas..." type="text"/>
+</div>
+<div class="hidden lg:flex items-center gap-4">
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1 rounded-full">
+<span class="text-[10px] font-bold text-secondary">$ Dólar:</span>
+<span class="font-financial-metric text-[14px]">38,5 Bs</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1 rounded-full">
+<span class="text-[10px] font-bold text-tertiary">Binance:</span>
+<span class="font-financial-metric text-[14px]">259,9 Bs</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-border-subtle mx-2"></div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-subtle rounded text-body-sm font-body-sm hover:text-primary transition-colors active:opacity-80">
+                        Quick Quote
+                    </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-body-sm active:opacity-80 transition-all">
+                        New Order
+                    </button>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="pt-24 px-gutter pb-12 max-w-[1600px] mx-auto">
+<!-- Page Header & Filters -->
+<div class="mb-10">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary">Catálogo de Productos</h2>
+<p class="text-on-surface-variant font-body-base mt-2">Gestión de insumos y materiales para impresión de gran formato.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-surface-container-high border border-border-subtle px-4 py-2 rounded hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-xl">filter_list</span>
+<span class="font-body-sm text-body-sm">Filtros Avanzados</span>
+</button>
+<button class="flex items-center gap-2 bg-surface-container-high border border-border-subtle px-4 py-2 rounded hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-xl">download</span>
+<span class="font-body-sm text-body-sm">Exportar Catálogo</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Filter Rail -->
+<div class="flex gap-2 overflow-x-auto pb-2">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-bold text-body-sm">Todos</button>
+<button class="px-6 py-2 rounded-full bg-surface-container border border-border-subtle text-on-surface-variant font-medium text-body-sm hover:border-primary/50 transition-all">Vinilos</button>
+<button class="px-6 py-2 rounded-full bg-surface-container border border-border-subtle text-on-surface-variant font-medium text-body-sm hover:border-primary/50 transition-all">Lonas Frontlit</button>
+<button class="px-6 py-2 rounded-full bg-surface-container border border-border-subtle text-on-surface-variant font-medium text-body-sm hover:border-primary/50 transition-all">Microperforados</button>
+<button class="px-6 py-2 rounded-full bg-surface-container border border-border-subtle text-on-surface-variant font-medium text-body-sm hover:border-primary/50 transition-all">Tintas Solventes</button>
+<button class="px-6 py-2 rounded-full bg-surface-container border border-border-subtle text-on-surface-variant font-medium text-body-sm hover:border-primary/50 transition-all">Papel Fotográfico</button>
+<button class="px-6 py-2 rounded-full bg-surface-container border border-border-subtle text-on-surface-variant font-medium text-body-sm hover:border-primary/50 transition-all">Accesorios</button>
+</div>
+</div>
+<!-- Products Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Vinilo Adhesivo Premium" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A macro close-up of a high-gloss white vinyl roll in a professional industrial workshop setting. The lighting is cold and clinical, with blueish reflections highlighting the smooth texture of the material. In the background, out-of-focus industrial machinery adds to the technical atmosphere. The overall aesthetic is clean, precise, and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCvohVfRdJ4-hBirgztE3hvyQ7ICmf6EI80iITspv2xlna8tLhPvRkbq60f6O1yF66MhRboLMESdk3FL0SP2Cb-lI8XHEw05m0dfYgzgfqoNPPhU1El4t6lKGevcY94-eF2qOFQnfSw8_5Ry1wF2HiIOboGfo3EDGm_kdu-LjWUaOzlKESgLcCnNH8zf6nGac7jOdFRWLmpNVv6Q4ruzWWiVTAnuR1wII_AOz9XLqeo40jQFK18zk4GPsF0bGKRq30nRppUFt9408"/>
+<div class="absolute top-4 right-4 bg-status-ready/20 text-status-ready backdrop-blur-md px-3 py-1 rounded text-[11px] font-bold uppercase tracking-wider border border-status-ready/30">
+                            En Stock
+                        </div>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-title-sm text-title-sm text-text-primary mb-1">Vinilo Autoadhesivo Glossy</h3>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">SKU: VIN-G-3200-P</p>
+</div>
+<div class="text-right">
+<span class="font-financial-metric text-primary text-2xl">$4.50</span>
+<p class="text-[10px] text-on-surface-variant">por m²</p>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">print</span>
+<span class="text-body-sm">Máquina:</span>
+</div>
+<span class="text-body-sm font-bold">Roland XF-640</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">palette</span>
+<span class="text-body-sm">Perfil Tinta:</span>
+</div>
+<span class="text-body-sm font-bold">CMYK High-Res</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">straighten</span>
+<span class="text-body-sm">Ancho:</span>
+</div>
+<span class="text-body-sm font-bold">3.20m</span>
+</div>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 py-2 bg-surface-container-highest text-white rounded font-bold text-body-sm hover:bg-primary/20 transition-all border border-border-subtle">
+                                Ficha Técnica
+                            </button>
+<button class="p-2 bg-primary/10 text-primary border border-primary/20 rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Lona Frontlit 13oz" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A detailed texture shot of a high-quality heavy-duty banner material, specifically a 13oz frontlit lona. The shot is angled to catch the sharp studio lighting, revealing the woven technical pattern of the substrate. The color is a neutral off-white with subtle gray shadows, conveying strength and durability. The environment is dark and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPs49b3OgQIyD8eey4MuLm4WTISlaputOYG7y4BusHxM7IggylmrKgEXSUj46bwdDZQQ4zm3yOGBbBuWML7I4Q7iRFlkLFcitbjW1iHNztrZ53t0acTRUt551QLYLjzNW-PjDHZGVw4mhun61Ee8CfLWflwAU-Qjd4HNej59bCV0gHfz59sGjKZmSNBU6nf0K5Ysr0-5cjLv-8CmQkP7axfyZltOlSF-a2viRhnl5OXh_gXO2W7CE-EdFyAbnALu0sPgmbJyrY8tg"/>
+<div class="absolute top-4 right-4 bg-secondary/20 text-secondary backdrop-blur-md px-3 py-1 rounded text-[11px] font-bold uppercase tracking-wider border border-secondary/30">
+                            Bajo Stock
+                        </div>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-title-sm text-title-sm text-text-primary mb-1">Lona Frontlit 13oz Matte</h3>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">SKU: LNF-M-13OZ</p>
+</div>
+<div class="text-right">
+<span class="font-financial-metric text-primary text-2xl">$2.85</span>
+<p class="text-[10px] text-on-surface-variant">por m²</p>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">print</span>
+<span class="text-body-sm">Máquina:</span>
+</div>
+<span class="text-body-sm font-bold">Mimaki SWJ-320</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">palette</span>
+<span class="text-body-sm">Perfil Tinta:</span>
+</div>
+<span class="text-body-sm font-bold">Standard Solvent</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">straighten</span>
+<span class="text-body-sm">Ancho:</span>
+</div>
+<span class="text-body-sm font-bold">5.00m</span>
+</div>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 py-2 bg-surface-container-highest text-white rounded font-bold text-body-sm hover:bg-primary/20 transition-all border border-border-subtle">
+                                Ficha Técnica
+                            </button>
+<button class="p-2 bg-primary/10 text-primary border border-primary/20 rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Microperforado Window Film" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a micro-perforated vinyl sheet used for window graphics. The tiny holes are perfectly aligned and visible against a blurred background of a modern office glass wall. Sunlight streams through the perforations creating a pattern of bright dots. The colors are technical and cool, emphasizing the precision manufacturing of the product." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl5wuO33M-pliOgTdf5xO5uBa6qFIWP0WLMzfhWp3Aj_s3xZQAnTeWPxq4iylv7g0oRQwlsNqAyu0gh1J7gfFghjNcJR8jVEbz285Po3BVK-l8APYoEIa_W1J_LQdT4VGV8KwwCpnDD247G_ceM1nUezO4OpGcB8HP1XOQ5GUdU2i9ceTXqLjmRFKa1koBEIk6FGn2l3SnBBWHh5OEOsi0b40NRkRdMI24UxTtCIu1WufY5bAECxArhczE5ADB6vAN0dRQG4srPYk"/>
+<div class="absolute top-4 right-4 bg-status-alert/20 text-status-alert backdrop-blur-md px-3 py-1 rounded text-[11px] font-bold uppercase tracking-wider border border-status-alert/30">
+                            Agotado
+                        </div>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-title-sm text-title-sm text-text-primary mb-1">Microperforado One-Way</h3>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">SKU: MIC-OW-1500</p>
+</div>
+<div class="text-right">
+<span class="font-financial-metric text-primary text-2xl">$5.20</span>
+<p class="text-[10px] text-on-surface-variant">por m²</p>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">print</span>
+<span class="text-body-sm">Máquina:</span>
+</div>
+<span class="text-body-sm font-bold">HP Latex 365</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">palette</span>
+<span class="text-body-sm">Perfil Tinta:</span>
+</div>
+<span class="text-body-sm font-bold">Latex Optimized</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">straighten</span>
+<span class="text-body-sm">Ancho:</span>
+</div>
+<span class="text-body-sm font-bold">1.52m</span>
+</div>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 py-2 bg-surface-container-highest text-white rounded font-bold text-body-sm hover:bg-primary/20 transition-all border border-border-subtle">
+                                Ficha Técnica
+                            </button>
+<button class="p-2 bg-primary/10 text-primary border border-primary/20 rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 (Tinta) -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Tinta Solvente Cyan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Artistic macro shot of vibrant cyan ink splashing inside a clear container, set against a dark, tech-oriented backdrop. The liquid looks viscous and high-density, typical of industrial plotter inks. The lighting is dramatic and focused, highlighting the purity of the color. The overall style is modern-corporate and technical." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJife_h9zC_OEMt7x2z4J-4jMYxzP1h2UI-bFR9-Bf-6wDmo-lFRjytLHtqaC-t0gSOzsgiWCSUkM8Xz5HrZi4_fqrIH8uilQ7OQNmfy4sER-oNGZsZtx6eUg5IAZmIHZrDwCXvSD3HOahmnz0fZCWD8sx8rYa0wt_L97lqH1x4ZWPT_8WO-_DGaGM_JzBVT9DJ48HjnLn7aKRXmAz9mnO2wxBbYldzpzkJY0BQGsqUFS69ObyDDdkgZVZ-OxVh-KSuiOQZ2luGUM"/>
+<div class="absolute top-4 right-4 bg-status-ready/20 text-status-ready backdrop-blur-md px-3 py-1 rounded text-[11px] font-bold uppercase tracking-wider border border-status-ready/30">
+                            En Stock
+                        </div>
+</div>
+<div class="p-6 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-title-sm text-title-sm text-text-primary mb-1">Tinta Eco-Solvente Cyan</h3>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">SKU: INK-ES-CY-1L</p>
+</div>
+<div class="text-right">
+<span class="font-financial-metric text-primary text-2xl">$42.00</span>
+<p class="text-[10px] text-on-surface-variant">por Litro</p>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">print</span>
+<span class="text-body-sm">Compatibilidad:</span>
+</div>
+<span class="text-body-sm font-bold">Serie DX5 / DX7</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-subtle">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">science</span>
+<span class="text-body-sm">Tipo:</span>
+</div>
+<span class="text-body-sm font-bold">Eco-Solvente Low Odor</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">inventory</span>
+<span class="text-body-sm">Envase:</span>
+</div>
+<span class="text-body-sm font-bold">1000ml (Botella)</span>
+</div>
+</div>
+<div class="mt-auto flex gap-2">
+<button class="flex-1 py-2 bg-surface-container-highest text-white rounded font-bold text-body-sm hover:bg-primary/20 transition-all border border-border-subtle">
+                                Ficha Técnica
+                            </button>
+<button class="p-2 bg-primary/10 text-primary border border-primary/20 rounded hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Specialized Plotter Calculator (Floating/Inset Component) -->
+<div class="mt-12 glass-card rounded-xl p-8 border-l-4 border-l-primary relative overflow-hidden">
+<div class="absolute top-0 right-0 opacity-5 pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+<span class="material-symbols-outlined text-[300px]" style="font-variation-settings: 'FILL' 1;">calculate</span>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row gap-8 items-start">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">calculate</span>
+<h3 class="font-title-sm text-title-sm">Calculadora de Consumo Estimado</h3>
+</div>
+<p class="text-on-surface-variant text-body-base mb-8 max-w-2xl">
+                            Herramienta técnica para previsualizar costos y márgenes operativos basados en el área de impresión y perfiles de tinta seleccionados.
+                        </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Ancho (m)</label>
+<input class="w-full bg-surface-container-lowest border border-border-subtle rounded p-3 text-white focus:ring-1 focus:ring-primary outline-none" placeholder="0.00" type="number"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Largo (m)</label>
+<input class="w-full bg-surface-container-lowest border border-border-subtle rounded p-3 text-white focus:ring-1 focus:ring-primary outline-none" placeholder="0.00" type="number"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Tipo de Material</label>
+<select class="w-full bg-surface-container-lowest border border-border-subtle rounded p-3 text-white focus:ring-1 focus:ring-primary outline-none">
+<option>Vinilo Adhesivo</option>
+<option>Lona Frontlit</option>
+<option>Microperforado</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Modo de Impresión</label>
+<select class="w-full bg-surface-container-lowest border border-border-subtle rounded p-3 text-white focus:ring-1 focus:ring-primary outline-none">
+<option>Borrador (360 dpi)</option>
+<option>Estándar (720 dpi)</option>
+<option>Alta Calidad (1440 dpi)</option>
+</select>
+</div>
+</div>
+</div>
+<div class="w-full md:w-80 bg-surface-container-highest rounded-lg p-6 border border-border-subtle shadow-xl">
+<h4 class="font-label-caps text-label-caps text-primary mb-4">RESULTADOS ESTIMADOS</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-baseline">
+<span class="text-on-surface-variant text-body-sm">Área Total:</span>
+<span class="font-financial-metric text-lg text-white">0.00 m²</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-on-surface-variant text-body-sm">Costo Material:</span>
+<span class="font-financial-metric text-lg text-white">$0.00</span>
+</div>
+<div class="flex justify-between items-baseline">
+<span class="text-on-surface-variant text-body-sm">Costo Tinta:</span>
+<span class="font-financial-metric text-lg text-white">$0.00</span>
+</div>
+<div class="pt-4 border-t border-border-subtle mt-4 flex justify-between items-baseline">
+<span class="font-bold text-primary text-body-base">COSTO TOTAL:</span>
+<span class="font-financial-metric text-2xl text-primary">$0.00</span>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded font-bold mt-4 hover:opacity-90 active:scale-[0.98] transition-all">
+                                Guardar en Cotización
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Pagination -->
+<div class="mt-12 flex justify-between items-center border-t border-border-subtle pt-8">
+<p class="text-on-surface-variant text-body-sm">Mostrando 4 de 128 productos industriales</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container-high text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container-high text-on-surface-variant transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container-high text-on-surface-variant transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container-high text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for filter buttons
+        const filterBtns = document.querySelectorAll('.flex.gap-2.overflow-x-auto button');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary', 'font-bold');
+                    b.classList.add('bg-surface-container', 'text-on-surface-variant', 'font-medium', 'border', 'border-border-subtle');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary', 'font-bold');
+                btn.classList.remove('bg-surface-container', 'text-on-surface-variant', 'font-medium', 'border', 'border-border-subtle');
+            });
+        });
+
+        // Hover effect for product cards (visual highlight)
+        const cards = document.querySelectorAll('.glass-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const img = card.querySelector('img');
+                if (img) img.style.transform = 'scale(1.05)';
+            });
+            card.addEventListener('mouseleave', () => {
+                const img = card.querySelector('img');
+                if (img) img.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

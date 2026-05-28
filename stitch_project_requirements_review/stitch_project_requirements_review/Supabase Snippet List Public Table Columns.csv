@@ -1,0 +1,101 @@
+table_schema,table_name,column_name,data_type,is_nullable,column_default
+public,catalog_items,id,uuid,NO,gen_random_uuid()
+public,catalog_items,name,text,NO,null
+public,catalog_items,category,text,NO,null
+public,catalog_items,unit,text,NO,null
+public,catalog_items,calc_rule,text,NO,null
+public,catalog_items,unit_cost,numeric,NO,0
+public,catalog_items,waste_percent,numeric,NO,0
+public,catalog_items,description,text,YES,null
+public,catalog_items,activo,boolean,NO,true
+public,catalog_items,created_at,timestamp with time zone,YES,now()
+public,clientes,id,uuid,NO,uuid_generate_v4()
+public,clientes,nombre_completo,text,NO,null
+public,clientes,cedula_rif,text,NO,null
+public,clientes,telefono,text,NO,null
+public,clientes,email,text,YES,null
+public,clientes,direccion,text,YES,null
+public,clientes,created_at,timestamp with time zone,NO,now()
+public,clientes,updated_at,timestamp with time zone,NO,now()
+public,clientes,porcentaje_descuento,numeric,YES,0
+public,clientes,activo,boolean,NO,true
+public,compra_items,id,uuid,NO,gen_random_uuid()
+public,compra_items,compra_id,uuid,NO,null
+public,compra_items,tipo,character varying,NO,null
+public,compra_items,item_id,uuid,YES,null
+public,compra_items,tinta_color,character varying,YES,null
+public,compra_items,descripcion,text,YES,null
+public,compra_items,cantidad,numeric,NO,0
+public,compra_items,unidad,character varying,YES,'unidad'::character varying
+public,compra_items,precio_unitario,numeric,NO,0
+public,compra_items,total_linea,numeric,NO,0
+public,compra_items,created_at,timestamp with time zone,YES,now()
+public,compras_material,id,uuid,NO,gen_random_uuid()
+public,compras_material,material_id,uuid,NO,null
+public,compras_material,cantidad,numeric,NO,null
+public,compras_material,unidad,character varying,YES,'metros'::character varying
+public,compras_material,moneda,character varying,NO,'USD'::character varying
+public,compras_material,precio_moneda,numeric,NO,null
+public,compras_material,tasa_usd,numeric,YES,null
+public,compras_material,precio_usd,numeric,YES,null
+public,compras_material,proveedor,character varying,YES,null
+public,compras_material,es_credito,boolean,YES,false
+public,compras_material,estado_pago,character varying,YES,'pagado'::character varying
+public,compras_material,fecha_compra,date,NO,CURRENT_DATE
+public,compras_material,fecha_pago,date,YES,null
+public,compras_material,nota,text,YES,null
+public,compras_material,created_at,timestamp with time zone,YES,now()
+public,compras_proveedores,id,uuid,NO,uuid_generate_v4()
+public,compras_proveedores,proveedor_id,uuid,YES,null
+public,compras_proveedores,numero_factura,text,NO,null
+public,compras_proveedores,fecha_factura,date,NO,null
+public,compras_proveedores,monto_total,numeric,NO,null
+public,compras_proveedores,monto_pagado,numeric,YES,0
+public,compras_proveedores,estado,text,NO,'pendiente'::text
+public,compras_proveedores,descripcion,text,YES,null
+public,compras_proveedores,archivo_factura_url,text,YES,null
+public,compras_proveedores,created_at,timestamp with time zone,NO,now()
+public,compras_proveedores,updated_at,timestamp with time zone,NO,now()
+public,compras_proveedores,moneda,character varying,YES,'Bs'::character varying
+public,configuracion_negocio,id,uuid,NO,gen_random_uuid()
+public,configuracion_negocio,gastos_fijos,jsonb,NO,"'{""arriendo"": 153}'::jsonb"
+public,configuracion_negocio,total_gastos_fijos_mes,numeric,YES,null
+public,configuracion_negocio,produccion_estimada_m2_mes,numeric,NO,40
+public,configuracion_negocio,margen_default,numeric,NO,0.50
+public,configuracion_negocio,moneda,character varying,NO,'USD'::character varying
+public,configuracion_negocio,updated_at,timestamp with time zone,YES,now()
+public,consumo_materiales,id,uuid,NO,gen_random_uuid()
+public,consumo_materiales,pedido_id,uuid,YES,null
+public,consumo_materiales,material_id,uuid,YES,null
+public,consumo_materiales,cantidad_consumida,numeric,NO,null
+public,consumo_materiales,created_at,timestamp with time zone,NO,now()
+public,consumo_tinta_pedido,id,uuid,NO,gen_random_uuid()
+public,consumo_tinta_pedido,pedido_id,uuid,NO,null
+public,consumo_tinta_pedido,tinta_id,uuid,NO,null
+public,consumo_tinta_pedido,magenta_consumida,numeric,NO,0
+public,consumo_tinta_pedido,cian_consumida,numeric,NO,0
+public,consumo_tinta_pedido,amarillo_consumida,numeric,NO,0
+public,consumo_tinta_pedido,negro_consumida,numeric,NO,0
+public,consumo_tinta_pedido,created_at,timestamp with time zone,YES,now()
+public,consumo_tinta_pedido,updated_at,timestamp with time zone,YES,now()
+public,consumo_tinta_pedido,trabajo_id,uuid,YES,null
+public,consumo_tinta_pedido,producto_descripcion,text,YES,null
+public,consumo_tinta_pedido,metros_cuadrados,numeric,YES,null
+public,cotizacion_items,id,uuid,NO,gen_random_uuid()
+public,cotizacion_items,cotizacion_id,uuid,YES,null
+public,cotizacion_items,descripcion,text,NO,null
+public,cotizacion_items,cantidad,numeric,NO,1
+public,cotizacion_items,precio_unitario,numeric,NO,0
+public,cotizacion_items,line_total,numeric,NO,0
+public,cotizacion_items,created_at,timestamp with time zone,YES,now()
+public,cotizaciones,id,uuid,NO,gen_random_uuid()
+public,cotizaciones,cliente_id,uuid,YES,null
+public,cotizaciones,nombre,text,NO,null
+public,cotizaciones,margen_ganancia,numeric,YES,50
+public,cotizaciones,iva_percent,numeric,YES,0
+public,cotizaciones,subtotal,numeric,YES,0
+public,cotizaciones,total_precio,numeric,YES,0
+public,cotizaciones,estado,text,YES,'borrador'::text
+public,cotizaciones,notas,text,YES,null
+public,cotizaciones,created_at,timestamp with time zone,YES,now()
+public,cotizaciones,updated_at,timestamp with time zone,YES,now()

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@700&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#ffb95f",
+                    "surface-tint": "#b4c5ff",
+                    "surface-container-highest": "#2d3449",
+                    "secondary-container": "#ee9800",
+                    "tertiary-container": "#007d55",
+                    "surface-container": "#171f33",
+                    "on-secondary-fixed": "#2a1700",
+                    "on-tertiary-container": "#bdffdb",
+                    "text-primary": "#F8FAFC",
+                    "on-primary": "#002a78",
+                    "status-alert": "#EF4444",
+                    "surface-container-high": "#222a3d",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "tertiary": "#4edea3",
+                    "primary": "#b4c5ff",
+                    "on-primary-fixed": "#00174b",
+                    "border-subtle": "rgba(255, 255, 255, 0.08)",
+                    "secondary": "#ffb95f",
+                    "text-secondary": "#94A3B8",
+                    "on-primary-container": "#eeefff",
+                    "surface": "#0b1326",
+                    "secondary-fixed": "#ffddb8",
+                    "surface-variant": "#2d3449",
+                    "error": "#ffb4ab",
+                    "surface-card": "#1E293B",
+                    "inverse-on-surface": "#283044",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-secondary": "#472a00",
+                    "surface-container-lowest": "#060e20",
+                    "status-pending": "#64748B",
+                    "on-surface-variant": "#c3c6d7",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary": "#003824",
+                    "background": "#0b1326",
+                    "outline": "#8d90a0",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-container": "#5b3800",
+                    "inverse-primary": "#0053db",
+                    "surface-bright": "#31394d",
+                    "status-production": "#3B82F6",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-background": "#dae2fd",
+                    "surface-deep": "#0B1120",
+                    "inverse-surface": "#dae2fd",
+                    "primary-container": "#2563eb",
+                    "surface-container-low": "#131b2e",
+                    "primary-fixed": "#dbe1ff",
+                    "status-ready": "#10B981",
+                    "outline-variant": "#434655",
+                    "on-surface": "#dae2fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "component-gap": "1rem",
+                    "gutter": "1.5rem",
+                    "stack-xs": "0.25rem",
+                    "container-margin": "2rem"
+            },
+            "fontFamily": {
+                    "label-caps": ["JetBrains Mono"],
+                    "data-table": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "title-sm": ["Geist"],
+                    "financial-metric": ["Geist"]
+            },
+            "fontSize": {
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "data-table": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "financial-metric": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #0b1326; color: #dae2fd; }
+        .glass-panel { backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .custom-shadow { box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5); }
+    </style>
+</head>
+<body class="font-body-base overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-deep border-r border-border-subtle flex flex-col py-component-gap z-50">
+<div class="px-gutter mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary leading-none">Blue CRM</h1>
+<p class="text-[10px] uppercase tracking-widest text-text-secondary mt-1">Industrial Precision</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-1 hide-scrollbar">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-sm text-body-sm">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-sm text-body-sm">Productos</span>
+</a>
+<!-- ACTIVE ITEM: Inventario -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded text-primary font-bold bg-primary-container/10 border-r-2 border-primary group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+<span class="font-body-sm text-body-sm">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-sm text-body-sm">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+<span class="font-body-sm text-body-sm">Pedidos PDF</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-body-sm text-body-sm">Archivos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-body-sm text-body-sm">Trabajos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">print</span>
+<span class="font-body-sm text-body-sm">Plotter</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-sm text-body-sm">Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-body-sm text-body-sm">Proveedores</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">request_quote</span>
+<span class="font-body-sm text-body-sm">Cotizaciones</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors text-on-surface-variant font-medium group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm">Configuración</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 bg-primary-container text-white rounded font-bold hover:bg-blue-600 transition-transform active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                New Quote
+            </button>
+<div class="mt-6 flex items-center gap-3 p-3 bg-surface-container rounded-lg border border-border-subtle">
+<img alt="Blue CRM Admin Avatar" class="w-10 h-10 rounded-full object-cover grayscale brightness-110" data-alt="A professional headshot of a senior engineer in a high-tech facility, wearing clean work attire. The lighting is cold and precise, reflecting a high-end corporate engineering environment. The background is softly blurred, showing industrial plotter machines in a dark blue and slate-grey color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC44k_XxOce33K0Gwbxq_namfa4LHAeIkV8YqEcBbgYMZHGUcxRrTltDwvt8UzWnxr9-97FebjQhiVxOwwKy59OcvpEgdr_XTsCCx0rZwEAb5aG6q2kSR9LN5tULp6y_ysfBEdoT0qBETv7mgUUUKyyH0hLSa7mHh50g0-APxqi7VO6BQqfB9p0WmtRk-WsqlnNVmeqhD5ri45lucwCT77lMuj8qpxsbLg1uVHAq22Bw37vJ1yf9buOa0lIMSuOOlly4yp-vUKGnQU"/>
+<div class="overflow-hidden">
+<p class="text-on-surface font-bold text-sm truncate">Admin Central</p>
+<p class="text-text-secondary text-xs truncate">Logística &amp; Stock</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] h-screen flex flex-col relative overflow-hidden bg-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+</span>
+<input class="bg-surface-container-lowest border border-border-subtle text-on-surface text-sm rounded w-64 pl-10 py-1.5 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Buscar material, lote o ID..." type="text"/>
+</div>
+<div class="flex items-center gap-4 border-l border-border-subtle pl-6">
+<div class="flex items-center gap-1.5">
+<span class="text-secondary text-[10px] font-bold uppercase tracking-wider">$ Dólar:</span>
+<span class="font-label-caps text-label-caps text-on-surface">38,5 Bs</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-tertiary text-[10px] font-bold uppercase tracking-wider">Binance:</span>
+<span class="font-label-caps text-label-caps text-on-surface">259,9 Bs</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-status-alert rounded-full"></span>
+</button>
+<div class="flex items-center gap-2">
+<button class="px-4 py-1.5 border border-border-subtle text-on-surface-variant font-medium rounded text-body-sm hover:text-primary transition-colors">Quick Quote</button>
+<button class="px-4 py-1.5 bg-primary-container text-white font-bold rounded text-body-sm hover:opacity-80 active:opacity-80 transition-all">New Order</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<section class="mt-16 flex-1 overflow-y-auto p-gutter hide-scrollbar">
+<!-- Page Header & Summary Cards -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2 tracking-tight">Gestión de Inventario</h2>
+<div class="flex items-center gap-3">
+<nav class="flex space-x-1 p-1 bg-surface-container-low rounded-lg border border-border-subtle">
+<button class="px-4 py-1.5 text-sm font-bold bg-primary text-on-primary rounded transition-all">Materiales</button>
+<button class="px-4 py-1.5 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-all">Tintas</button>
+<button class="px-4 py-1.5 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-all">En Camino</button>
+<button class="px-4 py-1.5 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-all">Historial</button>
+</nav>
+</div>
+</div>
+<div class="flex gap-4">
+<!-- Low Stock Alert Cards -->
+<div class="bg-secondary/10 border border-secondary-fixed-dim/30 p-4 rounded-xl flex items-center gap-4 min-w-[220px]">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<p class="text-secondary text-[11px] font-bold uppercase tracking-wider">Stock Bajo</p>
+<p class="font-financial-metric text-financial-metric text-on-surface">12 Rollos</p>
+</div>
+</div>
+<div class="bg-surface-card border border-border-subtle p-4 rounded-xl flex items-center gap-4 min-w-[220px]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">inventory</span>
+</div>
+<div>
+<p class="text-text-secondary text-[11px] font-bold uppercase tracking-wider">Total SKU</p>
+<p class="font-financial-metric text-financial-metric text-on-surface">342 Items</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Dashboard Technical Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-8">
+<!-- Plotter Efficiency / Usage Card -->
+<div class="lg:col-span-2 bg-surface-card border border-border-subtle rounded-xl overflow-hidden flex flex-col">
+<div class="p-5 border-b border-border-subtle flex justify-between items-center bg-surface-container/30">
+<h3 class="font-title-sm text-title-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">show_chart</span>
+                            Consumo de Sustratos (7D)
+                        </h3>
+<span class="text-xs text-text-secondary font-label-caps">PROMEDIO: 42m²/día</span>
+</div>
+<div class="p-6 h-48 flex items-end justify-between gap-2">
+<!-- Mock Chart Bars -->
+<div class="w-full bg-surface-container h-12 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-full rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[40%] rounded-t-sm transition-all group-hover:h-[60%]"></div>
+</div>
+<div class="w-full bg-surface-container h-24 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-full rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[70%] rounded-t-sm transition-all group-hover:h-[85%]"></div>
+</div>
+<div class="w-full bg-surface-container h-20 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-full rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[55%] rounded-t-sm transition-all group-hover:h-[65%]"></div>
+</div>
+<div class="w-full bg-surface-container h-32 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-status-alert h-full rounded-t-sm animate-pulse"></div>
+<div class="absolute bottom-0 w-full bg-status-alert h-[95%] rounded-t-sm"></div>
+</div>
+<div class="w-full bg-surface-container h-28 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-full rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[65%] rounded-t-sm transition-all group-hover:h-[75%]"></div>
+</div>
+<div class="w-full bg-surface-container h-16 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-full rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[30%] rounded-t-sm transition-all group-hover:h-[45%]"></div>
+</div>
+<div class="w-full bg-surface-container h-24 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-full rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[60%] rounded-t-sm transition-all group-hover:h-[70%]"></div>
+</div>
+</div>
+</div>
+<!-- Calculator Quick Card -->
+<div class="bg-primary-container/10 border border-primary/20 rounded-xl p-6 relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">calculate</span>
+<h3 class="font-title-sm text-title-sm text-on-surface">Calculadora Plotter</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="text-[10px] font-bold text-primary uppercase tracking-widest block mb-1">Medida Lineal (m)</label>
+<input class="w-full bg-surface-deep border-border-subtle rounded p-2 text-on-surface font-label-caps focus:ring-1 focus:ring-primary outline-none" type="number" value="10.5"/>
+</div>
+<div class="p-3 bg-primary-container rounded border border-primary/30">
+<p class="text-[10px] text-white/70 uppercase font-bold">Consumo Estimado</p>
+<div class="flex justify-between items-baseline">
+<span class="font-financial-metric text-financial-metric text-white">15.75 m²</span>
+<span class="text-xs text-white/90">Ancho: 1.5m</span>
+</div>
+</div>
+<button class="w-full py-2 bg-white text-primary-container font-bold rounded hover:bg-on-primary-container transition-all">Descontar de Stock</button>
+</div>
+</div>
+<div class="absolute -bottom-8 -right-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]">print</span>
+</div>
+</div>
+</div>
+<!-- Technical Data Table -->
+<div class="bg-surface-card border border-border-subtle rounded-xl overflow-hidden shadow-2xl">
+<div class="p-5 border-b border-border-subtle flex justify-between items-center bg-surface-container/30">
+<div class="flex items-center gap-4">
+<h3 class="font-title-sm text-title-sm text-on-surface">Inventario de Rollos</h3>
+<span class="bg-surface-container text-on-surface-variant text-[10px] px-2 py-0.5 rounded border border-border-subtle">MOSTRANDO 14 DE 152</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-border-subtle rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">filter_list</span></button>
+<button class="p-2 border border-border-subtle rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="p-4 font-label-caps text-label-caps text-text-secondary border-b border-border-subtle">Material</th>
+<th class="p-4 font-label-caps text-label-caps text-text-secondary border-b border-border-subtle">Tipo</th>
+<th class="p-4 font-label-caps text-label-caps text-text-secondary border-b border-border-subtle">Ancho</th>
+<th class="p-4 font-label-caps text-label-caps text-text-secondary border-b border-border-subtle">Largo Restante</th>
+<th class="p-4 font-label-caps text-label-caps text-text-secondary border-b border-border-subtle">Stock</th>
+<th class="p-4 font-label-caps text-label-caps text-text-secondary border-b border-border-subtle">Acciones</th>
+</tr>
+</thead>
+<tbody class="font-data-table text-data-table text-on-surface">
+<tr class="border-b border-border-subtle hover:bg-surface-container-high transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">texture</span>
+</div>
+<div>
+<p class="font-bold">Vinilo Brillante 3M</p>
+<p class="text-[10px] text-text-secondary">Lote: #3422-V</p>
+</div>
+</div>
+</td>
+<td class="p-4"><span class="px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded text-[10px] font-bold">CALANDRADO</span></td>
+<td class="p-4 font-label-caps">1.52 m</td>
+<td class="p-4">
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-1">
+<div class="bg-status-ready h-full w-[85%]"></div>
+</div>
+<span class="text-[10px] text-text-secondary">42.5m / 50m</span>
+</td>
+<td class="p-4"><span class="font-bold">08 Rollos</span></td>
+<td class="p-4">
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:text-primary transition-all"><span class="material-symbols-outlined text-base">edit</span></button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:text-primary transition-all"><span class="material-symbols-outlined text-base">history</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-border-subtle bg-secondary/5 hover:bg-secondary/10 transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-secondary">texture</span>
+</div>
+<div>
+<p class="font-bold">Lona Frontlit 13oz</p>
+<p class="text-[10px] text-text-secondary">Lote: #1105-L</p>
+</div>
+</div>
+</td>
+<td class="p-4"><span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-border-subtle rounded text-[10px] font-bold">SOLVENTE</span></td>
+<td class="p-4 font-label-caps">3.20 m</td>
+<td class="p-4">
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-1">
+<div class="bg-secondary h-full w-[12%]"></div>
+</div>
+<span class="text-[10px] text-secondary font-bold">ALERTA: 6.2m</span>
+</td>
+<td class="p-4"><span class="font-bold text-secondary">01 Rollo</span></td>
+<td class="p-4">
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-secondary text-on-secondary text-[10px] font-bold rounded">PEDIR YA</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-secondary/30 hover:bg-secondary/20 transition-all"><span class="material-symbols-outlined text-base">more_vert</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-high transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">texture</span>
+</div>
+<div>
+<p class="font-bold">Microperforado UV</p>
+<p class="text-[10px] text-text-secondary">Lote: #9902-M</p>
+</div>
+</div>
+</td>
+<td class="p-4"><span class="px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded text-[10px] font-bold">UV PRINT</span></td>
+<td class="p-4 font-label-caps">1.27 m</td>
+<td class="p-4">
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-1">
+<div class="bg-status-ready h-full w-[60%]"></div>
+</div>
+<span class="text-[10px] text-text-secondary">30.0m / 50m</span>
+</td>
+<td class="p-4"><span class="font-bold">04 Rollos</span></td>
+<td class="p-4">
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:text-primary transition-all"><span class="material-symbols-outlined text-base">edit</span></button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:text-primary transition-all"><span class="material-symbols-outlined text-base">history</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-high transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">texture</span>
+</div>
+<div>
+<p class="font-bold">Papel Fotográfico Mate</p>
+<p class="text-[10px] text-text-secondary">Lote: #PH-772</p>
+</div>
+</div>
+</td>
+<td class="p-4"><span class="px-2 py-0.5 bg-tertiary/10 text-tertiary border border-tertiary/20 rounded text-[10px] font-bold">LATEX</span></td>
+<td class="p-4 font-label-caps">0.91 m</td>
+<td class="p-4">
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-1">
+<div class="bg-status-ready h-full w-[95%]"></div>
+</div>
+<span class="text-[10px] text-text-secondary">28.5m / 30m</span>
+</td>
+<td class="p-4"><span class="font-bold">12 Rollos</span></td>
+<td class="p-4">
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:text-primary transition-all"><span class="material-symbols-outlined text-base">edit</span></button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:text-primary transition-all"><span class="material-symbols-outlined text-base">history</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container/10 border-t border-border-subtle flex justify-between items-center">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors text-xs font-bold">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+                        Anterior
+                    </button>
+<div class="flex gap-2">
+<span class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary text-xs font-bold">1</span>
+<span class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container text-xs font-medium cursor-pointer">2</span>
+<span class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container text-xs font-medium cursor-pointer">3</span>
+</div>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors text-xs font-bold">
+                        Siguiente
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Micro-interactions and subtle effects
+        document.querySelectorAll('nav button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const parent = this.parentElement;
+                parent.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary', 'font-bold');
+                    b.classList.add('text-on-surface-variant', 'font-medium');
+                });
+                this.classList.add('bg-primary', 'text-on-primary', 'font-bold');
+                this.classList.remove('text-on-surface-variant', 'font-medium');
+            });
+        });
+
+        // Background atmosphere effect (subtle gradient movement)
+        const body = document.body;
+        body.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            body.style.backgroundImage = `radial-gradient(circle at ${x}% ${y}%, rgba(37, 99, 235, 0.03) 0%, transparent 50%)`;
+        });
+    </script>
+</body></html>
